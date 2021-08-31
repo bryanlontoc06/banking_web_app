@@ -54,7 +54,6 @@ const Index = () => {
             console.log(`Error in handleSaveUsers`, e)
         }
     }
-    
 
     const handleDeleteUser = (id) => {
         const index = users.findIndex(user => {return user.account_no === id})
@@ -64,7 +63,6 @@ const Index = () => {
         setUsers([...users])
     }
 
-    
 
     return (
         <div className="users-container">
