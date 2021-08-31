@@ -18,7 +18,6 @@ const Index = () => {
     const [mobileNo, setMobileNo] = useState('');
     const [email, setEmail] = useState('');
 
-
     const handleGenerateAccountNo = () => {
         let date = new Date();
         let minutes = '0' + date.getMinutes().toString().substr(-2)
