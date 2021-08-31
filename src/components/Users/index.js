@@ -26,7 +26,6 @@ const Index = () => {
         let year = date.getFullYear().toString().substr(-2)
         setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
     }
-
     const handleSaveUsers = () => {
         try {
             let enPassword = Buffer.from(password).toString('base64');
@@ -53,9 +52,6 @@ const Index = () => {
             console.log(`Error in handleSaveUsers`, e)
         }
     }
-
-    
-
 
     return (
         <div className="users-container">
