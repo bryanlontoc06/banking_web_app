@@ -37,6 +37,6 @@ table.table {
     align-items: center;
 }
 
-.btn-delete {
-
+.read-only-user-detail { 
+    pointer-events: none;
 }

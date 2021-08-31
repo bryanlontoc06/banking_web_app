@@ -5,6 +5,7 @@ import {
     ContactInfo
 } from './component';
 import {useState} from 'react'
+import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
 
 const Index = () => {
@@ -19,6 +20,7 @@ const Index = () => {
     const [address, setAddress] = useState('');
     const [mobileNo, setMobileNo] = useState('');
     const [email, setEmail] = useState('');
+    const [balance, setBalance] = useState(0);
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -40,8 +42,12 @@ const Index = () => {
                 address: address,
                 mobile_no: mobileNo,
                 email: email,
+                balance: balance,
             }
             setUsers([...users, newUser])
+
+
+
             setAccountNo('')
             setUserName('')
             setPassword('')
@@ -50,6 +56,7 @@ const Index = () => {
             setAddress('')
             setMobileNo('')
             setEmail('')
+            setBalance(0)
         } catch(e) {
             console.log(`Error in handleSaveUsers`, e)
         }
@@ -105,6 +112,7 @@ const Index = () => {
                         <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     <div className="modal-body">
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="floatingInput" placeholder="Account No." readOnly value={accountNo}/>
@@ -138,6 +146,10 @@ const Index = () => {
                             <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" onChange={(e) => setEmail(e.target.value)} value={email}/>
                             <label /*for="floatingInput"*/>Email Address</label>
                         </div>
+                        <div className="form-floating mb-3">
+                            <input type="number" className="form-control" id="floatingBalance" placeholder="Balance" onChange={(e) => setBalance(e.target.value)} value={balance}/>
+                            <label /*for="floatingInput"*/>₱ Balance</label>
+                        </div>
                     </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -158,32 +170,36 @@ const Index = () => {
                     </div>
                     <div className="modal-body">
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
+                            <input type="text" className="read-only-user-detail form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
                             <label>Account No.</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
+                            <input type="text" className="read-only-user-detail form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
                             <label>User Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
+                            <input type="text" className="read-only-user-detail form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
                             <label>First Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
+                            <input type="text" className="read-only-user-detail form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
                             <label>Last Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
+                            <input type="text" className="read-only-user-detail form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
                             <label>Address</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
+                            <input type="number" className="read-only-user-detail form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
                             <label>Active Mobile No.</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
+                            <input type="email" className="read-only-user-detail form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
                             <label>Email Address</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="balance" className="read-only-user-detail form-control" id="floatingBalance" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
+                            <label>Balance</label>
                         </div>
                     </div>
                         <div className="modal-footer">
