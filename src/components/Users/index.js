@@ -7,7 +7,6 @@ import useLocalStorage from './useLocalStorage';
 
 const Index = () => {
 
-    
     const [currentSelectedData, setCurrentSelectedData] = useState({});
     const [users, setUsers] = useLocalStorage('usersData', [])
     const [accountNo, setAccountNo] = useState('')
