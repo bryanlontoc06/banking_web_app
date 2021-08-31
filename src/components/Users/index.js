@@ -57,9 +57,7 @@ const Index = () => {
 
     const handleDeleteUser = (id) => {
         const index = users.findIndex(user => {return user.account_no === id})
-        console.log({index})
-        console.log(users.splice(index, 1))
-        console.log({users})
+        users.splice(index, 1)
         setUsers([...users])
     }
 
