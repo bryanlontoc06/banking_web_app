@@ -1,0 +1,13 @@
+.side-bar {
+    width: 15rem;
+    height: 100vh;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+} 
+
+.menus {
+    margin-right: 0.5rem;
+}

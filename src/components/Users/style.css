@@ -1,0 +1,26 @@
+.users-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+}
+
+button {
+    width: calc(1vw + 7rem);
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-col {
+    text-align: center;
+}
+
+.btn-info {
+    background: #0dcaf0 !important;
+    margin: 0 auto;
+}
+
+table.table {
+    margin-top: 1rem;
+}
