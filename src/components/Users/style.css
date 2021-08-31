@@ -19,8 +19,24 @@ button {
 .btn-info {
     background: #0dcaf0 !important;
     margin: 0 auto;
+    width: 3rem;
+}
+
+.btn-danger {
+    margin: 0 auto;
+    width: 3rem;
 }
 
 table.table {
     margin-top: 1rem;
+}
+
+.action-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-delete {
+
 }

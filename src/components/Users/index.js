@@ -1,6 +1,8 @@
 import './style.css';
 import {
-    PersonPlus
+    PersonPlus,
+    FillDelete,
+    ContactInfo
 } from './component';
 import {useState} from 'react'
 import useLocalStorage from './useLocalStorage';
@@ -53,6 +55,15 @@ const Index = () => {
         }
     }
 
+    const handleDeleteUser = (id) => {
+        const index = users.findIndex(user => {return user.account_no === id})
+        console.log({index})
+        console.log(users.splice(index, 1))
+        console.log({users})
+        setUsers([...users])
+    }
+
+
     return (
         <div className="users-container">
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={handleGenerateAccountNo}><PersonPlus /> Add Client</button>
@@ -78,7 +89,10 @@ const Index = () => {
                                 <td>{data.address}</td>
                                 <td>{data.mobile_no}</td>
                                 <td>{data.email}</td>
-                                <td><button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" onClick={() => setCurrentSelectedData(data)}>details</button></td>
+                                <td className="action-btns">
+                                    <button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" onClick={() => setCurrentSelectedData(data)}><ContactInfo /></button>
+                                    <button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(data.account_no)}><FillDelete /></button>
+                                </td>
                             </tr>
                         )
                     })}
@@ -154,29 +168,28 @@ const Index = () => {
                             <label>User Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} readOnly value={currentSelectedData.first_name}/>
+                            <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
                             <label>First Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingLastName" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} readOnly value={currentSelectedData.last_name}/>
+                            <input type="text" className="form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
                             <label>Last Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingAddress" placeholder="Address" onChange={(e) => setAddress(e.target.value)} readOnly value={currentSelectedData.address}/>
+                            <input type="text" className="form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
                             <label>Address</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="floatingActiveNo" placeholder="Active Mobile No." onChange={(e) => setMobileNo(e.target.value)} readOnly value={currentSelectedData.mobile_no}/>
+                            <input type="number" className="form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
                             <label>Active Mobile No.</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" onChange={(e) => setEmail(e.target.value)} readOnly value={currentSelectedData.email}/>
+                            <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
                             <label>Email Address</label>
                         </div>
                     </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ModalForgotPassword" onClick={handleSaveUsers}>Save</button>
                         </div>
                     </div>
                 </div>
