@@ -153,10 +153,6 @@ const Index = () => {
                             <input type="text" className="form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
                             <label>User Name</label>
                         </div>
-                        {/* <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                            <label>Password</label>
-                        </div> */}
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} readOnly value={currentSelectedData.first_name}/>
                             <label>First Name</label>
