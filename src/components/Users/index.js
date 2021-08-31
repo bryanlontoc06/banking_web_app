@@ -7,6 +7,8 @@ import useLocalStorage from './useLocalStorage';
 
 const Index = () => {
 
+    
+    const [currentSelectedData, setCurrentSelectedData] = useState({});
     const [users, setUsers] = useLocalStorage('usersData', [])
     const [accountNo, setAccountNo] = useState('')
     const [userName, setUserName] = useState('');
@@ -26,7 +28,6 @@ const Index = () => {
         let year = date.getFullYear().toString().substr(-2)
         setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
     }
-
 
     const handleSaveUsers = () => {
         try {
@@ -55,6 +56,8 @@ const Index = () => {
         }
     }
 
+    
+
 
     return (
         <div className="users-container">
@@ -72,16 +75,16 @@ const Index = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((data) => {
+                    {users.map((data, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <th scope="row">{data.account_no}</th>
                                 <td>{data.first_name}</td>
                                 <td>{data.last_name}</td>
                                 <td>{data.address}</td>
                                 <td>{data.mobile_no}</td>
                                 <td>{data.email}</td>
-                                <td><button type="button" className="btn btn-info">details</button></td>
+                                <td><button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" onClick={() => setCurrentSelectedData(data)}>details</button></td>
                             </tr>
                         )
                     })}
@@ -128,6 +131,57 @@ const Index = () => {
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" onChange={(e) => setEmail(e.target.value)} value={email}/>
                             <label /*for="floatingInput"*/>Email Address</label>
+                        </div>
+                    </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ModalForgotPassword" onClick={handleSaveUsers}>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {/* Modal For Details */}
+            <div className="modal fade" id="detailsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
+                            <label>Account No.</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
+                            <label>User Name</label>
+                        </div>
+                        {/* <div className="form-floating mb-3">
+                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                            <label>Password</label>
+                        </div> */}
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} readOnly value={currentSelectedData.first_name}/>
+                            <label>First Name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="floatingLastName" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} readOnly value={currentSelectedData.last_name}/>
+                            <label>Last Name</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="text" className="form-control" id="floatingAddress" placeholder="Address" onChange={(e) => setAddress(e.target.value)} readOnly value={currentSelectedData.address}/>
+                            <label>Address</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="number" className="form-control" id="floatingActiveNo" placeholder="Active Mobile No." onChange={(e) => setMobileNo(e.target.value)} readOnly value={currentSelectedData.mobile_no}/>
+                            <label>Active Mobile No.</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" onChange={(e) => setEmail(e.target.value)} readOnly value={currentSelectedData.email}/>
+                            <label>Email Address</label>
                         </div>
                     </div>
                         <div className="modal-footer">
