@@ -18,7 +18,6 @@ const Index = () => {
     const [mobileNo, setMobileNo] = useState('');
     const [email, setEmail] = useState('');
 
-
     const handleGenerateAccountNo = () => {
         let date = new Date();
         let minutes = '0' + date.getMinutes().toString().substr(-2)
@@ -27,7 +26,6 @@ const Index = () => {
         let year = date.getFullYear().toString().substr(-2)
         setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
     }
-
     const handleSaveUsers = () => {
         try {
             let enPassword = Buffer.from(password).toString('base64');
@@ -54,9 +52,6 @@ const Index = () => {
             console.log(`Error in handleSaveUsers`, e)
         }
     }
-
-    
-
 
     return (
         <div className="users-container">
@@ -158,10 +153,6 @@ const Index = () => {
                             <input type="text" className="form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
                             <label>User Name</label>
                         </div>
-                        {/* <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                            <label>Password</label>
-                        </div> */}
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} readOnly value={currentSelectedData.first_name}/>
                             <label>First Name</label>
