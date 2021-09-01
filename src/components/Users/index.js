@@ -21,6 +21,8 @@ const Index = () => {
     const [mobileNo, setMobileNo] = useState('');
     const [email, setEmail] = useState('');
     const [balance, setBalance] = useState(0);
+    const [amountToWithdraw, setAmountToWithdraw] = useState(0)
+    const [amountToDeposit, setAmountToDeposit] = useState(0)
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -46,8 +48,6 @@ const Index = () => {
             }
             setUsers([...users, newUser])
 
-
-
             setAccountNo('')
             setUserName('')
             setPassword('')
@@ -66,6 +66,19 @@ const Index = () => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
         setUsers([...users])
+    }
+
+    const handleWithdraw = () => {
+        let currentBalance = currentSelectedData.balance - amountToWithdraw;
+        setUsers([...users], currentSelectedData.balance = currentBalance)
+    }
+
+    const handleDeposit = () => {
+        let currentBalance = currentSelectedData.balance + amountToDeposit;
+        console.log({amountToDeposit})
+        console.log(currentSelectedData.balance)
+        console.log({currentBalance})
+        // setUsers([...users], currentSelectedData.balance = currentBalance)
     }
 
 
@@ -169,42 +182,78 @@ const Index = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="form-floating mb-3">
-                            <input type="text" className="read-only-user-detail form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
-                            <label>Account No.</label>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
+                                <label>Account No.</label>
+                            </div>
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
+                                <label>User Name</label>
+                            </div>
                         </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="read-only-user-detail form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
-                            <label>User Name</label>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
+                                <label>First Name</label>
+                            </div>
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
+                                <label>Last Name</label>
+                            </div>
                         </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="read-only-user-detail form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
-                            <label>First Name</label>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
+                                <label>Address</label>
+                            </div>
+                            <div className="form-floating mb-3">
+                                <input type="number" className="read-only-user-detail form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
+                                <label>Active Mobile No.</label>
+                            </div>
                         </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="read-only-user-detail form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
-                            <label>Last Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="read-only-user-detail form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
-                            <label>Address</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="number" className="read-only-user-detail form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
-                            <label>Active Mobile No.</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="email" className="read-only-user-detail form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
-                            <label>Email Address</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="balance" className="read-only-user-detail form-control" id="floatingBalance" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
-                            <label>Balance</label>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <input type="email" className="read-only-user-detail form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
+                                <label>Email Address</label>
+                            </div>
+                            <div className="form-floating mb-3">
+                                <input type="text" className="read-only-user-detail form-control" id="floatingBalance" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
+                                <label>Balance</label>
+                            </div>
                         </div>
                     </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div>
+                        <div className="title">
+                            <h5 className="modal-title" >Transactions</h5>
                         </div>
+                        <div className="transaction-body-container">
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">
+                                    <input type="number" className="form-control" id="floatingWithdraw" placeholder="Withdraw" onChange={(e) => setAmountToWithdraw(e.target.value)} value={amountToWithdraw}/>
+                                    <label>₱ Amount to Withdraw</label>
+                                </div>
+                                <button type="button" class="btn btn-primary" onClick={handleWithdraw}>Withdraw</button>
+                            </div>
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">
+                                    <input type="number" className="form-control" id="floatingDeposit" placeholder="Deposit" onChange={(e) => setAmountToDeposit(e.target.value)} value={amountToDeposit}/>
+                                    <label>₱ Amount to Deposit</label>
+                                </div>
+                                <button type="button" class="btn btn-primary" onClick={handleDeposit}>Deposit</button>
+                            </div>
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">
+                                    <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" />
+                                    <label>₱ Amount to Transfer</label>
+                                </div>
+                                <button type="button" class="btn btn-primary">Transfer</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                     </div>
                 </div>
             </div>
