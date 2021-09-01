@@ -67,6 +67,7 @@ input[type=number] {
 
 .transaction {
     margin-bottom: unset !important;
+    width: 100%;
 }
 
 .transaction-body {
@@ -75,4 +76,14 @@ input[type=number] {
 
 .transaction-body-container {
     padding: 1rem;
+    overflow-y: scroll;
+    height: 12rem;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.transfer-names {
+    height: calc(3.5rem + 2px);
 }

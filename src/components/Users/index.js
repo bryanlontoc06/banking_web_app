@@ -23,6 +23,8 @@ const Index = () => {
     const [balance, setBalance] = useState(0);
     const [amountToWithdraw, setAmountToWithdraw] = useState(0)
     const [amountToDeposit, setAmountToDeposit] = useState(0)
+    const [transferTo, setTransferTo] = useState('')
+    const [amountToTransfer, setAmountToTransfer] = useState(0)
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -76,6 +78,15 @@ const Index = () => {
     const handleDeposit = () => {
         let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
         setUsers([...users], currentSelectedData.balance = currentBalance)
+    }
+
+    const handleTransfer = () => {
+        console.log({transferTo})
+        const toUser = users.find(user => {return user.account_no === transferTo})
+        let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
+        let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
+        console.log({toUserCurrentBalance})
+        setUsers([...users], currentSelectedData.balance = currentBalance, toUser.balance = toUserCurrentBalance)
     }
 
 
@@ -239,12 +250,23 @@ const Index = () => {
                                 </div>
                                 <button type="button" class="btn btn-primary" onClick={handleDeposit}>Deposit</button>
                             </div>
+
+
+
+                            <h6 className="modal-title" >Tranfer Fund</h6>
+                            <p>To</p>
+                            <div className="transaction-body user-row">
+                                <div className="transaction form mb-3">
+                                    <input type="text" className="transfer-names form-control" id="floatingTransferTo" placeholder="Account No." onChange={(e) => setTransferTo(e.target.value)} value={transferTo} />
+                                </div>
+                            </div>
+                            <p>Amount</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
-                                    <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" />
+                                    <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/>
                                     <label>₱ Amount to Transfer</label>
                                 </div>
-                                <button type="button" class="btn btn-primary">Transfer</button>
+                                <button type="button" class="btn btn-primary" onClick={handleTransfer}>Transfer</button>
                             </div>
                         </div>
                     </div>
@@ -254,7 +276,6 @@ const Index = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
