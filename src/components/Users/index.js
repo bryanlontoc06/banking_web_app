@@ -196,37 +196,37 @@ const Index = () => {
                                 <label>Account No.</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingUserName" placeholder="User Name" readOnly value={currentSelectedData.username}/>
+                                <input type="text" className="read-only-user-detail form-control" id="floatingUserNameDetails" placeholder="User Name" readOnly value={currentSelectedData.username}/>
                                 <label>User Name</label>
                             </div>
                         </div>
                         <div className="user-row">
                             <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingFirstName" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
+                                <input type="text" className="read-only-user-detail form-control" id="floatingFirstNameDetails" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
                                 <label>First Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingLastName" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
+                                <input type="text" className="read-only-user-detail form-control" id="floatingLastNameDetails" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
                                 <label>Last Name</label>
                             </div>
                         </div>
                         <div className="user-row">
                             <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingAddress" placeholder="Address" readOnly value={currentSelectedData.address}/>
+                                <input type="text" className="read-only-user-detail form-control" id="floatingAddressDetails" placeholder="Address" readOnly value={currentSelectedData.address}/>
                                 <label>Address</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input type="number" className="read-only-user-detail form-control" id="floatingActiveNo" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
+                                <input type="number" className="read-only-user-detail form-control" id="floatingActiveNoDetails" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
                                 <label>Active Mobile No.</label>
                             </div>
                         </div>
                         <div className="user-row">
                             <div className="form-floating mb-3">
-                                <input type="email" className="read-only-user-detail form-control" id="floatingEmail" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
+                                <input type="email" className="read-only-user-detail form-control" id="floatingEmailDetails" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
                                 <label>Email Address</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingBalance" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
+                                <input type="text" className="read-only-user-detail form-control" id="floatingBalanceDetails" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
                                 <label>Balance</label>
                             </div>
                         </div>
