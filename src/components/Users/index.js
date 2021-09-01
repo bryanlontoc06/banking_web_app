@@ -74,11 +74,8 @@ const Index = () => {
     }
 
     const handleDeposit = () => {
-        let currentBalance = currentSelectedData.balance + amountToDeposit;
-        console.log({amountToDeposit})
-        console.log(currentSelectedData.balance)
-        console.log({currentBalance})
-        // setUsers([...users], currentSelectedData.balance = currentBalance)
+        let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
+        setUsers([...users], currentSelectedData.balance = currentBalance)
     }
 
 
