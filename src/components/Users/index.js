@@ -7,8 +7,12 @@ import {
 import {useState} from 'react'
 import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
+<<<<<<< HEAD
 import ButtonComponent from './ButtonComponent';
 import InputComponent from './InputComponent';
+=======
+//try comment
+>>>>>>> 7ae01ec4c4ad05340c86f104aa3ca65e016b72b1
 
 const Index = () => {
 
@@ -262,7 +266,7 @@ const Index = () => {
 
 
 
-                            <h6 className="modal-title" >Tranfer Fund</h6>
+                            <h6 className="modal-title" >Transfer Fund</h6>
                             <p>To</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form mb-3">
