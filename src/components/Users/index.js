@@ -7,12 +7,9 @@ import {
 import {useState} from 'react'
 import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
-<<<<<<< HEAD
 import ButtonComponent from './ButtonComponent';
 import InputComponent from './InputComponent';
-=======
 //try comment
->>>>>>> 7ae01ec4c4ad05340c86f104aa3ca65e016b72b1
 
 const Index = () => {
 
@@ -277,8 +274,18 @@ const Index = () => {
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                 
-                                    <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/>
-                                    <label>₱ Amount to Transfer</label> 
+                                    {/* <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/> */}
+                                    
+                                    <InputComponent 
+                                        inputType={"number"}
+                                        controlType={"form-control"}
+                                        floatType={"floatingTransfer"}
+                                        placeholderTitle={"Transfer"}
+                                        setAmountToTransfer={setAmountToTransfer}
+                                        amountToTransfer={amountToTransfer}
+                                        isLabel={true}
+                                        label={`Amount to Transfer`}
+                                    />
                                     
                                 </div>
                                 <button type="button" class="btn btn-primary" onClick={handleTransfer}>Transfer</button>
