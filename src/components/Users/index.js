@@ -253,7 +253,7 @@ const Index = () => {
 
 
 
-                            <h6 className="modal-title" >Tranfer Fund</h6>
+                            <h6 className="modal-title" >Transfer Fund</h6>
                             <p>To</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form mb-3">
