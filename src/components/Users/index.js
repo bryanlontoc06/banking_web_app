@@ -7,6 +7,8 @@ import {
 import {useState} from 'react'
 import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
+import ButtonComponent from './ButtonComponent';
+import InputComponent from './InputComponent';
 
 const Index = () => {
 
@@ -90,9 +92,16 @@ const Index = () => {
     }
 
 
+
+   
     return (
-        <div className="users-container">
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={handleGenerateAccountNo}><PersonPlus /> Add Client</button>
+        <div className="users-container">            
+            <ButtonComponent
+                handleFunction = {handleGenerateAccountNo}
+                PersonPlus = {PersonPlus}
+                icon={true}
+                buttonDescription = {"Add Client"}
+            />
             <table className="table">
                 <thead className="table-dark">
                     <tr>
@@ -263,8 +272,10 @@ const Index = () => {
                             <p>Amount</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
+                                
                                     <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/>
-                                    <label>₱ Amount to Transfer</label>
+                                    <label>₱ Amount to Transfer</label> 
+                                    
                                 </div>
                                 <button type="button" class="btn btn-primary" onClick={handleTransfer}>Transfer</button>
                             </div>
