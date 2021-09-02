@@ -1,10 +1,11 @@
 import React from 'react'
 
-const ButtonComponent = ({handleFunction, PersonPlus, icon, buttonDescription}) => {
+const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, handleFunction, iconName, buttonDescription}) => {
+    
     return (
-        <div>
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={handleFunction}>{icon ? <PersonPlus /> : null } {buttonDescription}</button>
-        </div>
+        <>
+            <button type="button" className={btnClass} data-bs-toggle={dbsToggle} data-bs-target={dbsTarget} onClick={handleFunction}>{iconName ? iconName : null } {buttonDescription}</button>
+        </>
     )
 }
 

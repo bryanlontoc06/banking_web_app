@@ -1,15 +1,15 @@
 import './style.css';
 import {
     PersonPlus,
-    FillDelete,
-    ContactInfo
+    // FillDelete,
+    // ContactInfo
 } from './component';
 import {useState} from 'react'
 import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
 import ButtonComponent from './ButtonComponent';
 import InputComponent from './InputComponent';
-//try comment
+import TableComponent from './TableComponent';
 
 const Index = () => {
 
@@ -92,56 +92,29 @@ const Index = () => {
         setUsers([...users], currentSelectedData.balance = currentBalance, toUser.balance = toUserCurrentBalance)
     }
 
-
-
    
     return (
         <div className="users-container">            
             <ButtonComponent
                 handleFunction = {handleGenerateAccountNo}
-                PersonPlus = {PersonPlus}
-                icon={true}
+                iconName = {<PersonPlus/>}                
                 buttonDescription = {"Add Client"}
+                btnClass= {"btn btn-primary"}
+                dbsToggle={"modal"}
+                dbsTarget={"#exampleModal"}
             />
-            <table className="table">
-                <thead className="table-dark">
-                    <tr>
-                        <th scope="col">Acct #</th>
-                        <th scope="col">First name</th>
-                        <th scope="col">Last name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Mobile Number</th>
-                        <th scope="col">Email Address</th>
-                        <th scope="col" className="action-col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((data, index) => {
-                        return (
-                            <tr key={index}>
-                                <th scope="row">{data.account_no}</th>
-                                <td>{data.first_name}</td>
-                                <td>{data.last_name}</td>
-                                <td>{data.address}</td>
-                                <td>{data.mobile_no}</td>
-                                <td>{data.email}</td>
-                                <td className="action-btns">
-                                    <button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" onClick={() => setCurrentSelectedData(data)}><ContactInfo /></button>
-                                    <button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(data.account_no)}><FillDelete /></button>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-
+            <TableComponent
+                setCurrentSelectedData={setCurrentSelectedData}
+                handleDeleteUser={handleDeleteUser}
+                users={users}
+            />       
             {/* <!-- Modal --> */}
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>         
                     </div>
 
                     <div className="modal-body">
@@ -251,14 +224,14 @@ const Index = () => {
                                     <input type="number" className="form-control" id="floatingWithdraw" placeholder="Withdraw" onChange={(e) => setAmountToWithdraw(e.target.value)} value={amountToWithdraw}/>
                                     <label>₱ Amount to Withdraw</label>
                                 </div>
-                                <button type="button" class="btn btn-primary" onClick={handleWithdraw}>Withdraw</button>
+                                <button type="button" className="btn btn-primary" onClick={handleWithdraw}>Withdraw</button>
                             </div>
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <input type="number" className="form-control" id="floatingDeposit" placeholder="Deposit" onChange={(e) => setAmountToDeposit(e.target.value)} value={amountToDeposit}/>
                                     <label>₱ Amount to Deposit</label>
                                 </div>
-                                <button type="button" class="btn btn-primary" onClick={handleDeposit}>Deposit</button>
+                                <button type="button" className="btn btn-primary" onClick={handleDeposit}>Deposit</button>
                             </div>
 
 
@@ -272,10 +245,8 @@ const Index = () => {
                             </div>
                             <p>Amount</p>
                             <div className="transaction-body user-row">
-                                <div className="transaction form-floating mb-3">
-                                
-                                    {/* <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/> */}
-                                    
+                                <div className="transaction form-floating mb-3">                                
+                                    {/* <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/> */}                                    
                                     <InputComponent 
                                         inputType={"number"}
                                         controlType={"form-control"}
@@ -285,10 +256,9 @@ const Index = () => {
                                         amountToTransfer={amountToTransfer}
                                         isLabel={true}
                                         label={`Amount to Transfer`}
-                                    />
-                                    
+                                    />                                    
                                 </div>
-                                <button type="button" class="btn btn-primary" onClick={handleTransfer}>Transfer</button>
+                                <button type="button" className="btn btn-primary" onClick={handleTransfer}>Transfer</button>
                             </div>
                         </div>
                     </div>
