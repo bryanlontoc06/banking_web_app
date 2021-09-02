@@ -1,7 +1,9 @@
+import React from 'react'
+
 const Index = () => {
     return (
         <>
-         <h1>this is a Dashboard</h1>   
+            <h1>This is Transfers Page</h1>
         </>
     )
 }

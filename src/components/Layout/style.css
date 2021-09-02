@@ -11,3 +11,43 @@
 .menus {
     margin-right: 0.5rem;
 }
+
+.rightArrow {
+    margin-left: auto;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+}
+
+
+.accordion-item {
+    border: unset;
+}
+.accordion-header {
+    color: #fff;
+}
+
+.accorder-button {
+    background-color: unset;
+}
+
+button.accordion-button {
+    padding: 0.5rem 1rem;
+}
+
+.accordion-button::after {
+transform: rotate(-90deg);
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(0deg);
+}
+
+.accordion-body {
+    padding: 0;
+}
