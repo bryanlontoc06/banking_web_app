@@ -13,11 +13,13 @@ import {
     LogIn
 } from './components'
 import useSessionStorage from './useSessionStorage'
+import useLocalStorage from '../Users/useLocalStorage';
 import HomeComponent from '../Home'
 import UsersComponent from '../Users'
 import Withdrawals from '../Dashboard/Withdrawals'
 import Deposits from '../Dashboard/Deposits'
 import Transfers from '../Dashboard/Transfers'
+import Profile from '../Profile';
 
 
 
@@ -26,10 +28,29 @@ const Index = () => {
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
-    const [isAdmin, setIsAdmin] = useSessionStorage('adminAccount', false);
-    const [loginModal, setLoginModal] = useState(true)
+    const [isAdmin, setIsAdmin] = useSessionStorage('adminsData', false);
+    const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
+    const [admin, setAdmin] = useLocalStorage('adminsData', [])
     const historiesSelected = selected === 1 || selected === 2 || selected === 3;
-
+   
+    
+    if(localStorage.getItem('adminsData') == null) {
+            const newAdmin = {
+                id: 1,
+                role: 'admin',
+                username: 'admin', 
+                password: '1234',
+                first_name: 'Admin',
+                last_name: 'Lastname',
+                email: 'admin@gmail.com',
+                mobile_no: '0912323123123',
+                thumbnail_url: 'https://bootdey.com/img/Content/avatar/avatar6.png'
+            }
+            setAdmin([...admin, newAdmin])
+    }
+    if (sessionStorage.getItem('loginAccount') == null) {
+        setLoginAccount([])
+    }
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
     }
@@ -40,24 +61,30 @@ const Index = () => {
     const handleSelectedMenu = (index) => {
         setSelected(index)
     }
-    
+
+   const filterAdminRole = admin.filter(obj => obj.role === 'admin')
+   const filterAdminUsername = filterAdminRole.filter(obj => obj.username === usernameInput)
+
 
     const handleCheckUser = () => {
-        console.log(isAdmin)
-        if(`admin` === usernameInput){
-            if(`1234` === passwordInput) {
-                setIsAdmin(true)
-                setLoginModal(false)
+        if (filterAdminUsername.length === 1) {
+            if(filterAdminUsername[0].username === usernameInput){
+                if(filterAdminUsername[0].password === passwordInput) {
+                    setIsAdmin(true)
+                    setLoginAccount(filterAdminUsername)
+                }
             }
-        } else {
+        }
+         else {
             setIsAdmin(false)
         }
-        
     }
 
     const handleLogout = () => {
         setIsAdmin(false)
+        setLoginAccount([])
     }
+    
   
     return (
         <Router>
@@ -101,12 +128,12 @@ const Index = () => {
             {isAdmin && 
             <div className="dropdown">
                 <a href="google.com" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"/>
-                    <strong>Admin</strong>
+                    <img src={loginAccount[0].thumbnail_url} alt="" width="32" height="32" className="rounded-circle me-2"/>
+                    <strong>{loginAccount[0].first_name}</strong>
                 </a>
                 <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a className="dropdown-item" href="google.com">Settings</a></li>
-                    <li><a className="dropdown-item" href="google.com">Profile</a></li>
+                    <li><a className="dropdown-item" href="/profile" onClick={() => handleSelectedMenu(5)}>Profile</a></li>
                     <li><hr className="dropdown-divider"/></li>
                     <li><a className="dropdown-item" href="/" onClick={() => handleLogout()}>Sign out</a></li>
                 </ul>
@@ -131,13 +158,16 @@ const Index = () => {
             <Route path="/dashboard/transfers" exact  component={Transfers}>
                 <Transfers />
             </Route>
+            <Route path="/profile" exact  component={Profile}>
+                <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin}/>
+            </Route>
         </> 
         }
       </Switch>
 
 
         {/* Login Modals */}
-        <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
+        <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
             <div className="login-modal-dialog modal-dialog modal-dialog-centered">
                 <div className="modal-content login-modal">
                 <div className="modal-header">
