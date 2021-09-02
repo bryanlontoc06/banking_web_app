@@ -9,12 +9,14 @@ import './style.css'
 import {
     OutlineHome,
     OutlineDashboard,
-    Users
+    Users,
 } from './components'
-import useSessionStorage from './useSessionStorage';
+import useSessionStorage from './useSessionStorage'
 import HomeComponent from '../Home'
-import DashboardComponent from '../Dashboard'
 import UsersComponent from '../Users'
+import Withdrawals from '../Dashboard/Withdrawals'
+import Deposits from '../Dashboard/Deposits'
+import Transfers from '../Dashboard/Transfers'
 
 
 
@@ -28,7 +30,7 @@ const Index = () => {
     const handleSelectedMenu = (index) => {
         setSelected(index)
     }
-
+  
     return (
         <Router>
         <div className="side-bar d-flex flex-column flex-shrink-0 p-3 bg-light" styled={{width: '280px'}}>
@@ -43,12 +45,25 @@ const Index = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/dashboard" className={`nav-link ${selected === 1? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(1)}>
-                        <span className="menus"><OutlineDashboard /></span>Dashboard
-                    </Link>
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingTwo">
+                            <button className={`accordion-button ${selected === 1 || selected === 2 || selected === 3? `` : `collapsed`}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded={selected === 1 || selected === 2 || selected === 3 ? 'true' : 'false'} aria-controls="collapseTwo">
+                                <span className="menus"><OutlineDashboard /></span>Dashboard
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" className={`accordion-collapse collapse ${selected === 1 || selected === 2 || selected === 3? `show` : ``}`} aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
+                            <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li className="dashboard-list" onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`nav-link ${selected === 1? 'active' : ''} link-dark`}>Withdrawals</Link></li>
+                                <li className="dashboard-list" onClick={() => handleSelectedMenu(2)}><Link to="/dashboard/deposits" className={`nav-link ${selected === 2? 'active' : ''} link-dark`}>Deposits</Link></li>
+                                <li className="dashboard-list" onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`nav-link ${selected === 3? 'active' : ''} link-dark`}>Transfers</Link></li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
                 </li>
                 <li>
-                    <Link to="/users" className={`nav-link ${selected === 2? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(2)}>
+                    <Link to="/users" className={`nav-link ${selected === 4? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(4)}>
                         <span className="menus"><Users /></span>Users
                     </Link>
                 </li>
@@ -73,11 +88,17 @@ const Index = () => {
         <Route path="/" exact component={HomeComponent}>
           <HomeComponent />
         </Route>
-        <Route path="/dashboard" exact  component={DashboardComponent}>
-          <DashboardComponent />
-        </Route>
         <Route path="/users" exact  component={UsersComponent}>
           <UsersComponent />
+        </Route>
+        <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
+          <Withdrawals />
+        </Route>
+        <Route path="/dashboard/deposits" exact  component={Deposits}>
+          <Deposits />
+        </Route>
+        <Route path="/dashboard/transfers" exact  component={Transfers}>
+          <Transfers />
         </Route>
       </Switch>
     </Router>
