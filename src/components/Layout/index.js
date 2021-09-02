@@ -28,10 +28,6 @@ const Index = () => {
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
-<<<<<<< HEAD
-    const historiesSelected = selected === 1 || selected === 2 || selected === 3;
-
-=======
     const [isAdmin, setIsAdmin] = useSessionStorage('adminsData', false);
     const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
     const [admin, setAdmin] = useLocalStorage('adminsData', [])
@@ -55,7 +51,6 @@ const Index = () => {
     if (sessionStorage.getItem('loginAccount') == null) {
         setLoginAccount([])
     }
->>>>>>> main
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
     }
