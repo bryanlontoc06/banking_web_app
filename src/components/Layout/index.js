@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,6 +10,7 @@ import {
     OutlineHome,
     OutlineDashboard,
     Users,
+    LogIn
 } from './components'
 import useSessionStorage from './useSessionStorage'
 import HomeComponent from '../Home'
@@ -22,14 +23,40 @@ import Transfers from '../Dashboard/Transfers'
 
 const Index = () => {
 
+    const [usernameInput, setUsernameInput] = useState('')
+    const [passwordInput, setPasswordInput] = useState('')
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
+    const [isAdmin, setIsAdmin] = useSessionStorage('adminAccount', false);
+    const [loginModal, setLoginModal] = useState(true)
     const historiesSelected = selected === 1 || selected === 2 || selected === 3;
 
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
     }
+    if(sessionStorage.getItem('adminAccount') == null) {
+        setIsAdmin(false)
+    }
+    
     const handleSelectedMenu = (index) => {
         setSelected(index)
+    }
+    
+
+    const handleCheckUser = () => {
+        console.log(isAdmin)
+        if(`admin` === usernameInput){
+            if(`1234` === passwordInput) {
+                setIsAdmin(true)
+                setLoginModal(false)
+            }
+        } else {
+            setIsAdmin(false)
+        }
+        
+    }
+
+    const handleLogout = () => {
+        setIsAdmin(false)
     }
   
     return (
@@ -71,6 +98,7 @@ const Index = () => {
             </ul>
             <hr/>
             
+            {isAdmin && 
             <div className="dropdown">
                 <a href="google.com" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2"/>
@@ -80,28 +108,58 @@ const Index = () => {
                     <li><a className="dropdown-item" href="google.com">Settings</a></li>
                     <li><a className="dropdown-item" href="google.com">Profile</a></li>
                     <li><hr className="dropdown-divider"/></li>
-                    <li><a className="dropdown-item" href="google.com">Sign out</a></li>
+                    <li><a className="dropdown-item" href="/" onClick={() => handleLogout()}>Sign out</a></li>
                 </ul>
-            </div>
+            </div>}
       </div>
       
       <Switch>
-        <Route path="/" exact component={HomeComponent}>
-          <HomeComponent />
-        </Route>
-        <Route path="/users" exact  component={UsersComponent}>
-          <UsersComponent />
-        </Route>
-        <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
-          <Withdrawals />
-        </Route>
-        <Route path="/dashboard/deposits" exact  component={Deposits}>
-          <Deposits />
-        </Route>
-        <Route path="/dashboard/transfers" exact  component={Transfers}>
-          <Transfers />
-        </Route>
+        {isAdmin &&
+        <>
+            <Route path="/" exact component={HomeComponent}>
+                <HomeComponent />
+            </Route>
+            <Route path="/users" exact  component={UsersComponent}>
+                <UsersComponent />
+            </Route>
+            <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
+                <Withdrawals />
+            </Route>
+            <Route path="/dashboard/deposits" exact  component={Deposits}>
+                <Deposits />
+            </Route>
+            <Route path="/dashboard/transfers" exact  component={Transfers}>
+                <Transfers />
+            </Route>
+        </> 
+        }
       </Switch>
+
+
+        {/* Login Modals */}
+        <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
+            <div className="login-modal-dialog modal-dialog modal-dialog-centered">
+                <div className="modal-content login-modal">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
+                    {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                </div>
+                <div className="modal-body">
+                    <div className="account-row input-group mb-3">
+                        <span>Username</span>
+                        <input type="text" className="login form-control" placeholder="Username" onChange={(e) => setUsernameInput(e.target.value)} value={usernameInput}/>
+                    </div>
+                    <div className="account-row input-group mb-3">
+                        <span>Password</span>
+                        <input type="password" className="login form-control" placeholder="Password" onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
+                    </div>
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-primary" onClick={() => handleCheckUser()}>Login</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </Router>
     )
 }
