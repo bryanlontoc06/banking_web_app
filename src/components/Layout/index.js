@@ -23,6 +23,7 @@ import Transfers from '../Dashboard/Transfers'
 const Index = () => {
 
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
+    const historiesSelected = selected === 1 || selected === 2 || selected === 3;
 
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
@@ -47,11 +48,11 @@ const Index = () => {
                 <li>
                     <div className="accordion-item">
                         <h2 className="accordion-header" id="headingTwo">
-                            <button className={`accordion-button ${selected === 1 || selected === 2 || selected === 3? `` : `collapsed`}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded={selected === 1 || selected === 2 || selected === 3 ? 'true' : 'false'} aria-controls="collapseTwo">
+                            <button className={`accordion-button ${historiesSelected? `` : `collapsed`}`} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded={historiesSelected? 'true' : 'false'} aria-controls="collapseTwo" style={{pointerEvents: historiesSelected? `none` : ``}}>
                                 <span className="menus"><OutlineDashboard /></span>Dashboard
                             </button>
                         </h2>
-                        <div id="collapseTwo" className={`accordion-collapse collapse ${selected === 1 || selected === 2 || selected === 3? `show` : ``}`} aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo" className={`accordion-collapse collapse ${historiesSelected? `show` : ``}`} aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                             <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li className="dashboard-list" onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`nav-link ${selected === 1? 'active' : ''} link-dark`}>Withdrawals</Link></li>
