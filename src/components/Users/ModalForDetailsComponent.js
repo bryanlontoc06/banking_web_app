@@ -179,8 +179,8 @@ const ModalForDetailsComponent = (
                                         inputClass={"form-control"}
                                         inputID={"floatingWithdraw"}
                                         placeholderTitle={"Withdraw"}
-                                        handleOnChange={setAmountToWithdraw}
-                                        inputValue={amountToWithdraw}
+                                        handleOnChange={setAmountToDeposit}
+                                        inputValue={amountToDeposit}
                                         label={"₱ Amount to Withdraw"}
                                     />
                                 </div>
