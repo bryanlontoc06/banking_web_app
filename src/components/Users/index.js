@@ -1,8 +1,6 @@
 import './style.css';
 import {
     PersonPlus,
-    // FillDelete,
-    // ContactInfo
 } from './component';
 import {useState} from 'react'
 import useLocalStorage from './useLocalStorage';
@@ -11,8 +9,17 @@ import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
 import ModalDetailsComponent from './ModalDetailsComponent';
+import useHooks from './hooks'
 
 const Index = () => {
+    const {
+        withdrawalHistories,
+        depositHistories,
+        transfersHistories,
+        setWithdrawalHistories,
+        setDepositHistories,
+        setTransfersHistories
+    } = useHooks();
 
     const [currentSelectedData, setCurrentSelectedData] = useState({});
     const [users, setUsers] = useLocalStorage('usersData', [])
@@ -29,6 +36,32 @@ const Index = () => {
     const [amountToDeposit, setAmountToDeposit] = useState(0)
     const [transferTo, setTransferTo] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState(0)
+
+    const handleHistories = (action) => {
+        const newHistory = {
+            account_no: currentSelectedData.account_no,
+            username: currentSelectedData.username, 
+            first_name: currentSelectedData.first_name,
+            last_name: currentSelectedData.last_name,
+            address: currentSelectedData.address,
+            mobile_no: currentSelectedData.mobile_no,
+            email: currentSelectedData.email,
+            balance: currentSelectedData.balance,
+            latestWithdrawnAmount: currentSelectedData.latestWithdrawnAmount,
+            latestDepositAmount: currentSelectedData.latestDepositAmount,
+            latestTransferAmount: currentSelectedData.latestTransferAmount,
+            latestTransferTo: currentSelectedData.latestTransferTo,
+            currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+        }
+        if(action === 'withdraw') {
+            setWithdrawalHistories([...withdrawalHistories, newHistory])
+        }
+        else if (action === 'deposit') {
+            setDepositHistories([...depositHistories, newHistory])
+        } else if (action === 'transfer') {
+            setTransfersHistories([...transfersHistories, newHistory])
+        }
+    }
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -51,6 +84,10 @@ const Index = () => {
                 mobile_no: mobileNo,
                 email: email,
                 balance: balance,
+                latestWithdrawnAmount: amountToWithdraw,
+                latestDepositAmount: amountToDeposit,
+                latestTransferAmount: amountToTransfer,
+                latestTransferTo: transferTo,
             }
             setUsers([...users, newUser])
             setAccountNo('')
@@ -62,11 +99,14 @@ const Index = () => {
             setMobileNo('')
             setEmail('')
             setBalance(0)
+            setAmountToWithdraw(0)
+            setAmountToTransfer(0)
+            setAmountToDeposit(0)
+            setTransferTo('')
         } catch(e) {
             console.log(`Error in handleSaveUsers`, e)
         }
     }
-
     const handleDeleteUser = (id) => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
@@ -75,25 +115,32 @@ const Index = () => {
 
     const handleWithdraw = () => {
         let currentBalance = currentSelectedData.balance - amountToWithdraw;
-        setUsers([...users], currentSelectedData.balance = currentBalance)
+        setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
+        handleHistories('withdraw');
     }
 
     const handleDeposit = () => {
         let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
-        setUsers([...users], currentSelectedData.balance = currentBalance)
+        setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
+        handleHistories('deposit');
     }
 
     const handleTransfer = () => {
         if(transferTo){
-        console.log({transferTo})
         const toUser = users.find(user => {return user.account_no === transferTo})
         let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
         let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
-        console.log({toUserCurrentBalance})
-        setUsers([...users], currentSelectedData.balance = currentBalance, toUser.balance = toUserCurrentBalance)
+        setUsers([...users], 
+            currentSelectedData.balance = currentBalance, 
+            currentSelectedData.latestTransferAmount = amountToTransfer, 
+            currentSelectedData.latestTransferTo = transferTo,
+            toUser.balance = toUserCurrentBalance)
+        handleHistories('transfer');
         }
     }
-   
+
+
+
     return (
         <div className="users-container">            
             <ButtonComponent
@@ -132,19 +179,19 @@ const Index = () => {
             />   
             {/* ModalComponentForDetails */}             
             <ModalDetailsComponent
-            currentSelectedData={currentSelectedData}            
-            convertToMoney={convertToMoney}
-            setAmountToWithdraw={setAmountToWithdraw}
-            amountToWithdraw={amountToWithdraw}
-            handleWithdraw={handleWithdraw}
-            amountToDeposit={amountToDeposit}
-            setAmountToDeposit={setAmountToDeposit}
-            transferTo={transferTo}
-            setTransferTo={setTransferTo}
-            amountToTransfer={amountToTransfer}
-            setAmountToTransfer={setAmountToTransfer}
-            handleDeposit={handleDeposit}
-            handleTransfer={handleTransfer}
+                currentSelectedData={currentSelectedData}            
+                convertToMoney={convertToMoney}
+                setAmountToWithdraw={setAmountToWithdraw}
+                amountToWithdraw={amountToWithdraw}
+                handleWithdraw={handleWithdraw}
+                amountToDeposit={amountToDeposit}
+                setAmountToDeposit={setAmountToDeposit}
+                transferTo={transferTo}
+                setTransferTo={setTransferTo}
+                amountToTransfer={amountToTransfer}
+                setAmountToTransfer={setAmountToTransfer}
+                handleDeposit={handleDeposit}
+                handleTransfer={handleTransfer}
             />
         </div>
     )

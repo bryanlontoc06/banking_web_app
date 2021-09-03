@@ -1,17 +1,23 @@
-import React, {useState} from 'react'
+import React from 'react'
+import useLocalStorage from '../Users/useLocalStorage'
 export const AppContext = React.createContext();
 
-const AppProvider = (props) => {
 
-    const [withdrawHistory, setWithdrawHistory] = useState(0)
-    
+const AppProvider = (props) => {
+    const [withdrawalHistories, setWithdrawalHistories] = useLocalStorage('withdrawalHistories', [])
+    const [depositHistories, setDepositHistories] = useLocalStorage('depositHistories', [])
+    const [transfersHistories, setTransfersHistories] = useLocalStorage('transfersHistories', [])
 
     const state = {
-        withdrawHistory,
+        withdrawalHistories,
+        depositHistories,
+        transfersHistories
     }
 
     const func = {
-        setWithdrawHistory,
+        setWithdrawalHistories,
+        setDepositHistories,
+        setTransfersHistories
     }
 
     return (
