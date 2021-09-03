@@ -31,22 +31,20 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users}) {
                                 <td>{data.mobile_no}</td>
                                 <td>{data.email}</td>
                                 <td className="action-btns">
-                                {/* <div><button type="button" className="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" onClick={() => setCurrentSelectedData(data)}><ContactInfo /></button></div> */}                                    
+                                                            
                                     <ButtonComponent
-                                    handleFunction = {()=>setCurrentSelectedData(data)}
-                                    iconName = {<ContactInfo />}                                                                     
-                                    btnClass= {"btn btn-info"}
-                                    dbsToggle={"modal"}
-                                    dbsTarget={"#detailsModal"}
-                                         />
-                                {/* <div><button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(data.account_no)}><FillDelete /></button></div> */}                                    
+                                        handleFunction = {()=>setCurrentSelectedData(data)}
+                                        iconName = {<ContactInfo />}                                                                     
+                                        btnClass= {"btn btn-info"}
+                                        dbsToggle={"modal"}
+                                        dbsTarget={"#detailsModal"}
+                                    />
+                                
                                     <ButtonComponent
-                                    handleFunction = {() => handleDeleteUser(data.account_no)}
-                                    iconName = {<FillDelete />}                                                                 
-                                    btnClass= {"btn btn-danger"}
-                                    // dbsToggle={"modal"}
-                                    // dbsTarget={"#detailsModal"}
-                                         />
+                                        handleFunction = {() => handleDeleteUser(data.account_no)}
+                                        iconName = {<FillDelete />}                                                                 
+                                        btnClass= {"btn btn-danger"}
+                                    />
                                 </td>
                             </tr>
                         )
