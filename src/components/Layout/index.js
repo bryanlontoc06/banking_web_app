@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
@@ -20,8 +20,6 @@ import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
 import bankLogo from '../../assets/bdpi.png'
 import useHooks from './hooks'
-import useSessionStorage from './useSessionStorage'
-import useLocalStorage from '../Users/useLocalStorage';
 
 
 
