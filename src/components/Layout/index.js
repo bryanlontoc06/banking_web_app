@@ -45,7 +45,7 @@ const Index = () => {
         <Router>
         <div className="side-bar d-flex flex-column flex-shrink-0 p-3 bg-light" styled={{width: '280px'}}>
             <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                <span className="fs-4"><img src={bankLogo} style={{width: '100%'}} alt="Bank Logo"/></span>
+                <span className="fs-4"><img src={bankLogo} style={{width: '50%'}} alt="Bank Logo"/></span>
             </a>
             <hr/>
             <ul className="nav nav-pills flex-column mb-auto">
