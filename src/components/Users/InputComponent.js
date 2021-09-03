@@ -8,7 +8,7 @@ function InputComponent({
   handleOnChange,
   inputValue,
   label,
-  isReadOnly,  
+  isReadOnly, 
 }) {
   return (
     <>

@@ -134,27 +134,27 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                 inputID={"floatingBalance"}
                                 placeholderTitle={"Balance"}
                                 handleOnChange={setBalance}                                
-                                inputValue={balance}                                
+                                inputValue={balance}                           
                                 label={`Balance`}                                                             
                             />
                         </div>
                     </div>
                         <div className="modal-footer">
                             {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
-                            <ButtonComponent
-                            btnClass={"btn btn-secondary"}
-                            dbsDismiss={"modal"}
-                            btnDescription={"Close"}
-                            />                            
+                                <ButtonComponent
+                                    btnClass={"btn btn-secondary"}
+                                    dbsDismiss={"modal"}
+                                    btnDescription={"Close"}
+                                />                            
                             {/* <button type="button" className="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ModalForgotPassword" onClick={handleSaveUsers}>Save</button> */}
-                              <ButtonComponent
-                            btnClass={"btn btn-primary"}
-                            dbsDismiss={"modal"}
-                            dbsToggle={"modal"}
-                            dbsTarget={"#ModalForgotPassword"}
-                            handleFunction={handleSaveUsers}
-                            btnDescription={"Save"}
-                            />
+                                <ButtonComponent
+                                    btnClass={"btn btn-primary"}
+                                    dbsDismiss={"modal"}
+                                    dbsToggle={"modal"}
+                                    dbsTarget={"#ModalForgotPassword"}
+                                    handleFunction={handleSaveUsers}
+                                    btnDescription={"Save"}
+                                />
                             
                         </div>
                     </div>

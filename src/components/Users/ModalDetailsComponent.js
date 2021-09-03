@@ -18,7 +18,6 @@ const ModalForDetailsComponent = (
   handleTransfer}
 ) => {
     return (
-        
         <div>        
             <div className="modal fade" id="detailsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -61,11 +60,11 @@ const ModalForDetailsComponent = (
                                 <InputComponent
                                  inputType={"text"}
                                  inputClass={"read-only-user-detail form-control"}
-                                 placeholderTitle={"User Name"}
+                                 placeholderTitle={"First Name"}
                                  inputID={"floatingFirstNameDetails"}
                                  isReadOnly={true}
-                                 inputValue={currentSelectedData.username}
-                                 label={"User Name"}
+                                 inputValue={currentSelectedData.first_name}
+                                 label={"First Name"}
                                  />
                             </div>
                             <div className="form-floating mb-3">
@@ -76,7 +75,7 @@ const ModalForDetailsComponent = (
                                  inputID={"floatingLastNameDetails"}
                                  isReadOnly={true}
                                  inputValue={currentSelectedData.last_name}
-                                 label={"User Name"}
+                                 label={"Last Name"}
                                  />
                             </div>
                         </div>
@@ -109,11 +108,11 @@ const ModalForDetailsComponent = (
                                 <InputComponent
                                 inputType={"email"}
                                 inputClass={"read-only-user-detail form-control"}
-                                placeholderTitle={"Active Mobile No."}
+                                placeholderTitle={"Email Address"}
                                 inputID={"floatingEmailDetails"}
                                 isReadOnly={true}
-                                inputValue={currentSelectedData.mobile_no}
-                                label={"Active Mobile No."}
+                                inputValue={currentSelectedData.email}
+                                label={"Email Address"}
                                 />
                             </div>
                             <div className="form-floating mb-3">
@@ -158,11 +157,11 @@ const ModalForDetailsComponent = (
                                     <InputComponent
                                         inputType={"number"}
                                         inputClass={"form-control"}
-                                        inputID={"floatingWithdraw"}
-                                        placeholderTitle={"Withdraw"}
+                                        inputID={"floatingDeposit"}
+                                        placeholderTitle={"Deposit"}
                                         handleOnChange={setAmountToDeposit}
                                         inputValue={amountToDeposit}
-                                        label={"₱ Amount to Withdraw"}
+                                        label={"₱ Amount to Deposit"}
                                     />
                                 </div>
                                 

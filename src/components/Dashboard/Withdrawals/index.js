@@ -1,18 +1,10 @@
 import './style.css';
-import useHooks from './hooks';
 import useLocalStorage from '../../Users/useLocalStorage';
 import {convertToMoney} from '../../lib/helpers'
 
 const Index = () => {
 
-    const [users, setUsers] = useLocalStorage('usersData', [])
-
-    const {
-        withdrawHistory,
-        setWithdrawHistory,
-    } = useHooks();
-
-    console.log({users})
+    const [withdrawalHistories, setWithdrawalHistories] = useLocalStorage('withdrawalHistories', [])
 
     return (
         <div className="dashboard-container">
@@ -20,7 +12,7 @@ const Index = () => {
 
             <h3>Withdrawals</h3>
             <table className="table">
-                <thead>
+                <thead className="table-dark">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Account No.</th>
@@ -31,14 +23,14 @@ const Index = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => {
+                    {withdrawalHistories.map((user, index) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{index}</th>
                                 <td>{user.account_no}</td>
-                                <td>Mark Otto</td>
-                                <td>09-02-2021 18:05</td>
-                                <td>{convertToMoney(500)}</td>
+                                <td>{user.first_name + " " + user.last_name}</td>
+                                <td>{user.currentDatenTime}</td>
+                                <td>{convertToMoney(user.latestWithdrawnAmount)}</td>
                                 <td>{convertToMoney(user.balance)}</td>
                             </tr>
                         )
