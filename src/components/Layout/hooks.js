@@ -34,7 +34,7 @@ const useHooks = () => {
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
     }
-    if(sessionStorage.getItem('adminAccount') == null) {
+    if(sessionStorage.getItem('adminsData') == null) {
         setIsAdmin(false)
     }
     

@@ -10,7 +10,7 @@ import ButtonComponent from './ButtonComponent';
 import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
-import ModalForDetailsComponent from './ModalForDetailsComponent';
+import ModalDetailsComponent from './ModalDetailsComponent';
 
 const Index = () => {
 
@@ -131,7 +131,7 @@ const Index = () => {
                 handleSaveUsers={handleSaveUsers}                    
             />   
             {/* ModalComponentForDetails */}             
-            <ModalForDetailsComponent
+            <ModalDetailsComponent
             currentSelectedData={currentSelectedData}            
             convertToMoney={convertToMoney}
             setAmountToWithdraw={setAmountToWithdraw}
