@@ -5,11 +5,13 @@ import {
     // ContactInfo
 } from './component';
 import {useState} from 'react'
-import {convertToMoney} from '../lib/helpers'
 import useLocalStorage from './useLocalStorage';
 import ButtonComponent from './ButtonComponent';
-import InputComponent from './InputComponent';
+import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
+import ModalComponent from './ModalComponent';
+// import ModalForDetailsComponent from './ModalForDetailsComponent';
+import ModalForDetailsComponent from './ModalForDetailsComponent';
 
 const Index = () => {
 
@@ -84,12 +86,14 @@ const Index = () => {
     }
 
     const handleTransfer = () => {
+        if(transferTo){
         console.log({transferTo})
         const toUser = users.find(user => {return user.account_no === transferTo})
         let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
         let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
         console.log({toUserCurrentBalance})
         setUsers([...users], currentSelectedData.balance = currentBalance, toUser.balance = toUserCurrentBalance)
+        }
     }
 
    
@@ -98,176 +102,55 @@ const Index = () => {
             <ButtonComponent
                 handleFunction = {handleGenerateAccountNo}
                 iconName = {<PersonPlus/>}                
-                buttonDescription = {"Add Client"}
+                btnDescription = {" Add Client"}
                 btnClass= {"btn btn-primary"}
                 dbsToggle={"modal"}
                 dbsTarget={"#exampleModal"}
             />
             <TableComponent
-                setCurrentSelectedData={setCurrentSelectedData}
                 handleDeleteUser={handleDeleteUser}
                 users={users}
+                setCurrentSelectedData={setCurrentSelectedData}
             />       
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>         
-                    </div>
-
-                    <div className="modal-body">
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingInput" placeholder="Account No." readOnly value={accountNo}/>
-                            <label /*for="floatingInput"*/>Account No.</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingUserName" placeholder="User Name" onChange={(e) => setUserName(e.target.value)} value={userName}/>
-                            <label /*for="floatingInput"*/>User Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                            <label /*for="floatingInput"*/>Password</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingFirstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
-                            <label /*for="floatingInput"*/>First Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingLastName" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} value={lastName}/>
-                            <label /*for="floatingInput"*/>Last Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="text" className="form-control" id="floatingAddress" placeholder="Address" onChange={(e) => setAddress(e.target.value)} value={address}/>
-                            <label /*for="floatingInput"*/>Address</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="floatingActiveNo" placeholder="Active Mobile No." onChange={(e) => setMobileNo(e.target.value)} value={mobileNo}/>
-                            <label /*for="floatingInput"*/>Active Mobile No.</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="email" className="form-control" id="floatingEmail" placeholder="Email Address" onChange={(e) => setEmail(e.target.value)} value={email}/>
-                            <label /*for="floatingInput"*/>Email Address</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input type="number" className="form-control" id="floatingBalance" placeholder="Balance" onChange={(e) => setBalance(e.target.value)} value={balance}/>
-                            <label /*for="floatingInput"*/>₱ Balance</label>
-                        </div>
-                    </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ModalForgotPassword" onClick={handleSaveUsers}>Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            {/* Modal For Details */}
-            <div className="modal fade" id="detailsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        <div className="user-row">
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" placeholder="Account No." readOnly value={currentSelectedData.account_no}/>
-                                <label>Account No.</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingUserNameDetails" placeholder="User Name" readOnly value={currentSelectedData.username}/>
-                                <label>User Name</label>
-                            </div>
-                        </div>
-                        <div className="user-row">
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingFirstNameDetails" placeholder="First Name" readOnly value={currentSelectedData.first_name}/>
-                                <label>First Name</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingLastNameDetails" placeholder="Last Name" readOnly value={currentSelectedData.last_name}/>
-                                <label>Last Name</label>
-                            </div>
-                        </div>
-                        <div className="user-row">
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingAddressDetails" placeholder="Address" readOnly value={currentSelectedData.address}/>
-                                <label>Address</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input type="number" className="read-only-user-detail form-control" id="floatingActiveNoDetails" placeholder="Active Mobile No." readOnly value={currentSelectedData.mobile_no}/>
-                                <label>Active Mobile No.</label>
-                            </div>
-                        </div>
-                        <div className="user-row">
-                            <div className="form-floating mb-3">
-                                <input type="email" className="read-only-user-detail form-control" id="floatingEmailDetails" placeholder="Email Address" readOnly value={currentSelectedData.email}/>
-                                <label>Email Address</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input type="text" className="read-only-user-detail form-control" id="floatingBalanceDetails" placeholder="Balance" readOnly value={convertToMoney(currentSelectedData.balance)}/>
-                                <label>Balance</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="title">
-                            <h5 className="modal-title" >Transactions</h5>
-                        </div>
-                        <div className="transaction-body-container">
-                            <div className="transaction-body user-row">
-                                <div className="transaction form-floating mb-3">
-                                    <input type="number" className="form-control" id="floatingWithdraw" placeholder="Withdraw" onChange={(e) => setAmountToWithdraw(e.target.value)} value={amountToWithdraw}/>
-                                    <label>₱ Amount to Withdraw</label>
-                                </div>
-                                <button type="button" className="btn btn-primary" onClick={handleWithdraw}>Withdraw</button>
-                            </div>
-                            <div className="transaction-body user-row">
-                                <div className="transaction form-floating mb-3">
-                                    <input type="number" className="form-control" id="floatingDeposit" placeholder="Deposit" onChange={(e) => setAmountToDeposit(e.target.value)} value={amountToDeposit}/>
-                                    <label>₱ Amount to Deposit</label>
-                                </div>
-                                <button type="button" className="btn btn-primary" onClick={handleDeposit}>Deposit</button>
-                            </div>
-
-
-
-                            <h6 className="modal-title" >Transfer Fund</h6>
-                            <p>To</p>
-                            <div className="transaction-body user-row">
-                                <div className="transaction form mb-3">
-                                    <input type="text" className="transfer-names form-control" id="floatingTransferTo" placeholder="Account No." onChange={(e) => setTransferTo(e.target.value)} value={transferTo} />
-                                </div>
-                            </div>
-                            <p>Amount</p>
-                            <div className="transaction-body user-row">
-                                <div className="transaction form-floating mb-3">                                
-                                    {/* <input type="number" className="form-control" id="floatingTransfer" placeholder="Transfer" onChange={(e) => setAmountToTransfer(e.target.value)} value={amountToTransfer}/> */}                                    
-                                    <InputComponent 
-                                        inputType={"number"}
-                                        controlType={"form-control"}
-                                        floatType={"floatingTransfer"}
-                                        placeholderTitle={"Transfer"}
-                                        setAmountToTransfer={setAmountToTransfer}
-                                        amountToTransfer={amountToTransfer}
-                                        isLabel={true}
-                                        label={`Amount to Transfer`}
-                                    />                                    
-                                </div>
-                                <button type="button" className="btn btn-primary" onClick={handleTransfer}>Transfer</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            <ModalComponent
+                accountNo={accountNo}  
+                setUserName={setUserName}
+                userName={userName}     
+                setPassword={setPassword}
+                password={password}
+                setFirstName={setFirstName}
+                firstName={firstName}
+                setLastName={setLastName}
+                lastName={lastName}
+                setAddress={setAddress}
+                address={address}
+                setMobileNo={setMobileNo}
+                mobileNo={mobileNo}
+                setEmail={setEmail}
+                email={email}
+                setBalance={setBalance}
+                balance={balance}
+                handleSaveUsers={handleSaveUsers}                    
+            />   
+            {/* ModalComponentForDetails */}             
+            <ModalForDetailsComponent
+            currentSelectedData={currentSelectedData}            
+            convertToMoney={convertToMoney}
+            setAmountToWithdraw={setAmountToWithdraw}
+            amountToWithdraw={amountToWithdraw}
+            handleWithdraw={handleWithdraw}
+            amountToDeposit={amountToDeposit}
+            setAmountToDeposit={setAmountToDeposit}
+            transferTo={transferTo}
+            setTransferTo={setTransferTo}
+            amountToTransfer={amountToTransfer}
+            setAmountToTransfer={setAmountToTransfer}
+            handleDeposit={handleDeposit}
+            handleTransfer={handleTransfer}
+            />
+                  
+           
         </div>
     )
 }
