@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,85 +12,40 @@ import {
     Users,
     LogIn
 } from './components'
-import useSessionStorage from './useSessionStorage'
-import useLocalStorage from '../Users/useLocalStorage';
 import HomeComponent from '../Home'
 import UsersComponent from '../Users'
 import Withdrawals from '../Dashboard/Withdrawals'
 import Deposits from '../Dashboard/Deposits'
 import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
+import bankLogo from '../../assets/bdpi.png'
+import useHooks from './hooks'
 
 
 
 const Index = () => {
-
-    const [usernameInput, setUsernameInput] = useState('')
-    const [passwordInput, setPasswordInput] = useState('')
-    const [selected, setSelected] = useSessionStorage('selectedMenu', '');
-    const [isAdmin, setIsAdmin] = useSessionStorage('adminsData', false);
-    const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
-    const [admin, setAdmin] = useLocalStorage('adminsData', [])
-    const historiesSelected = selected === 1 || selected === 2 || selected === 3;
-   
-    
-    if(localStorage.getItem('adminsData') == null) {
-            const newAdmin = {
-                id: 1,
-                role: 'admin',
-                username: 'admin', 
-                password: '1234',
-                first_name: 'Admin',
-                last_name: 'Lastname',
-                email: 'admin@gmail.com',
-                mobile_no: '0912323123123',
-                thumbnail_url: 'https://bootdey.com/img/Content/avatar/avatar6.png'
-            }
-            setAdmin([...admin, newAdmin])
-    }
-    if (sessionStorage.getItem('loginAccount') == null) {
-        setLoginAccount([])
-    }
-    if(sessionStorage.getItem('selectedMenu') == null) {
-        setSelected(0)
-    }
-    if(sessionStorage.getItem('adminAccount') == null) {
-        setIsAdmin(false)
-    }
-    
-    const handleSelectedMenu = (index) => {
-        setSelected(index)
-    }
-
-   const filterAdminRole = admin.filter(obj => obj.role === 'admin')
-   const filterAdminUsername = filterAdminRole.filter(obj => obj.username === usernameInput)
-
-
-    const handleCheckUser = () => {
-        if (filterAdminUsername.length === 1) {
-            if(filterAdminUsername[0].username === usernameInput){
-                if(filterAdminUsername[0].password === passwordInput) {
-                    setIsAdmin(true)
-                    setLoginAccount(filterAdminUsername)
-                }
-            }
-        }
-         else {
-            setIsAdmin(false)
-        }
-    }
-
-    const handleLogout = () => {
-        setIsAdmin(false)
-        setLoginAccount([])
-    }
+    const {
+        usernameInput,
+        setUsernameInput,
+        passwordInput,
+        setPasswordInput,
+        selected,
+        isAdmin,
+        loginAccount,
+        admin,
+        setAdmin,
+        historiesSelected,
+        handleSelectedMenu,
+        handleCheckUser,
+        handleLogout
+    } = useHooks();
     
   
     return (
         <Router>
         <div className="side-bar d-flex flex-column flex-shrink-0 p-3 bg-light" styled={{width: '280px'}}>
             <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <span className="fs-4">Bank Logo</span>
+                <span className="fs-4"><img src={bankLogo} style={{width: '100%'}} alt="Bank Logo"/></span>
             </a>
             <hr/>
             <ul className="nav nav-pills flex-column mb-auto">
@@ -171,7 +126,6 @@ const Index = () => {
                 <div className="modal-content login-modal">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
-                    {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                 </div>
                 <div className="modal-body">
                     <div className="account-row input-group mb-3">
