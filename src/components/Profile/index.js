@@ -64,12 +64,28 @@ const Index = (props) => {
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row mb-3">
+                            <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
+                                        <h6 class="mb-0">ID Number</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" value={loginAccount[0].first_name + " " +loginAccount[0].last_name} readOnly/>
+                                        <input type="text" class="form-control" value={loginAccount[0].id} readOnly/>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">First Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" value={loginAccount[0].first_name} readOnly/>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" value={loginAccount[0].last_name} readOnly/>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
