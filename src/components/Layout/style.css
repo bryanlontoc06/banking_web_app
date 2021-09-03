@@ -51,3 +51,36 @@ transform: rotate(-90deg);
 .accordion-body {
     padding: 0;
 }
+
+div#exampleModalLive {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    padding: .375rem .75rem;
+}
+
+.login-modal {
+    width: 60%; 
+}
+
+input.login.form-control {
+    width: 100%;
+    border-radius: 0.25rem;
+}
+
+.login-modal-dialog {
+    display: flex;
+    justify-content: center;
+}

@@ -10,7 +10,6 @@ import ButtonComponent from './ButtonComponent';
 import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
-// import ModalForDetailsComponent from './ModalForDetailsComponent';
 import ModalForDetailsComponent from './ModalForDetailsComponent';
 
 const Index = () => {
@@ -54,7 +53,6 @@ const Index = () => {
                 balance: balance,
             }
             setUsers([...users, newUser])
-
             setAccountNo('')
             setUserName('')
             setPassword('')
@@ -95,7 +93,6 @@ const Index = () => {
         setUsers([...users], currentSelectedData.balance = currentBalance, toUser.balance = toUserCurrentBalance)
         }
     }
-
    
     return (
         <div className="users-container">            
@@ -116,7 +113,7 @@ const Index = () => {
             <ModalComponent
                 accountNo={accountNo}  
                 setUserName={setUserName}
-                userName={userName}     
+                userName={userName}
                 setPassword={setPassword}
                 password={password}
                 setFirstName={setFirstName}
@@ -149,8 +146,6 @@ const Index = () => {
             handleDeposit={handleDeposit}
             handleTransfer={handleTransfer}
             />
-                  
-           
         </div>
     )
 }

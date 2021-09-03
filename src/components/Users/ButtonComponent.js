@@ -5,11 +5,9 @@ const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, dbsDismiss, handleFunc
     return (
         <>
             <button type="button" className={btnClass} data-bs-dismiss={dbsDismiss} data-bs-toggle={dbsToggle} data-bs-target={dbsTarget} onClick={handleFunction} aria-label={ariaLabel}> {iconName ? iconName : null} {btnDescription}</button>
+
         </>
     )
 }
 
 export default ButtonComponent
-
-
-
