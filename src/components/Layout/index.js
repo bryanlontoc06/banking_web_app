@@ -165,7 +165,6 @@ const Index = () => {
         }
       </Switch>
 
-
         {/* Login Modals */}
         <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
             <div className="login-modal-dialog modal-dialog modal-dialog-centered">
