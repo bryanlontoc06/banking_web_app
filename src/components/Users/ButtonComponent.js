@@ -1,15 +1,13 @@
 import React from 'react'
 
-const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, handleFunction, iconName, buttonDescription}) => {
+const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, dbsDismiss, handleFunction, iconName, ariaLabel, btnDescription}) => {
     
     return (
         <>
-            <button type="button" className={btnClass} data-bs-toggle={dbsToggle} data-bs-target={dbsTarget} onClick={handleFunction}>{iconName ? iconName : null } {buttonDescription}</button>
+            <button type="button" className={btnClass} data-bs-dismiss={dbsDismiss} data-bs-toggle={dbsToggle} data-bs-target={dbsTarget} onClick={handleFunction} aria-label={ariaLabel}> {iconName ? iconName : null} {btnDescription}</button>
+
         </>
     )
 }
 
 export default ButtonComponent
-
-
-
