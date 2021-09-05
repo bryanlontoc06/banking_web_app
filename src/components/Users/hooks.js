@@ -15,16 +15,27 @@ const useHooks = () => {
     const [accountNo, setAccountNo] = useState('')
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [retypePassword, setRetypePassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
     const [mobileNo, setMobileNo] = useState('');
     const [email, setEmail] = useState('');
-    const [balance, setBalance] = useState(0);
-    const [amountToWithdraw, setAmountToWithdraw] = useState(0)
-    const [amountToDeposit, setAmountToDeposit] = useState(0)
+    const [balance, setBalance] = useState('');
+    const [amountToWithdraw, setAmountToWithdraw] = useState('')
+    const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
-    const [amountToTransfer, setAmountToTransfer] = useState(0)
+    const [amountToTransfer, setAmountToTransfer] = useState('')
+    const [errorState, setErrorState] = useState({
+        username: false,
+        password: false,
+        retypePassword: false,
+        firstName: false,
+        lastName: false,
+        address: false,
+        mobileNo: false,
+        email: false
+    })
     
     const handleHistories = (action) => {
         const newHistory = {
@@ -60,7 +71,84 @@ const useHooks = () => {
         let year = date.getFullYear().toString().substr(-2)
         setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
     }
-    const handleSaveUsers = () => {
+
+    const validation = (newUser) => {
+        if(users.find((user) => {return user.username === userName})) {
+            alert('Username already exists.')
+       }
+       else if (password !== retypePassword) {
+            alert('Password do not match.')
+       } 
+       else if (!userName) {
+            setErrorState({username: true})
+       }
+       else if (!password) {
+        setErrorState({password: true})
+       }
+       else if (!retypePassword) {
+        setErrorState({retypePassword: true})
+       }
+       else if (!firstName) {
+        setErrorState({firstName: true})
+       }
+       else if (!lastName) {
+        setErrorState({lastName: true})
+       }
+       else if (!address) {
+        setErrorState({address: true})
+       }
+       else if (!mobileNo) {
+        setErrorState({ mobileNo: true})
+       }
+       else if (!email) {
+        setErrorState({email: true})
+       }
+        else if (userName) {
+            setErrorState({username: false})
+            if (password) {
+                setErrorState({password: false})
+                if (retypePassword) {
+                    setErrorState({retypePassword: false})
+                    if (firstName) {
+                        setErrorState({firstName: false})
+                        if (lastName) {
+                            setErrorState({lastName: false})
+                            if (address) {
+                                setErrorState({address: false})
+                                if (mobileNo) {
+                                    setErrorState({mobileNo: false})
+                                    if (email) {
+                                        setErrorState({email: false})
+
+                                        setUsers([...users, newUser])
+                                        setAccountNo('')
+                                        setUserName('')
+                                        setPassword('')
+                                        setRetypePassword('')
+                                        setFirstName('')
+                                        setLastName('')
+                                        setAddress('')
+                                        setMobileNo('')
+                                        setEmail('')
+                                        setBalance(0)
+                                        setAmountToWithdraw(0)
+                                        setAmountToTransfer(0)
+                                        setAmountToDeposit(0)
+                                        setTransferTo('')
+                                        alert('Account created')
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+
+    const handleSaveUsers = (e) => {
+        e.preventDefault();
         try {
             let enPassword = Buffer.from(password).toString('base64');
             const newUser = {
@@ -78,24 +166,14 @@ const useHooks = () => {
                 latestTransferAmount: amountToTransfer,
                 latestTransferTo: transferTo,
             }
-            setUsers([...users, newUser])
-            setAccountNo('')
-            setUserName('')
-            setPassword('')
-            setFirstName('')
-            setLastName('')
-            setAddress('')
-            setMobileNo('')
-            setEmail('')
-            setBalance(0)
-            setAmountToWithdraw(0)
-            setAmountToTransfer(0)
-            setAmountToDeposit(0)
-            setTransferTo('')
+
+            validation(newUser);
+       
         } catch(e) {
             console.log(`Error in handleSaveUsers`, e)
         }
     }
+
     const handleDeleteUser = (id) => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
@@ -138,6 +216,8 @@ const useHooks = () => {
         setUserName, 
         password, 
         setPassword, 
+        retypePassword, 
+        setRetypePassword, 
         firstName, 
         setFirstName, 
         lastName, 
@@ -163,7 +243,9 @@ const useHooks = () => {
         handleDeleteUser,
         handleWithdraw,
         handleDeposit,
-        handleTransfer
+        handleTransfer,
+        errorState,
+        setErrorState
     }
 }
 
