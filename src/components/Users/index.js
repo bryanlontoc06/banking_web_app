@@ -20,6 +20,8 @@ const Index = () => {
         setUserName, 
         password, 
         setPassword, 
+        retypePassword, 
+        setRetypePassword, 
         firstName, 
         setFirstName, 
         lastName, 
@@ -45,7 +47,9 @@ const Index = () => {
         handleDeleteUser,
         handleWithdraw,
         handleDeposit,
-        handleTransfer
+        handleTransfer,
+        errorState,
+        setErrorState
     } = useHooks();
 
     return (
@@ -70,6 +74,8 @@ const Index = () => {
                 userName={userName}
                 setPassword={setPassword}
                 password={password}
+                retypePassword={retypePassword}
+                setRetypePassword={setRetypePassword}
                 setFirstName={setFirstName}
                 firstName={firstName}
                 setLastName={setLastName}
@@ -82,7 +88,9 @@ const Index = () => {
                 email={email}
                 setBalance={setBalance}
                 balance={balance}
-                handleSaveUsers={handleSaveUsers}                    
+                handleSaveUsers={handleSaveUsers}   
+                errorState={errorState} 
+                setErrorState={setErrorState} 
             />   
             {/* ModalComponentForDetails */}             
             <ModalDetailsComponent
