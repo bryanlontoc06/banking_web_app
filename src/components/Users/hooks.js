@@ -142,9 +142,10 @@ const useHooks = () => {
         e.preventDefault();
         try {
             let enPassword = Buffer.from(password).toString('base64');
+            let lowerCasedUserName= userName.toLowerCase()
             const newUser = {
                 account_no: accountNo,
-                username: userName, 
+                username: lowerCasedUserName, 
                 password: enPassword,
                 first_name: firstName,
                 last_name: lastName,
