@@ -96,45 +96,55 @@ const useHooks = () => {
        }
         else if (userName) {
             setErrorState({username: false})
-            if (password) {
-                setErrorState({password: false})
-                if (retypePassword) {
-                    setErrorState({retypePassword: false})
-                    if (firstName) {
-                        setErrorState({firstName: false})
-                        if (lastName) {
-                            setErrorState({lastName: false})
-                            if (address) {
-                                setErrorState({address: false})
-                                if (mobileNo) {
-                                    setErrorState({mobileNo: false})
-                                    if (email) {
-                                        setErrorState({email: false})
+                if (password) {
+                    setErrorState({password: false})
+                    if (retypePassword) {
+                        setErrorState({retypePassword: false})
+                        if (firstName) {
+                            setErrorState({firstName: false})
+                            if(isNaN(firstName.substring(0, 1))) {
+                                if (lastName) {
+                                    setErrorState({lastName: false})
+                                    if(isNaN(lastName.substring(0, 1))){
+                                        if (address) {
+                                            setErrorState({address: false})
+                                            if (mobileNo) {
+                                                setErrorState({mobileNo: false})
+                                                if (email) {
+                                                    setErrorState({email: false})
 
-                                        setUsers([...users, newUser])
-                                        setAccountNo('')
-                                        setUserName('')
-                                        setPassword('')
-                                        setRetypePassword('')
-                                        setFirstName('')
-                                        setLastName('')
-                                        setAddress('')
-                                        setMobileNo('')
-                                        setEmail('')
-                                        setBalance(0)
-                                        setAmountToWithdraw(0)
-                                        setAmountToTransfer(0)
-                                        setAmountToDeposit(0)
-                                        setTransferTo('')
-                                        alert('Account created')
+                                                    setUsers([...users, newUser])
+                                                    setAccountNo('')
+                                                    setUserName('')
+                                                    setPassword('')
+                                                    setRetypePassword('')
+                                                    setFirstName('')
+                                                    setLastName('')
+                                                    setAddress('')
+                                                    setMobileNo('')
+                                                    setEmail('')
+                                                    setBalance(0)
+                                                    setAmountToWithdraw(0)
+                                                    setAmountToTransfer(0)
+                                                    setAmountToDeposit(0)
+                                                    setTransferTo('')
+                                                    alert('Account created')
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        alert(`Last name cannot start with a number`)
                                     }
                                 }
+                            }
+                            else {
+                                alert(`First name cannot start with a number`)
                             }
                         }
                     }
                 }
-            }
-        }
+        } 
     }
     
 
