@@ -26,7 +26,7 @@ const Index = () => {
                     {withdrawalHistories.map((user, index) => {
                         return (
                             <tr key={index}>
-                                <th scope="row">{index}</th>
+                                <th scope="row">{index+1}</th>
                                 <td>{user.account_no}</td>
                                 <td>{user.first_name + " " + user.last_name}</td>
                                 <td>{user.currentDatenTime}</td>

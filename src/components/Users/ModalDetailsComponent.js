@@ -229,11 +229,11 @@ const ModalForDetailsComponent = (
                             </div>
                             <div style={{marginBottom: '1rem'}}>
                                 {modalDetailsAlert.insufficientBalanceTransfer && <p className="error-message">You have an Insufficient Balance. Please Try Again.</p>}
-                                {modalDetailsAlert.successfulTransfer && <p className="success-message">You have successfully transferred {convertToMoney(transferMessage.transferAmount)} to the user {transferMessage.accountName} with the Account# {transferMessage.accountNo}.</p>}
-                                {modalDetailsAlert.enterAnAmountToTransfer && <p className="enter-an-amount-message">Please enter an amount to transfer</p>}
+                                {modalDetailsAlert.successfulTransfer && <p className="success-message">You have successfully transferred {convertToMoney(transferMessage.transferAmount)} to {transferMessage.firstName} {transferMessage.lastName} with the Account# {transferMessage.accountNo}.</p>}
+                                {modalDetailsAlert.enterAnAmountToTransfer && <p className="enter-an-amount-message">Please enter an amount to transfer.</p>}
                                 {modalDetailsAlert.sameAccountNumber &&  <p className="enter-an-amount-message">Invalid Action. You cannot send amount to the same Account #. Please Try Again.</p>}
-                                {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account # is not valid. Please Try Again!</p>}                      
-                                {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account # to transfer to cannot be blank. Please Try Again. </p>}
+                                {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account# is not valid. Please Try Again.</p>}                      
+                                {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account# to transfer to cannot be blank. Please Try Again. </p>}
                             </div>
                         </div>
                     </div>

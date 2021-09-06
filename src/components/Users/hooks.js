@@ -244,7 +244,7 @@ const useHooks = () => {
                                 currentSelectedData.latestTransferTo = transferTo,
                                 toUser.balance = toUserCurrentBalance)
                             handleHistories('transfer');
-                            setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, accountName: toUser.first_name})                            
+                            setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, firstName: toUser.first_name, lastName: toUser.last_name})                            
                             setTransferTo('')
                             setAmountToTransfer('')
                             setModalDetailsAlert({successfulTransfer: true})
