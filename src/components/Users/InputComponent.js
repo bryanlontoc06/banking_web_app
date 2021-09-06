@@ -31,7 +31,7 @@ function InputComponent({
         // required      
       />
       {label ? <label>{label}</label> : ""}
-      {errorMessage}
+      {errorMessage && errorMessage}
     </>
   );
 }

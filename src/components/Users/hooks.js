@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import {AppContext} from '../Global/AppContext'
 import useLocalStorage from './useLocalStorage'
+import {convertToMoney} from '../lib/helpers'
 
 const useHooks = () => {
     const {withdrawalHistories,
@@ -26,6 +27,19 @@ const useHooks = () => {
     const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState('')
+    const [modalDetailsAlert, setModalDetailsAlert] = useState({
+        insufficientBalance: false,
+        successful: false,
+        enterAnAmountToWithdraw: false,
+        successfulDeposit: false,
+        enterAnAmountToDeposit: false,
+        insufficientBalanceTransfer: false,
+        successfulTransfer: false,
+        enterAnAmountToTransfer: false,
+        sameAccountNumber: false,
+        accountNumberNotValidTransfer: false,
+        accountNumberCannotBeBlank: false,
+    });
     const [errorState, setErrorState] = useState({
         username: false,
         password: false,
@@ -37,31 +51,7 @@ const useHooks = () => {
         email: false
     })
     
-    const handleHistories = (action) => {
-        const newHistory = {
-            account_no: currentSelectedData.account_no,
-            username: currentSelectedData.username, 
-            first_name: currentSelectedData.first_name,
-            last_name: currentSelectedData.last_name,
-            address: currentSelectedData.address,
-            mobile_no: currentSelectedData.mobile_no,
-            email: currentSelectedData.email,
-            balance: currentSelectedData.balance,
-            latestWithdrawnAmount: currentSelectedData.latestWithdrawnAmount,
-            latestDepositAmount: currentSelectedData.latestDepositAmount,
-            latestTransferAmount: currentSelectedData.latestTransferAmount,
-            latestTransferTo: currentSelectedData.latestTransferTo,
-            currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
-        }
-        if(action === 'withdraw') {
-            setWithdrawalHistories([...withdrawalHistories, newHistory])
-        }
-        else if (action === 'deposit') {
-            setDepositHistories([...depositHistories, newHistory])
-        } else if (action === 'transfer') {
-            setTransfersHistories([...transfersHistories, newHistory])
-        }
-    }
+    
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -166,7 +156,6 @@ const useHooks = () => {
                 latestTransferAmount: amountToTransfer,
                 latestTransferTo: transferTo,
             }
-
             validation(newUser);
        
         } catch(e) {
@@ -180,31 +169,107 @@ const useHooks = () => {
         setUsers([...users])
     }
 
+    const handleHistories = (action) => {
+        const newHistory = {
+            account_no: currentSelectedData.account_no,
+            username: currentSelectedData.username, 
+            first_name: currentSelectedData.first_name,
+            last_name: currentSelectedData.last_name,
+            address: currentSelectedData.address,
+            mobile_no: currentSelectedData.mobile_no,
+            email: currentSelectedData.email,
+            balance: currentSelectedData.balance,
+            latestWithdrawnAmount: currentSelectedData.latestWithdrawnAmount,
+            latestDepositAmount: currentSelectedData.latestDepositAmount,
+            latestTransferAmount: currentSelectedData.latestTransferAmount,
+            latestTransferTo: currentSelectedData.latestTransferTo,
+            currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+        }
+        if(action === 'withdraw') {
+            setWithdrawalHistories([...withdrawalHistories, newHistory])
+        }
+        else if (action === 'deposit') {
+            setDepositHistories([...depositHistories, newHistory])
+        } else if (action === 'transfer') {
+            setTransfersHistories([...transfersHistories, newHistory])
+        }
+    }
+
+
     const handleWithdraw = () => {
-        let currentBalance = currentSelectedData.balance - amountToWithdraw;
-        setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
-        handleHistories('withdraw');
+        if(amountToWithdraw > 0) {
+            if(amountToWithdraw < currentSelectedData.balance) {
+                let currentBalance = currentSelectedData.balance - amountToWithdraw;
+                setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
+                handleHistories('withdraw');
+                setModalDetailsAlert({insufficientBalance: false})
+                setModalDetailsAlert({successful: true})
+                setAmountToWithdraw('')
+            } else {
+                setModalDetailsAlert({insufficientBalance: true})
+            }
+        } else {
+            
+            setModalDetailsAlert({enterAnAmountToWithdraw: true})
+        }
     }
 
     const handleDeposit = () => {
-        let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
-        setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
-        handleHistories('deposit');
+        if(amountToDeposit > 0) {
+            let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
+            setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
+            handleHistories('deposit');
+            setAmountToDeposit('')
+            setModalDetailsAlert({successfulDeposit: true})
+        } else {
+            setModalDetailsAlert({enterAnAmountToDeposit: true})
+        }
     }
+
+    
 
     const handleTransfer = () => {
         if(transferTo){
-        const toUser = users.find(user => {return user.account_no === transferTo})
-        let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
-        let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
-        setUsers([...users], 
-            currentSelectedData.balance = currentBalance, 
-            currentSelectedData.latestTransferAmount = amountToTransfer, 
-            currentSelectedData.latestTransferTo = transferTo,
-            toUser.balance = toUserCurrentBalance)
-        handleHistories('transfer');
+            const toUser = users.find(user => {return user.account_no === transferTo})
+            if(toUser) {
+                if(toUser.account_no !== currentSelectedData.account_no) {
+                    if(amountToTransfer > 0) {
+                        if(amountToTransfer <= currentSelectedData.balance) {
+                            let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
+                            let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
+                            setUsers([...users], 
+                                currentSelectedData.balance = currentBalance, 
+                                currentSelectedData.latestTransferAmount = amountToTransfer, 
+                                currentSelectedData.latestTransferTo = transferTo,
+                                toUser.balance = toUserCurrentBalance)
+                            handleHistories('transfer');
+                            setTransferTo('')
+                            setAmountToTransfer('')
+                            setModalDetailsAlert({successfulTransfer: true})
+                        } else {
+                            setModalDetailsAlert({insufficientBalanceTransfer: true})
+                        }
+                    } else {
+                        setModalDetailsAlert({amountToTransfer: true})
+                    }
+                } else {
+                    setModalDetailsAlert({sameAccountNumber: true})
+                }
+            } else {
+                setModalDetailsAlert({accountNumberNotValidTransfer: true})
+            }
+        } else {
+            setModalDetailsAlert({accountNumberCannotBeBlank: true})
         }
     }
+
+    const resetTransaction = () => {
+        setAmountToWithdraw('')
+        setAmountToDeposit('')
+        setAmountToTransfer('')
+        setTransferTo('')
+    }
+
     return {
         currentSelectedData,
         setCurrentSelectedData, 
@@ -245,7 +310,10 @@ const useHooks = () => {
         handleDeposit,
         handleTransfer,
         errorState,
-        setErrorState
+        setErrorState,
+        convertToMoney,
+        modalDetailsAlert,
+        resetTransaction
     }
 }
 

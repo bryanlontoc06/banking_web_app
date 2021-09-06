@@ -114,6 +114,14 @@ p {
     color: red;
 }
 
+.success-message {
+   color: green;
+}
+
+.enter-an-amount-message {
+    color: orange;
+}
+
 .required {
     font-size: 0.8rem;
     font-weight: bold;

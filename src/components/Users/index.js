@@ -4,7 +4,6 @@ import {
 } from './component';
 
 import ButtonComponent from './ButtonComponent';
-import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
 import ModalDetailsComponent from './ModalDetailsComponent';
@@ -49,7 +48,10 @@ const Index = () => {
         handleDeposit,
         handleTransfer,
         errorState,
-        setErrorState
+        setErrorState,
+        convertToMoney,
+        modalDetailsAlert,
+        resetTransaction
     } = useHooks();
 
     return (
@@ -107,6 +109,8 @@ const Index = () => {
                 setAmountToTransfer={setAmountToTransfer}
                 handleDeposit={handleDeposit}
                 handleTransfer={handleTransfer}
+                modalDetailsAlert={modalDetailsAlert}
+                resetTransaction={resetTransaction}
             />
         </div>
     )
