@@ -26,7 +26,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                         })}></button>         
                     </div>
                             <div className="modal-body">
-                            <form onSubmit={handleSaveUsers}  novalidate>
+                            <form onSubmit={handleSaveUsers}  noValidate>
                                 <div className="form-floating mb-3">
                                     <InputComponent
                                         inputType={"text"}
@@ -69,7 +69,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                     <InputComponent
                                         inputType={"password"}
                                         inputClass={"form-control"}
-                                        inputID={"floatingPassword"}
+                                        inputID={"floatingRetypePassword"}
                                         placeholderTitle={"Retype Password"}
                                         handleOnChange={setRetypePassword}                                
                                         inputValue={retypePassword}                                
