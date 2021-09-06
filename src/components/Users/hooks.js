@@ -268,6 +268,20 @@ const useHooks = () => {
         setAmountToDeposit('')
         setAmountToTransfer('')
         setTransferTo('')
+
+        setModalDetailsAlert({
+            insufficientBalance: false,
+            successful: false,
+            enterAnAmountToWithdraw: false,
+            successfulDeposit: false,
+            enterAnAmountToDeposit: false,
+            insufficientBalanceTransfer: false,
+            successfulTransfer: false,
+            enterAnAmountToTransfer: false,
+            sameAccountNumber: false,
+            accountNumberNotValidTransfer: false,
+            accountNumberCannotBeBlank: false,
+        });
     }
 
     return {
