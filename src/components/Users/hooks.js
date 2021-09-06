@@ -26,6 +26,7 @@ const useHooks = () => {
     const [amountToWithdraw, setAmountToWithdraw] = useState('')
     const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
+    const [transferMessage, setTransferMessage] = useState({})
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
@@ -230,7 +231,7 @@ const useHooks = () => {
 
     const handleTransfer = () => {
         if(transferTo){
-            const toUser = users.find(user => {return user.account_no === transferTo})
+            const toUser = users.find(user => {return user.account_no === transferTo})                    
             if(toUser) {
                 if(toUser.account_no !== currentSelectedData.account_no) {
                     if(amountToTransfer > 0) {
@@ -243,6 +244,7 @@ const useHooks = () => {
                                 currentSelectedData.latestTransferTo = transferTo,
                                 toUser.balance = toUserCurrentBalance)
                             handleHistories('transfer');
+                            setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, accountName: toUser.first_name})                            
                             setTransferTo('')
                             setAmountToTransfer('')
                             setModalDetailsAlert({successfulTransfer: true})
@@ -268,7 +270,7 @@ const useHooks = () => {
         setAmountToDeposit('')
         setAmountToTransfer('')
         setTransferTo('')
-
+        setTransferMessage({})
         setModalDetailsAlert({
             insufficientBalance: false,
             successful: false,
@@ -314,7 +316,8 @@ const useHooks = () => {
         amountToDeposit, 
         setAmountToDeposit, 
         transferTo, 
-        setTransferTo, 
+        setTransferTo,
+        transferMessage,
         amountToTransfer, 
         setAmountToTransfer,
         handleGenerateAccountNo,

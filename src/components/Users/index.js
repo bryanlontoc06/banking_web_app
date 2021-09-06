@@ -41,6 +41,7 @@ const Index = () => {
         setTransferTo, 
         amountToTransfer, 
         setAmountToTransfer,
+        transferMessage,
         handleGenerateAccountNo,
         handleSaveUsers,
         handleDeleteUser,
@@ -107,6 +108,7 @@ const Index = () => {
                 setTransferTo={setTransferTo}
                 amountToTransfer={amountToTransfer}
                 setAmountToTransfer={setAmountToTransfer}
+                transferMessage={transferMessage}
                 handleDeposit={handleDeposit}
                 handleTransfer={handleTransfer}
                 modalDetailsAlert={modalDetailsAlert}
