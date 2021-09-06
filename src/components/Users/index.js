@@ -4,7 +4,6 @@ import {
 } from './component';
 
 import ButtonComponent from './ButtonComponent';
-import {convertToMoney} from '../lib/helpers'
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
 import ModalDetailsComponent from './ModalDetailsComponent';
@@ -20,6 +19,8 @@ const Index = () => {
         setUserName, 
         password, 
         setPassword, 
+        retypePassword, 
+        setRetypePassword, 
         firstName, 
         setFirstName, 
         lastName, 
@@ -40,12 +41,18 @@ const Index = () => {
         setTransferTo, 
         amountToTransfer, 
         setAmountToTransfer,
+        transferMessage,
         handleGenerateAccountNo,
         handleSaveUsers,
         handleDeleteUser,
         handleWithdraw,
         handleDeposit,
-        handleTransfer
+        handleTransfer,
+        errorState,
+        setErrorState,
+        convertToMoney,
+        modalDetailsAlert,
+        resetTransaction
     } = useHooks();
 
     return (
@@ -70,6 +77,8 @@ const Index = () => {
                 userName={userName}
                 setPassword={setPassword}
                 password={password}
+                retypePassword={retypePassword}
+                setRetypePassword={setRetypePassword}
                 setFirstName={setFirstName}
                 firstName={firstName}
                 setLastName={setLastName}
@@ -82,7 +91,9 @@ const Index = () => {
                 email={email}
                 setBalance={setBalance}
                 balance={balance}
-                handleSaveUsers={handleSaveUsers}                    
+                handleSaveUsers={handleSaveUsers}   
+                errorState={errorState} 
+                setErrorState={setErrorState} 
             />   
             {/* ModalComponentForDetails */}             
             <ModalDetailsComponent
@@ -97,8 +108,11 @@ const Index = () => {
                 setTransferTo={setTransferTo}
                 amountToTransfer={amountToTransfer}
                 setAmountToTransfer={setAmountToTransfer}
+                transferMessage={transferMessage}
                 handleDeposit={handleDeposit}
                 handleTransfer={handleTransfer}
+                modalDetailsAlert={modalDetailsAlert}
+                resetTransaction={resetTransaction}
             />
         </div>
     )

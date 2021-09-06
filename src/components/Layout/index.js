@@ -1,8 +1,7 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Switch,
-    Link,
+    Switch,     
     Route,
 } from 'react-router-dom';
 import './style.css'
@@ -20,6 +19,9 @@ import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
 import bankLogo from '../../assets/bdpi.png'
 import useHooks from './hooks'
+import LinkComponent from './LinkComponent';
+import LoginModalComponent from './LoginComponent';
+import UserSectionComponent from './UserSectionComponent';
 
 
 
@@ -50,10 +52,16 @@ const Index = () => {
                 </a>
                 <hr/>
                 <ul className="nav nav-pills flex-column mb-auto">
-                    <li className="nav-item">
-                        <Link to="/" className={`nav-link ${selected === 0? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(0)} aria-current="page">
-                            <span className="menus"><OutlineHome /></span>Home
-                        </Link>
+                    <li className="nav-item">                        
+                        <LinkComponent
+                        selected={selected}
+                        handleSelectedMenu={handleSelectedMenu}
+                        Icon={OutlineHome}
+                        path={"/"}
+                        index={0}
+                        description={"Home"}
+                        hasSpan={true}                            
+                        />
                     </li>
                     <li>
                         <div className="accordion-item">
@@ -64,35 +72,64 @@ const Index = () => {
                             </h2>
                             <div id="collapseTwo" className={`accordion-collapse collapse ${historiesSelected? `show` : ``}`} aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div className="accordion-body">
-                                    <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                        <li className="dashboard-list" onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`nav-link ${selected === 1? 'active' : ''} link-dark`}>Withdrawals</Link></li>
-                                        <li className="dashboard-list" onClick={() => handleSelectedMenu(2)}><Link to="/dashboard/deposits" className={`nav-link ${selected === 2? 'active' : ''} link-dark`}>Deposits</Link></li>
-                                        <li className="dashboard-list" onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`nav-link ${selected === 3? 'active' : ''} link-dark`}>Transfers</Link></li>
+                                    <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">                                   
+                                        <li className="dashboard-list">
+                                        {/* <Link to="/dashboard/withdrawals" onClick={() => handleSelectedMenu(1)} className={`nav-link ${selected === 1? 'active' : ''} link-dark`}>Withdrawals</Link> */}
+                                        <LinkComponent
+                                            selected={selected}
+                                            path={"/dashboard/withdrawals"}
+                                            handleSelectedMenu={handleSelectedMenu}
+                                            index={1}
+                                            description={"Withdrawals"}
+                                        />
+                                        </li>                                                                      
+                                        <li className="dashboard-list">
+                                        {/* <Link to="/dashboard/deposits" onClick={() => handleSelectedMenu(2)} className={`nav-link ${selected === 2? 'active' : ''} link-dark`}>Deposits</Link> */}
+                                        <LinkComponent
+                                            path={"/dashboard/deposits"}
+                                            handleSelectedMenu={handleSelectedMenu}
+                                            selected={selected}
+                                            index={2}
+                                            description={"Deposits"}
+                                        />
+                                        </li>                                        
+                                        <li className="dashboard-list">
+                                        {/* <Link to="/dashboard/transfers" onClick={() => handleSelectedMenu(3)} className={`nav-link ${selected === 3? 'active' : ''} link-dark`}>Transfers</Link> */}
+                                        <LinkComponent
+                                            path={"/dashboard/transfers"}
+                                            handleSelectedMenu={handleSelectedMenu}
+                                            selected={selected}
+                                            index={3}
+                                            description={"Transfers"}
+                                        />
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <Link to="/users" className={`nav-link ${selected === 4? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(4)}>
+                    <li>                       
+                        {/* <Link to="/users" className={`nav-link ${selected === 4? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(4)}>
                             <span className="menus"><Users /></span>Users
-                        </Link>
+                        </Link> */}
+                        <LinkComponent
+                            path={"/users"}
+                            handleSelectedMenu={handleSelectedMenu}
+                            selected={selected}
+                            index={4}
+                            hasSpan={true}
+                            Icon={Users}
+                            description={"Users"}
+                        />
                     </li>
                 </ul>
                 <hr/>
                 
-                {isAdmin && 
-                <div className="dropdown">
-                    <a href="google.com" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src={loginAccount[0].thumbnail_url} alt="" width="32" height="32" className="rounded-circle me-2"/>
-                        <strong>{loginAccount[0].first_name}</strong>
-                    </a>
-                    <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a className="dropdown-item" href="/profile" onClick={() => handleSelectedMenu(5)}>Profile</a></li>
-                        <li><hr className="dropdown-divider"/></li>
-                        <li><a className="dropdown-item" href="/" onClick={() => handleLogout()}>Sign out</a></li>
-                    </ul>
-                </div>}
+                {isAdmin && <UserSectionComponent
+                    loginAccount={loginAccount}
+                    handleSelectedMenu={handleSelectedMenu}
+                    handleLogout={handleLogout}
+                />}
         </div>
         
         <Switch>
@@ -120,29 +157,16 @@ const Index = () => {
             }
         </Switch>
 
-            {/* Login Modals */}
-            <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
-                <div className="login-modal-dialog modal-dialog modal-dialog-centered">
-                    <div className="modal-content login-modal">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
-                    </div>
-                    <div className="modal-body">
-                        <div className="account-row input-group mb-3">
-                            <span>Username</span>
-                            <input type="text" className="login form-control" placeholder="Username" onChange={(e) => setUsernameInput(e.target.value)} value={usernameInput}/>
-                        </div>
-                        <div className="account-row input-group mb-3">
-                            <span>Password</span>
-                            <input type="password" className="login form-control" placeholder="Password" onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={() => handleCheckUser()}>Login</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
+            {/* Login Modals */}  
+            <LoginModalComponent
+                isAdmin={isAdmin}
+                LogIn={LogIn}
+                usernameInput={usernameInput}
+                setUsernameInput={setUsernameInput}
+                passwordInput={passwordInput}
+                setPasswordInput={setPasswordInput}
+                handleCheckUser={handleCheckUser}
+            />         
         </Router>
     </>
     )

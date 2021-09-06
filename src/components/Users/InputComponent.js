@@ -8,20 +8,30 @@ function InputComponent({
   handleOnChange,
   inputValue,
   label,
-  isReadOnly, 
+  isReadOnly,
+  isPattern,
+  dbsDismiss,
+  errorMessage,
+  isError,
 }) {
   return (
     <>
       <input
+        style={{border: isError && `red 2px solid`}}
         type={inputType}
         className={inputClass}
         id={inputID}
         placeholder={placeholderTitle}
         readOnly={isReadOnly && true}
         onChange={(e) => handleOnChange(e.target.value)}
-        value={inputValue}         
+        value={inputValue}
+        pattern={isPattern && "(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}"}
+        title={isPattern && `Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters`}
+        data-bs-dismiss={dbsDismiss}
+        // required      
       />
       {label ? <label>{label}</label> : ""}
+      {errorMessage && errorMessage}
     </>
   );
 }

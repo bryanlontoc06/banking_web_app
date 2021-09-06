@@ -15,11 +15,15 @@ const ModalForDetailsComponent = (
   setAmountToTransfer,
   transferTo,
   amountToTransfer,
-  handleTransfer}
+  transferMessage,
+  handleTransfer,
+  modalDetailsAlert,
+  resetTransaction
+  }
 ) => {
     return (
         <div>        
-            <div className="modal fade" id="detailsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="modal-content">
                     <div className="modal-header">
@@ -28,6 +32,7 @@ const ModalForDetailsComponent = (
                          btnClass={"btn-close"}
                          dbsDismiss={"modal"}
                          ariaLabel={"Close"}
+                         resetTransaction={resetTransaction}
                          />
                     </div>
                     <div className="modal-body">
@@ -142,7 +147,10 @@ const ModalForDetailsComponent = (
                                         placeholderTitle={"Withdraw"}
                                         handleOnChange={setAmountToWithdraw}
                                         inputValue={amountToWithdraw}
-                                        label={"₱ Amount to Withdraw"}
+                                        label={"₱ Amount to Withdraw"} 
+                                        // errorMessage={modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
+                                        // successfulMessage={modalDetailsAlert.successful && <p className="success-message">Withdrawn Successfully!</p>}
+                                        // enterAnAmountToWithdraw={modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
                                     />
                                 </div>
                                 
@@ -152,6 +160,13 @@ const ModalForDetailsComponent = (
                                     btnDescription={"Withdraw"}
                                 />
                             </div>
+
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
+                                {modalDetailsAlert.successful && <p className="success-message">Withdrawn Successfully!</p>}
+                                {modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
+                            </div>
+
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <InputComponent
@@ -171,6 +186,12 @@ const ModalForDetailsComponent = (
                                     btnDescription={"Deposit"}
                                 />
                             </div>
+
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposit Successfully!</p>}
+                                {modalDetailsAlert.enterAnAmountToDeposit && <p className="enter-an-amount-message">Please enter an Amount to Deposit</p>}
+                            </div>
+
                             <h6 className="modal-title" >Transfer Funds</h6>
                             <p>To</p>
                             <div className="transaction-body user-row">
@@ -206,6 +227,14 @@ const ModalForDetailsComponent = (
                                     btnDescription={"Transfer"}
                                 />
                             </div>
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.insufficientBalanceTransfer && <p className="error-message">You have an Insufficient Balance. Please Try Again.</p>}
+                                {modalDetailsAlert.successfulTransfer && <p className="success-message">You have successfully transferred {convertToMoney(transferMessage.transferAmount)} to {transferMessage.firstName} {transferMessage.lastName} with the Account# {transferMessage.accountNo}.</p>}
+                                {modalDetailsAlert.enterAnAmountToTransfer && <p className="enter-an-amount-message">Please enter an amount to transfer.</p>}
+                                {modalDetailsAlert.sameAccountNumber &&  <p className="enter-an-amount-message">Invalid Action. You cannot send amount to the same Account #. Please Try Again.</p>}
+                                {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account# is not valid. Please Try Again.</p>}                      
+                                {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account# to transfer to cannot be blank. Please Try Again. </p>}
+                            </div>
                         </div>
                     </div>
                     <div className="modal-footer">
@@ -213,6 +242,7 @@ const ModalForDetailsComponent = (
                             btnClass={"btn btn-secondary"}
                             dbsDismiss={"modal"}
                             btnDescription={"Close"}
+                            resetTransaction={resetTransaction}
                         />
                     </div>
                     </div>
