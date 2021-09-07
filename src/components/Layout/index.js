@@ -23,6 +23,12 @@ import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
 import UserSectionComponent from './UserSectionComponent';
 
+// React Bootstrap
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+
 
 
 const Index = () => {
@@ -39,13 +45,15 @@ const Index = () => {
         historiesSelected,
         handleSelectedMenu,
         handleCheckUser,
-        handleLogout
+        handleLogout,
+        matchesMD
     } = useHooks();
 
   
     return (
         <>
             <Router>
+                {matchesMD ?
             <div className="side-bar d-flex flex-column flex-shrink-0 p-3 bg-light" styled={{width: '280px'}}>
                 <a href="/" onClick={() => handleSelectedMenu(0)} className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <span className="fs-4"><img src={bankLogo} style={{width: '50%'}} alt="Bank Logo"/></span>
@@ -131,7 +139,39 @@ const Index = () => {
                     handleLogout={handleLogout}
                 />}
         </div>
-        
+         : 
+        <Navbar bg="light" expand="lg">
+            <Container>
+                <Navbar.Brand href="/">
+                    <a href="/" onClick={() => handleSelectedMenu(0)} className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <span className="fs-4"><img src={bankLogo} style={{width: '50%'}} alt="Bank Logo"/></span>
+                    </a>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <NavDropdown title="Dashboard" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/dashboard/withdrawals">Withdrawals</NavDropdown.Item>
+                    <NavDropdown.Item href="/dashboard/deposits">Deposits</NavDropdown.Item>
+                    <NavDropdown.Item href="/dashboard/transfers">Transfers</NavDropdown.Item>
+                    </NavDropdown>
+                    <Nav.Link href="/users">Users</Nav.Link>
+                    <NavDropdown.Divider />
+                    {isAdmin &&<UserSectionComponent
+                    loginAccount={loginAccount}
+                    handleSelectedMenu={handleSelectedMenu}
+                    handleLogout={handleLogout} 
+                    />}
+                </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar> }
+
+
+
+
+
         <Switch>
             {isAdmin &&
             <>
@@ -156,6 +196,8 @@ const Index = () => {
             </> 
             }
         </Switch>
+
+        
 
             {/* Login Modals */}  
             <LoginModalComponent

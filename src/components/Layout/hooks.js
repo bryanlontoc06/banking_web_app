@@ -1,10 +1,12 @@
 import {useState} from 'react'
 import useSessionStorage from './useSessionStorage'
 import useLocalStorage from '../Users/useLocalStorage';
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 
 const useHooks = () => {
 
+    const matchesMD = useMediaQuery('(min-width: 768px)')
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
@@ -80,7 +82,8 @@ const useHooks = () => {
         historiesSelected,
         handleSelectedMenu,
         handleCheckUser,
-        handleLogout
+        handleLogout,
+        matchesMD
     }
 }
 

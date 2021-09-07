@@ -64,7 +64,7 @@ const Index = () => {
                 handleFunction = {handleGenerateAccountNo}
                 iconName = {<PersonPlus/>}                
                 btnDescription = {" Add Client"}
-                btnClass= {"btn btn-primary"}
+                btnClass= {"btn btn-primary add-user-btn"}
                 dbsToggle={"modal"}
                 dbsTarget={"#exampleModal"}
             />

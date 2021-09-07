@@ -142,3 +142,23 @@ div#contained-modal-title-vcenter {
 .modal-close-btn {
     font-size: 1rem;
 }
+
+table.table {
+    overflow-x: auto;
+    display: block;
+}
+@media (min-width: 768px) {
+    table.table {
+        overflow-x: auto;
+        display: block;
+    }
+}
+@media (min-width: 1024px) {
+    table.table {
+        display: inline-table;
+    }
+}
+
+.add-user-btn {
+    width: 9rem;
+}
