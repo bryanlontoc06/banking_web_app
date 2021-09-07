@@ -1,7 +1,20 @@
+div#root {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+@media (min-width: 768px) {
+    div#root {
+        flex-direction: unset;
+    }
+}
+
 .side-bar {
     width: 15rem;
     height: 100vh;
 }
+
 
 .nav-link {
     display: flex;
@@ -83,4 +96,19 @@ input.login.form-control {
 .login-modal-dialog {
     display: flex;
     justify-content: center;
+}
+
+
+a.navbar-brand {
+    width: 14rem;
+}
+
+button.navbar-toggler {
+    width: 4rem;
+}
+
+@media (min-width: 576px) {
+    .container, .container-sm {
+        max-width: unset;
+    }
 }
