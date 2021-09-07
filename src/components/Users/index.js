@@ -52,7 +52,10 @@ const Index = () => {
         setErrorState,
         convertToMoney,
         modalDetailsAlert,
-        resetTransaction
+        resetTransaction,
+        setModalShow,
+        modalShow,
+        closeModalComponent
     } = useHooks();
 
     return (
@@ -94,6 +97,9 @@ const Index = () => {
                 handleSaveUsers={handleSaveUsers}   
                 errorState={errorState} 
                 setErrorState={setErrorState} 
+                setModalShow={setModalShow}
+                modalShow={modalShow}
+                closeModalComponent={closeModalComponent}
             />   
             {/* ModalComponentForDetails */}             
             <ModalDetailsComponent

@@ -28,6 +28,7 @@ const useHooks = () => {
     const [transferTo, setTransferTo] = useState('')
     const [transferMessage, setTransferMessage] = useState({})
     const [amountToTransfer, setAmountToTransfer] = useState('')
+    const [modalShow, setModalShow] = useState(false);
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -61,6 +62,21 @@ const useHooks = () => {
         let month = '0' + (date.getMonth() + 1).toString().substr(-2)
         let year = date.getFullYear().toString().substr(-2)
         setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
+        setModalShow(true)
+    }
+
+    const closeModalComponent = () => {
+        setModalShow(false)
+        setErrorState({
+            username: false,
+            password: false,
+            retypePassword: false,
+            firstName: false,
+            lastName: false,
+            address: false,
+            mobileNo: false,
+            email: false
+        })
     }
 
     const validation = (newUser) => {
@@ -128,6 +144,7 @@ const useHooks = () => {
                                                     setAmountToTransfer(0)
                                                     setAmountToDeposit(0)
                                                     setTransferTo('')
+                                                    setModalShow(false)
                                                     alert('Account created')
                                                 }
                                             }
@@ -341,7 +358,10 @@ const useHooks = () => {
         setErrorState,
         convertToMoney,
         modalDetailsAlert,
-        resetTransaction
+        resetTransaction,
+        setModalShow,
+        modalShow,
+        closeModalComponent
     }
 }
 
