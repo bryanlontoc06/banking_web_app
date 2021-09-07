@@ -10,7 +10,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
         <div>
               <Modal
                     show={modalShow}
-                    size="lg"
+                    size="md"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                     backdrop="static"
