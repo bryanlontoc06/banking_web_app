@@ -150,6 +150,11 @@ table.table {
 @media (min-width: 768px) {
     table.table {
         overflow-x: auto;
+        display: block;
+    }
+}
+@media (min-width: 1024px) {
+    table.table {
         display: inline-table;
     }
 }
