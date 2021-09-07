@@ -1,31 +1,31 @@
 import React from 'react'
 import InputComponent from './InputComponent'
+import Modal from 'react-bootstrap/Modal'
 
 
-const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, setErrorState}) => {
+const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, setModalShow, modalShow, closeModalComponent}) => {
 
     return (
+        
         <div>
-              <div className="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                            <p className="required">***All Fields are REQUIRED***</p>
-                        </div>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => setErrorState({
-                            username: false,
-                            password: false,
-                            retypePassword: false,
-                            firstName: false,
-                            lastName: false,
-                            address: false,
-                            mobileNo: false,
-                            email: false
-                        })}></button>         
-                    </div>
-                            <div className="modal-body">
+              <Modal
+                    show={modalShow}
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    backdrop="static"
+                    keyboard={false}
+                >
+                        <Modal.Header>
+                             <Modal.Title id="contained-modal-title-vcenter">
+                             <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
+                                <p className="required">***All Fields are REQUIRED***</p>
+                            </div>
+                             <button type="button" className="btn-close modal-close-btn" data-bs-dismiss="modal" aria-label="Close" onClick={() => closeModalComponent()}></button>
+                             </Modal.Title>
+                         </Modal.Header>
+                         <Modal.Body>
                             <form onSubmit={handleSaveUsers}  noValidate>
                                 <div className="form-floating mb-3">
                                     <InputComponent
@@ -160,24 +160,13 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                     <InputComponent
                                         inputType={"submit"}
                                         inputClass={"submit-btn"}                              
-                                        inputValue={'Submit'} 
-                                        dbsDismiss={
-                                            userName && 
-                                            password && 
-                                            firstName && 
-                                            lastName && 
-                                            address && 
-                                            mobileNo && 
-                                            email && "modal"}                                                         
+                                        inputValue={'Submit'}                                                   
                                     />
                                 </div>
                             </form>
-                            </div>
-                        </div>
-                    </div>
-            </div>
+                        </Modal.Body>
+                </Modal>
         </div>
-
     )
 }
 
