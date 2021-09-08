@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './style.css'
 
 const Index = (props) => {
-    const {loginAccount, admin, setAdmin} = props;
+    const {loginAccount, admin, setAdmin, users, setUsers} = props;
 
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
@@ -10,17 +10,35 @@ const Index = (props) => {
 
 
     const handleSaveNewPassword = () => {
-        if(loginAccount[0].password === oldPassword) {
+        let enPassword = Buffer.from(oldPassword).toString('base64');
+        console.log({loginAccount})
+        console.log({enPassword})
+        if(loginAccount[0].password === enPassword) {
             if(newPassword === retypePassword) {
-                setNewPassword(retypePassword)
+                let enPasswordNewPassword = Buffer.from(newPassword).toString('base64');
+                let enPasswordRetypePassword = Buffer.from(retypePassword).toString('base64');
+                setNewPassword(enPasswordRetypePassword)
                 let findLoginAccount = admin.find((item) => item.id === loginAccount[0].id)
-                console.log(findLoginAccount.password)
-                setAdmin([...admin], findLoginAccount.password = newPassword)
+                let findLoginAccountUsers = users.find((item) => item.account_no === loginAccount[0].account_no)
+                if(findLoginAccount) {
+                    setAdmin([...admin], findLoginAccount.password = enPasswordNewPassword)
+                    setOldPassword('')
+                    setNewPassword('')
+                    setRetypePassword('')
+                } 
+                else if (findLoginAccountUsers) {
+                    setUsers([...users], findLoginAccountUsers.password = enPasswordNewPassword)
+                    setOldPassword('')
+                    setNewPassword('')
+                    setRetypePassword('')
+                }
+                else {
+                    alert(`Account did not match`)
+                }
             }
         }
     }
 
-    // console.log(loginAccount[0])
     return (
         <div className="container">
             <div className="main-body">
@@ -29,7 +47,7 @@ const Index = (props) => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={loginAccount[0].thumbnail_url} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
+                                    <img src={loginAccount[0].thumbnail_url || 'https://bootdey.com/img/Content/avatar/avatar6.png'} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
                                     <div className="mt-3">
                                         <h4>{loginAccount[0].first_name + " " +loginAccount[0].last_name}</h4>
                                         <p className="text-secondary mb-1">{loginAccount[0].role}</p>
@@ -66,10 +84,10 @@ const Index = (props) => {
                             <div className="card-body">
                             <div className="row mb-3">
                                     <div className="col-sm-3">
-                                        <h6 className="mb-0">ID Number</h6>
+                                        <h6 className="mb-0">{loginAccount[0].role === 'admin' ? 'ID Number' : 'Client Number'}</h6>
                                     </div>
                                     <div className="col-sm-9 text-secondary">
-                                        <input type="text" className="form-control" value={loginAccount[0].id} readOnly/>
+                                        <input type="text" className="form-control" value={loginAccount[0].id || loginAccount[0].account_no} readOnly/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">

@@ -10,9 +10,11 @@ const useHooks = () => {
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const [selected, setSelected] = useSessionStorage('selectedMenu', '');
-    const [isAdmin, setIsAdmin] = useSessionStorage('adminsData', false);
+    const [isAdmin, setIsAdmin] = useSessionStorage('isAdmin', false);
+    const [isUser, setIsUser] = useSessionStorage('isUser', false);
     const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
     const [admin, setAdmin] = useLocalStorage('adminsData', [])
+    const [users, setUsers] = useLocalStorage('usersData', [])
     const historiesSelected = selected === 1 || selected === 2 || selected === 3;
    
     
@@ -21,7 +23,7 @@ const useHooks = () => {
                 id: 1,
                 role: 'admin',
                 username: 'admin', 
-                password: '1234',
+                password: 'MTIzNA==',
                 first_name: 'Admin',
                 last_name: 'Lastname',
                 email: 'admin@gmail.com',
@@ -29,41 +31,57 @@ const useHooks = () => {
                 thumbnail_url: 'https://bootdey.com/img/Content/avatar/avatar6.png'
             }
             setAdmin([...admin, newAdmin])
+            setIsAdmin(false)
     }
     if (sessionStorage.getItem('loginAccount') == null) {
         setLoginAccount([])
     }
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
-    }
-    if(sessionStorage.getItem('adminsData') == null) {
-        setIsAdmin(false)
-    }
+    }   
     
     const handleSelectedMenu = (index) => {
         setSelected(index)
     }
 
-   const filterAdminRole = admin.filter(obj => obj.role === 'admin')
-   const filterAdminUsername = filterAdminRole.filter(obj => obj.username === usernameInput)
-
+   
 
     const handleCheckUser = () => {
-        if (filterAdminUsername.length === 1) {
-            if(filterAdminUsername[0].username === usernameInput){
-                if(filterAdminUsername[0].password === passwordInput) {
-                    setIsAdmin(true)
-                    setLoginAccount(filterAdminUsername)
-                }
+        const loginFilterAdmin = admin.filter(obj => obj.username === usernameInput)
+        const loginFilterUser = users.filter(obj => obj.username === usernameInput)
+        if(loginFilterAdmin.length >= 1) {
+            let enPassword = Buffer.from(passwordInput).toString('base64');
+            const passwordFilter = loginFilterAdmin.filter(obj => obj.password === enPassword)
+            if(passwordFilter.length >= 1) {
+                setIsAdmin(true)
+                setIsUser(false)
+                setLoginAccount(loginFilterAdmin)
+            }
+            else {
+                alert('Wrong password. Please Try Again.')
             }
         }
-         else {
-            setIsAdmin(false)
+        else if(loginFilterUser.length >= 1) {
+            let enPassword = Buffer.from(passwordInput).toString('base64');
+            const passwordFilter = loginFilterUser.filter(obj => obj.password === enPassword)
+            if(passwordFilter.length >= 1) {
+                setIsAdmin(false)
+                setIsUser(true)
+                setLoginAccount(loginFilterUser)
+            }
+            else {
+                alert('Wrong password. Please Try Again.')
+            }
+        }
+        else {
+            alert('Username not registered!')
         }
     }
 
+
     const handleLogout = () => {
         setIsAdmin(false)
+        setIsUser(false)
         setLoginAccount([])
     }
 
@@ -75,6 +93,7 @@ const useHooks = () => {
         selected,
         isAdmin,
         setIsAdmin,
+        isUser,
         loginAccount,
         setLoginAccount,
         admin,
@@ -83,7 +102,9 @@ const useHooks = () => {
         handleSelectedMenu,
         handleCheckUser,
         handleLogout,
-        matchesMD
+        matchesMD,
+        users,
+        setUsers,
     }
 }
 
