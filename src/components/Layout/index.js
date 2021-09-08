@@ -8,8 +8,9 @@ import './style.css'
 import {
     OutlineHome,
     OutlineDashboard,
-    Users,
-    LogIn
+    UsersIcon,
+    LogIn,
+    TransactionIcon
 } from './components'
 import HomeComponent from '../Home'
 import UsersComponent from '../Users'
@@ -22,6 +23,7 @@ import useHooks from './hooks'
 import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
 import UserSectionComponent from './UserSectionComponent';
+import TransactionComponent from '../Transaction'
 import { Link } from "react-router-dom";
 
 
@@ -30,6 +32,8 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+
+
 
 
 
@@ -48,10 +52,12 @@ const Index = () => {
         handleSelectedMenu,
         handleCheckUser,
         handleLogout,
-        matchesMD
+        matchesMD,
+        users,
+        setUsers,
+        isUser
     } = useHooks();
 
-  
     return (
         <>
             <Router>
@@ -84,7 +90,7 @@ const Index = () => {
                                 <div className="accordion-body">
                                     <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">                                   
                                         <li className="dashboard-list">
-                                        {/* <Link to="/dashboard/withdrawals" onClick={() => handleSelectedMenu(1)} className={`nav-link ${selected === 1? 'active' : ''} link-dark`}>Withdrawals</Link> */}
+                                        
                                         <LinkComponent
                                             selected={selected}
                                             path={"/dashboard/withdrawals"}
@@ -94,7 +100,7 @@ const Index = () => {
                                         />
                                         </li>                                                                      
                                         <li className="dashboard-list">
-                                        {/* <Link to="/dashboard/deposits" onClick={() => handleSelectedMenu(2)} className={`nav-link ${selected === 2? 'active' : ''} link-dark`}>Deposits</Link> */}
+                                       
                                         <LinkComponent
                                             path={"/dashboard/deposits"}
                                             handleSelectedMenu={handleSelectedMenu}
@@ -104,7 +110,7 @@ const Index = () => {
                                         />
                                         </li>                                        
                                         <li className="dashboard-list">
-                                        {/* <Link to="/dashboard/transfers" onClick={() => handleSelectedMenu(3)} className={`nav-link ${selected === 3? 'active' : ''} link-dark`}>Transfers</Link> */}
+                                        
                                         <LinkComponent
                                             path={"/dashboard/transfers"}
                                             handleSelectedMenu={handleSelectedMenu}
@@ -118,32 +124,43 @@ const Index = () => {
                             </div>
                         </div>
                     </li>
-                    <li>                       
-                        {/* <Link to="/users" className={`nav-link ${selected === 4? 'active' : ''} link-dark`} onClick={() => handleSelectedMenu(4)}>
-                            <span className="menus"><Users /></span>Users
-                        </Link> */}
-                        <LinkComponent
-                            path={"/users"}
-                            handleSelectedMenu={handleSelectedMenu}
-                            selected={selected}
-                            index={4}
-                            hasSpan={true}
-                            Icon={Users}
-                            description={"Users"}
-                        />
-                    </li>
+                    {isAdmin && 
+                        <li>          
+                            <LinkComponent
+                                path={"/users"}
+                                handleSelectedMenu={handleSelectedMenu}
+                                selected={selected}
+                                index={4}
+                                hasSpan={true}
+                                Icon={UsersIcon}
+                                description={"Users"}
+                            />
+                        </li> 
+                    }
+                    {isUser && 
+                        <li>          
+                            <LinkComponent
+                                path={"/transactions"}
+                                handleSelectedMenu={handleSelectedMenu}
+                                selected={selected}
+                                index={5}
+                                hasSpan={true}
+                                Icon={TransactionIcon}
+                                description={"Transactions"}
+                            />
+                        </li>
+                    }
                 </ul>
                 <hr/>
                 
-                {isAdmin && <UserSectionComponent
+                {loginAccount.length === 1 ? <UserSectionComponent
                     loginAccount={loginAccount}
                     handleSelectedMenu={handleSelectedMenu}
                     handleLogout={handleLogout}
-                />}
+                /> : ''}
         </div>
          : 
          <>
-
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="/">
@@ -160,15 +177,18 @@ const Index = () => {
                     <NavDropdown.Item className={`${selected === 2 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(2)}><Link to="/dashboard/deposits" className={`${selected === 2 ? 'mobile-menus' : ''}`}>Deposits</Link></NavDropdown.Item>
                     <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}><Users />Users</Link></Nav.Link>
+                    {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}><UsersIcon />Users</Link></Nav.Link>}
+                    {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/users" className={`${selected === 5 ? 'mobile-menus' : ''}`}><TransactionIcon />Transactions</Link></Nav.Link>}
 
 
                     <NavDropdown.Divider />
-                    {isAdmin &&<UserSectionComponent
-                    loginAccount={loginAccount}
-                    handleSelectedMenu={handleSelectedMenu}
-                    handleLogout={handleLogout} 
-                    />}
+                    {loginAccount.length === 1 ? 
+                        <UserSectionComponent
+                            loginAccount={loginAccount}
+                            handleSelectedMenu={handleSelectedMenu}
+                            handleLogout={handleLogout} 
+                        />
+                    : ''}
                 </Nav>
                 </Navbar.Collapse>
             </Container>
@@ -180,42 +200,48 @@ const Index = () => {
 
 
         <Switch>
-            {isAdmin &&
             <>
                 <Route path="/" exact component={HomeComponent}>
                     <HomeComponent />
                 </Route>
+            {isAdmin &&
                 <Route path="/users" exact  component={UsersComponent}>
                     <UsersComponent />
                 </Route>
+            }
+            {isUser &&
+                <Route path="/transactions" exact  component={TransactionComponent}>
+                    <TransactionComponent />
+                </Route>
+            }
                 <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
-                    <Withdrawals />
+                    <Withdrawals loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/dashboard/deposits" exact  component={Deposits}>
-                    <Deposits />
+                    <Deposits loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/dashboard/transfers" exact  component={Transfers}>
-                    <Transfers />
+                    <Transfers loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/profile" exact  component={Profile}>
-                    <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin}/>
+                    <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
                 </Route>
-            </> 
-            }
+            </>
         </Switch>
 
         
 
             {/* Login Modals */}  
+            {loginAccount.length === 1 ? '' :
             <LoginModalComponent
-                isAdmin={isAdmin}
                 LogIn={LogIn}
+                loginAccount={loginAccount}
                 usernameInput={usernameInput}
                 setUsernameInput={setUsernameInput}
                 passwordInput={passwordInput}
                 setPasswordInput={setPasswordInput}
                 handleCheckUser={handleCheckUser}
-            />         
+            /> }     
         </Router>
     </>
     )

@@ -179,6 +179,7 @@ const useHooks = () => {
                 mobile_no: mobileNo,
                 email: email,
                 balance: balance,
+                role: 'client' ,
                 latestWithdrawnAmount: amountToWithdraw,
                 latestDepositAmount: amountToDeposit,
                 latestTransferAmount: amountToTransfer,

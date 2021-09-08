@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LoginModalComponent = ({isAdmin, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser}) => {
+const LoginModalComponent = ({loginAccount, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser}) => {
     return (
         <>
-             <div className={`modal fade ${!isAdmin && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: !isAdmin && "block"}} aria-modal="true" role="dialog">
+             <div className={`modal fade ${loginAccount.length === 0 && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: loginAccount.length === 0 && "block"}} aria-modal="true" role="dialog">
                 <div className="login-modal-dialog modal-dialog modal-dialog-centered">
                     <div className="modal-content login-modal">
                     <div className="modal-header">
