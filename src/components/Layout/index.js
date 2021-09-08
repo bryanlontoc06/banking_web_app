@@ -26,11 +26,14 @@ import { Link } from "react-router-dom";
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 // React Bootstrap
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+>>>>>>> main
+=======
 >>>>>>> main
 
 // React Bootstrap
@@ -151,14 +154,17 @@ const Index = () => {
                 />}
         </div>
          : 
-<<<<<<< HEAD
          <>
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
          <>
          
 =======
 >>>>>>> main
+>>>>>>> main
+=======
+
 >>>>>>> main
         <Navbar bg="light" expand="lg">
             <Container>
@@ -171,9 +177,12 @@ const Index = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
                     <Nav.Link className={`${selected === 0 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(0)}><Link to="/" className={`${selected === 0 ? 'mobile-menus' : ''}`}><OutlineHome />Home</Link></Nav.Link>
                     <NavDropdown title={`Dashboard`} id="basic-nav-dropdown">
@@ -186,6 +195,7 @@ const Index = () => {
 
 =======
                     </NavDropdown>
+<<<<<<< HEAD
                     <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/dashboard/transfers" className={`${selected === 4 ? 'mobile-menus' : ''}`}><Users />Users</Link></Nav.Link>
 =======
                     <Nav.Link href="/">Home</Nav.Link>
@@ -197,6 +207,11 @@ const Index = () => {
                     <Nav.Link href="/users">Users</Nav.Link>
 >>>>>>> main
 >>>>>>> main
+=======
+                    <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}><Users />Users</Link></Nav.Link>
+
+
+>>>>>>> main
                     <NavDropdown.Divider />
                     {isAdmin &&<UserSectionComponent
                     loginAccount={loginAccount}
@@ -206,9 +221,10 @@ const Index = () => {
                 </Nav>
                 </Navbar.Collapse>
             </Container>
-<<<<<<< HEAD
+
         </Navbar>
         <hr className="hr" />
+<<<<<<< HEAD
         </> }
 =======
 <<<<<<< HEAD
@@ -220,6 +236,9 @@ const Index = () => {
 >>>>>>> main
 
 
+=======
+        </>  }
+>>>>>>> main
 
 >>>>>>> main
 
