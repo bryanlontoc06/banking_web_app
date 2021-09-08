@@ -111,6 +111,7 @@ button.navbar-toggler {
     .container, .container-sm {
         max-width: unset;
     }
+<<<<<<< HEAD
 }
 
 .mobile-menus {
@@ -135,4 +136,6 @@ a.nav-link {
 a {
     text-decoration: none;
     color: #000;
+=======
+>>>>>>> main
 }
