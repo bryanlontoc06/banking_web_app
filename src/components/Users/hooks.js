@@ -53,7 +53,6 @@ const useHooks = () => {
         email: false
     })
     
-    
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -61,7 +60,7 @@ const useHooks = () => {
         let hours = '0' + date.getHours().toString().substr(-2)
         let month = '0' + (date.getMonth() + 1).toString().substr(-2)
         let year = date.getFullYear().toString().substr(-2)
-        setAccountNo(Math.floor(10 + Math.random() * 90) + minutes + hours + month + year)
+        setAccountNo(year + month + hours + minutes + Math.floor(10 + Math.random() * 90))
         setModalShow(true)
     }
 

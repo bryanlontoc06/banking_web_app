@@ -22,6 +22,7 @@ import useHooks from './hooks'
 import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
 import UserSectionComponent from './UserSectionComponent';
+import { Link } from "react-router-dom";
 
 // React Bootstrap
 import Navbar from 'react-bootstrap/Navbar'
@@ -140,6 +141,8 @@ const Index = () => {
                 />}
         </div>
          : 
+         <>
+         
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="/">
@@ -150,13 +153,13 @@ const Index = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <NavDropdown title="Dashboard" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="/dashboard/withdrawals">Withdrawals</NavDropdown.Item>
-                    <NavDropdown.Item href="/dashboard/deposits">Deposits</NavDropdown.Item>
-                    <NavDropdown.Item href="/dashboard/transfers">Transfers</NavDropdown.Item>
+                    <Nav.Link className={`${selected === 0 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(0)}><Link to="/" className={`${selected === 0 ? 'mobile-menus' : ''}`}><OutlineHome />Home</Link></Nav.Link>
+                    <NavDropdown title={`Dashboard`} id="basic-nav-dropdown">
+                    <NavDropdown.Item className={`${selected === 1 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`${selected === 1 ? 'mobile-menus' : ''}`}>Withdrawals</Link></NavDropdown.Item>
+                    <NavDropdown.Item className={`${selected === 2 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(2)}><Link to="/dashboard/deposits" className={`${selected === 2 ? 'mobile-menus' : ''}`}>Deposits</Link></NavDropdown.Item>
+                    <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link href="/users">Users</Nav.Link>
+                    <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/dashboard/transfers" className={`${selected === 4 ? 'mobile-menus' : ''}`}><Users />Users</Link></Nav.Link>
                     <NavDropdown.Divider />
                     {isAdmin &&<UserSectionComponent
                     loginAccount={loginAccount}
@@ -166,7 +169,9 @@ const Index = () => {
                 </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar> }
+        </Navbar>
+        <hr className="hr" />
+        </> }
 
 
 

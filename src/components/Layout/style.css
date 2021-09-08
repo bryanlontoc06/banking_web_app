@@ -85,7 +85,7 @@ div#exampleModalLive {
 }
 
 .login-modal {
-    width: 60%; 
+    width: 75%; 
 }
 
 input.login.form-control {
@@ -111,4 +111,28 @@ button.navbar-toggler {
     .container, .container-sm {
         max-width: unset;
     }
+}
+
+.mobile-menus {
+    background-color: #0d6efd;
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.dropdown-menu.show {
+    padding: 0;
+}
+
+a.nav-link {
+    padding: 0.5rem 1rem !important;
+    border-radius: 5px;
+}
+
+.hr {
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
 }
