@@ -1,9 +1,255 @@
 import React from 'react'
+import ButtonComponent from './ButtonComponent'
+import InputComponent from './InputComponent'
+import { convertToMoney } from '../lib/helpers'
+import useHooks from './hooks'
 
-const Index = () => {
+
+const Index = (props)  => {  
+    const {loginAccount} = props
+    const {      
+      amountToWithdraw, 
+      setAmountToWithdraw, 
+      amountToDeposit, 
+      setAmountToDeposit, 
+      transferTo, 
+      setTransferTo,
+      transferMessage,
+      amountToTransfer, 
+      setAmountToTransfer,     
+      handleWithdraw,
+      handleDeposit,
+      handleTransfer,           
+      modalDetailsAlert,
+      resetTransaction,
+    } = useHooks(props)
     return (
         <>
-          <h1>Transaction Page</h1>  
+            <div>
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
+                        <ButtonComponent
+                         btnClass={"btn-close"}
+                         dbsDismiss={"modal"}
+                         ariaLabel={"Close"}
+                         resetTransaction={resetTransaction}
+                         />
+                    </div>
+                    <div className="modal-body">
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                            <InputComponent
+                             inputType={"text"}
+                             inputClass={"read-only-user-detail form-control"}
+                             placeholderTitle={"Account No."}
+                             inputID={"floatingAccountNumberDetails"}
+                             isReadOnly={true}
+                             inputValue={loginAccount[0].account_no}
+                             label={"Account No."}
+                            />
+                            </div>
+                            <div className="form-floating mb-3">
+                            <InputComponent
+                             inputType={"text"}
+                             inputClass={"read-only-user-detail form-control"}
+                             placeholderTitle={"User Name"}
+                             inputID={"floatingUserNameDetails"}
+                             isReadOnly={true}
+                             inputValue={loginAccount[0].username}
+                             label={"User Name"}
+                            />
+                            </div>
+                        </div>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                 inputType={"text"}
+                                 inputClass={"read-only-user-detail form-control"}
+                                 placeholderTitle={"First Name"}
+                                 inputID={"floatingFirstNameDetails"}
+                                 isReadOnly={true}
+                                 inputValue={loginAccount[0].first_name}
+                                 label={"First Name"}
+                                 />
+                            </div>
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                 inputType={"text"}
+                                 inputClass={"read-only-user-detail form-control"}
+                                 placeholderTitle={"Last Name"}
+                                 inputID={"floatingLastNameDetails"}
+                                 isReadOnly={true}
+                                 inputValue={loginAccount[0].last_name}
+                                 label={"Last Name"}
+                                 />
+                            </div>
+                        </div>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                 inputType={"text"}
+                                 inputClass={"read-only-user-detail form-control"}
+                                 placeholderTitle={"Address"}
+                                 inputID={"floatingAddressDetails"}
+                                 isReadOnly={true}
+                                 inputValue={loginAccount[0].address}
+                                 label={"Address"}
+                                 />
+                            </div>
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                inputType={"number"}
+                                inputClass={"read-only-user-detail form-control"}
+                                placeholderTitle={"Active Mobile No."}
+                                inputID={"floatingActiveNoDetails"}
+                                isReadOnly={true}
+                                inputValue={loginAccount[0].mobile_no}
+                                label={"Active Mobile No."}
+                                />
+                            </div>
+                        </div>
+                        <div className="user-row">
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                inputType={"email"}
+                                inputClass={"read-only-user-detail form-control"}
+                                placeholderTitle={"Email Address"}
+                                inputID={"floatingEmailDetails"}
+                                isReadOnly={true}
+                                inputValue={loginAccount[0].email}
+                                label={"Email Address"}
+                                />
+                            </div>
+                            <div className="form-floating mb-3">
+                                <InputComponent
+                                inputType={"text"}
+                                inputClass={"read-only-user-detail form-control"}
+                                placeholderTitle={"Balance"}
+                                inputID={"floatingBalanceDetails"}
+                                isReadOnly={true}
+                                inputValue={convertToMoney(loginAccount[0].balance)}
+                                label={"Balance"}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="title">
+                            <h5 className="modal-title" >Transactions</h5>
+                        </div>
+                        <div className="transaction-body-container">
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">
+                                    <InputComponent
+                                        inputType={"number"}
+                                        inputClass={"form-control"}
+                                        inputID={"floatingWithdraw"}
+                                        placeholderTitle={"Withdraw"}
+                                        handleOnChange={setAmountToWithdraw}
+                                        inputValue={amountToWithdraw}
+                                        label={"₱ Amount to Withdraw"} 
+                                        // errorMessage={modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
+                                        // successfulMessage={modalDetailsAlert.successful && <p className="success-message">Withdrawn Successfully!</p>}
+                                        // enterAnAmountToWithdraw={modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
+                                    />
+                                </div>
+                                
+                                <ButtonComponent
+                                    btnClass={"btn btn-primary"}                                   
+                                    handleFunction={() => handleWithdraw()}
+                                    btnDescription={"Withdraw"}
+                                />
+                            </div>
+
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
+                                {modalDetailsAlert.successful && <p className="success-message">Withdrawn Successfully!</p>}
+                                {modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
+                            </div>
+
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">
+                                    <InputComponent
+                                        inputType={"number"}
+                                        inputClass={"form-control"}
+                                        inputID={"floatingDeposit"}
+                                        placeholderTitle={"Deposit"}
+                                        handleOnChange={setAmountToDeposit}
+                                        inputValue={amountToDeposit}
+                                        label={"₱ Amount to Deposit"}
+                                    />
+                                </div>
+                                
+                                <ButtonComponent
+                                    btnClass={"btn btn-primary"}
+                                    handleFunction={() => handleDeposit()}
+                                    btnDescription={"Deposit"}
+                                />
+                            </div>
+
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposit Successfully!</p>}
+                                {modalDetailsAlert.enterAnAmountToDeposit && <p className="enter-an-amount-message">Please enter an Amount to Deposit</p>}
+                            </div>
+
+                            <h6 className="modal-title" >Transfer Funds</h6>
+                            <p>To</p>
+                            <div className="transaction-body user-row">
+                                <div className="transaction form mb-3">
+                                    <InputComponent
+                                        inputType={"text"}
+                                        inputClass={"transfer-names form-control"}
+                                        inputID={"floatingTransferTo"}
+                                        placeholderTitle={"Account No."}
+                                        handleOnChange={setTransferTo}
+                                        inputValue={transferTo}
+                                    />
+                                </div>
+                            </div>
+                            <p>Amount</p>
+                            <div className="transaction-body user-row">
+                                <div className="transaction form-floating mb-3">                                                                
+                                    <InputComponent 
+                                        inputType={"number"}
+                                        inputClass={"form-control"}
+                                        inputID={"floatingTransfer"}
+                                        placeholderTitle={"Transfer"}
+                                        inputValue={amountToTransfer}
+                                        handleOnChange={setAmountToTransfer}                                        
+                                        isLabel={true}
+                                        label={`Amount to Transfer`}
+                                    />                                    
+                                </div>
+                                
+                                <ButtonComponent
+                                    btnClass={"btn btn-primary"}
+                                    handleFunction={() => handleTransfer()}
+                                    btnDescription={"Transfer"}
+                                />
+                            </div>
+                            <div style={{marginBottom: '1rem'}}>
+                                {modalDetailsAlert.insufficientBalanceTransfer && <p className="error-message">You have an Insufficient Balance. Please Try Again.</p>}
+                                {modalDetailsAlert.successfulTransfer && <p className="success-message">You have successfully transferred {convertToMoney(transferMessage.transferAmount)} to {transferMessage.firstName} {transferMessage.lastName} with the Account# {transferMessage.accountNo}.</p>}
+                                {modalDetailsAlert.enterAnAmountToTransfer && <p className="enter-an-amount-message">Please enter an amount to transfer.</p>}
+                                {modalDetailsAlert.sameAccountNumber &&  <p className="enter-an-amount-message">Invalid Action. You cannot send amount to the same Account #. Please Try Again.</p>}
+                                {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account# is not valid. Please Try Again.</p>}                      
+                                {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account# to transfer to cannot be blank. Please Try Again. </p>}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <ButtonComponent
+                            btnClass={"btn btn-secondary"}
+                            dbsDismiss={"modal"}
+                            btnDescription={"Close"}
+                            resetTransaction={resetTransaction}
+                        />
+                    </div>
+                    </div>
+                </div>
+            </div>        
         </>
     )
 }
