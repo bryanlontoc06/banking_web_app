@@ -30,13 +30,6 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
-// React Bootstrap
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-
-
 
 const Index = () => {
     const {
@@ -147,11 +140,7 @@ const Index = () => {
                 />}
         </div>
          : 
-<<<<<<< HEAD
          <>
-         
-=======
->>>>>>> main
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand href="/">
@@ -162,7 +151,6 @@ const Index = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-<<<<<<< HEAD
                     <Nav.Link className={`${selected === 0 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(0)}><Link to="/" className={`${selected === 0 ? 'mobile-menus' : ''}`}><OutlineHome />Home</Link></Nav.Link>
                     <NavDropdown title={`Dashboard`} id="basic-nav-dropdown">
                     <NavDropdown.Item className={`${selected === 1 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`${selected === 1 ? 'mobile-menus' : ''}`}>Withdrawals</Link></NavDropdown.Item>
@@ -170,15 +158,7 @@ const Index = () => {
                     <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/dashboard/transfers" className={`${selected === 4 ? 'mobile-menus' : ''}`}><Users />Users</Link></Nav.Link>
-=======
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <NavDropdown title="Dashboard" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="/dashboard/withdrawals">Withdrawals</NavDropdown.Item>
-                    <NavDropdown.Item href="/dashboard/deposits">Deposits</NavDropdown.Item>
-                    <NavDropdown.Item href="/dashboard/transfers">Transfers</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="/users">Users</Nav.Link>
->>>>>>> main
+
                     <NavDropdown.Divider />
                     {isAdmin &&<UserSectionComponent
                     loginAccount={loginAccount}
@@ -188,13 +168,11 @@ const Index = () => {
                 </Nav>
                 </Navbar.Collapse>
             </Container>
-<<<<<<< HEAD
+
         </Navbar>
         <hr className="hr" />
         </> }
-=======
-        </Navbar> }
->>>>>>> main
+
 
 
 
