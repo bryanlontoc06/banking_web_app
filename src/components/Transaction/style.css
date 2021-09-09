@@ -1,0 +1,13 @@
+
+
+@media screen and (min-width: 1024px) {
+    .flex-container {
+        display: flex;
+    }    
+}
+
+.transactions {
+    
+}
+
+

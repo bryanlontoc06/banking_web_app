@@ -178,7 +178,7 @@ const Index = () => {
                     <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></NavDropdown.Item>
                     </NavDropdown>
                     {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}><UsersIcon />Users</Link></Nav.Link>}
-                    {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/users" className={`${selected === 5 ? 'mobile-menus' : ''}`}><TransactionIcon />Transactions</Link></Nav.Link>}
+                    {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''}`}><TransactionIcon />Transactions</Link></Nav.Link>}
 
 
                     <NavDropdown.Divider />

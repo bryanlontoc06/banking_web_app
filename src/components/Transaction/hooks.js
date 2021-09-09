@@ -3,6 +3,7 @@ import {AppContext} from '../Global/AppContext'
 import useLocalStorage from '../Users/useLocalStorage'
 import {convertToMoney} from '../lib/helpers'
 import useSessionStorage from '../Layout/useSessionStorage'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 
 const useHooks = () => {
@@ -12,7 +13,8 @@ const useHooks = () => {
         setWithdrawalHistories,
         setDepositHistories,
         setTransfersHistories} = useContext(AppContext)
-    
+
+    const matchesLG = useMediaQuery('(min-width: 1024px)')
     const [users, setUsers] = useLocalStorage('usersData', [])
     const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
     const [currentSelectedData, setCurrentSelectedData] = useState(loginAccount[0])
@@ -235,7 +237,8 @@ const useHooks = () => {
         modalShow,
         closeModalComponent,
         loginAccount,
-        userSelected
+        userSelected,
+        matchesLG
     }
 }
 

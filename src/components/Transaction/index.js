@@ -3,6 +3,7 @@ import ButtonComponent from './ButtonComponent'
 import InputComponent from './InputComponent'
 import { convertToMoney } from '../lib/helpers'
 import useHooks from './hooks'
+import './style.css'
 
 
 const Index = ()  => {  
@@ -21,23 +22,20 @@ const Index = ()  => {
       handleTransfer,           
       modalDetailsAlert,
       resetTransaction,
-      userSelected
+      userSelected,
+      matchesLG
     } = useHooks()
 
     return (
         <>
-            <div className="container-fluid col-lg-8">
-                <div className="modal-dialog-centered">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                        <ButtonComponent
-                         btnClass={"btn-close"}
-                         dbsDismiss={"modal"}
-                         ariaLabel={"Close"}
-                         resetTransaction={resetTransaction}
-                         />
-                    </div>
+            <div className="container-fluid">
+                {/* <div className="modal-dialog-centered"> */}
+                    <div>
+                    <div className="modal-header">                    
+                    <div className="col-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
+                    {matchesLG && <div className="col-6"><h5 className="modal-title">Transactions</h5></div>}
+                    </div>                                        
+                <div className="flex-container">                
                     <div className="modal-body">
                         <div className="user-row">
                             <div className="form-floating mb-3">
@@ -103,11 +101,11 @@ const Index = ()  => {
                                 <InputComponent
                                 inputType={"number"}
                                 inputClass={"read-only-user-detail form-control"}
-                                placeholderTitle={"Active Mobile No."}
+                                placeholderTitle={"Mobile No."}
                                 inputID={"floatingActiveNoDetails"}
                                 isReadOnly={true}
                                 inputValue={userSelected.mobile_no}
-                                label={"Active Mobile No."}
+                                label={"Mobile No."}
                                 />
                             </div>
                         </div>
@@ -136,11 +134,12 @@ const Index = ()  => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="col-lg-6 col-md-12" style={{paddingTop: "1rem"}}>
                         <div className="title">
-                            <h5 className="modal-title" >Transactions</h5>
+                            
                         </div>
-                        <div className="transaction-body-container">
+                        <div>
+                            {!matchesLG && <h5>Transactions</h5>}
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <InputComponent
@@ -238,19 +237,12 @@ const Index = ()  => {
                                 {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account# is not valid. Please Try Again.</p>}                      
                                 {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account# to transfer to cannot be blank. Please Try Again. </p>}
                             </div>
-                        </div>
+                        </div>                   
                     </div>
-                    <div className="modal-footer">
-                        <ButtonComponent
-                            btnClass={"btn btn-secondary"}
-                            dbsDismiss={"modal"}
-                            btnDescription={"Close"}
-                            resetTransaction={resetTransaction}
-                        />
-                    </div>
-                    </div>
-                </div>
-            </div>        
+                </div>                
+            </div>
+         </div>
+            {/* </div>         */}
         </>
     )
 }
