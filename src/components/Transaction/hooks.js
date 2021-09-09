@@ -81,19 +81,19 @@ const useHooks = () => {
 
     const handleHistories = (action) => {
         const newHistory = {
-                account_no: currentSelectedData.account_no,
-                username: currentSelectedData.username, 
-                first_name: currentSelectedData.first_name,
-                last_name: currentSelectedData.last_name,
-                address: currentSelectedData.address,
-                mobile_no: currentSelectedData.mobile_no,
-                email: currentSelectedData.email,
-                balance: currentSelectedData.balance,
-                latestWithdrawnAmount: currentSelectedData.latestWithdrawnAmount,
-                latestDepositAmount: currentSelectedData.latestDepositAmount,
-                latestTransferAmount: currentSelectedData.latestTransferAmount,
-                latestTransferTo: currentSelectedData.latestTransferTo,
-            currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+                account_no: userSelected.account_no,
+                username: userSelected.username, 
+                first_name: userSelected.first_name,
+                last_name: userSelected.last_name,
+                address: userSelected.address,
+                mobile_no: userSelected.mobile_no,
+                email: userSelected.email,
+                balance: userSelected.balance,
+                latestWithdrawnAmount: userSelected.latestWithdrawnAmount,
+                latestDepositAmount: userSelected.latestDepositAmount,
+                latestTransferAmount: userSelected.latestTransferAmount,
+                latestTransferTo: userSelected.latestTransferTo,
+                currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
         }
         if(action === 'withdraw') {
             setWithdrawalHistories([...withdrawalHistories, newHistory])
