@@ -83,6 +83,7 @@ const useHooks = () => {
         setIsAdmin(false)
         setIsUser(false)
         setLoginAccount([])
+        setSelected(0)
     }
 
     return {

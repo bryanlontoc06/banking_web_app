@@ -2,10 +2,10 @@ import { useState, useContext } from 'react'
 import {AppContext} from '../Global/AppContext'
 import useLocalStorage from '../Users/useLocalStorage'
 import {convertToMoney} from '../lib/helpers'
+import useSessionStorage from '../Layout/useSessionStorage'
 
 
-const useHooks = (props) => {
-    const {loginAccount} = props
+const useHooks = () => {
     const {withdrawalHistories,
         depositHistories,
         transfersHistories,
@@ -14,6 +14,8 @@ const useHooks = (props) => {
         setTransfersHistories} = useContext(AppContext)
     
     const [users, setUsers] = useLocalStorage('usersData', [])
+    const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
+    const [currentSelectedData, setCurrentSelectedData] = useState(loginAccount[0])
     const [accountNo, setAccountNo] = useState('')
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -55,16 +57,6 @@ const useHooks = (props) => {
     })
     
 
-    const handleGenerateAccountNo = () => {
-        let date = new Date();
-        let minutes = '0' + date.getMinutes().toString().substr(-2)
-        let hours = '0' + date.getHours().toString().substr(-2)
-        let month = '0' + (date.getMonth() + 1).toString().substr(-2)
-        let year = date.getFullYear().toString().substr(-2)
-        setAccountNo(year + month + hours + minutes + Math.floor(10 + Math.random() * 90))
-        setModalShow(true)
-    }
-
     const closeModalComponent = () => {
         setModalShow(false)
         setErrorState({
@@ -79,140 +71,26 @@ const useHooks = (props) => {
         })
     }
 
-    const validation = (newUser) => {
-        if(users.find((user) => {return user.username === userName})) {
-            alert('Username already exists.')
-       }
-       else if (password !== retypePassword) {
-            alert('Password do not match.')
-       } 
-       else if (!userName) {
-            setErrorState({username: true})
-       }
-       else if (!password) {
-        setErrorState({password: true})
-       }
-       else if (!retypePassword) {
-        setErrorState({retypePassword: true})
-       }
-       else if (!firstName) {
-        setErrorState({firstName: true})
-       }
-       else if (!lastName) {
-        setErrorState({lastName: true})
-       }
-       else if (!address) {
-        setErrorState({address: true})
-       }
-       else if (!mobileNo) {
-        setErrorState({ mobileNo: true})
-       }
-       else if (!email) {
-        setErrorState({email: true})
-       }
-        else if (userName) {
-            setErrorState({username: false})
-                if (password) {
-                    setErrorState({password: false})
-                    if (retypePassword) {
-                        setErrorState({retypePassword: false})
-                        if (firstName) {
-                            setErrorState({firstName: false})
-                            if(isNaN(firstName.substring(0, 1))) {
-                                if (lastName) {
-                                    setErrorState({lastName: false})
-                                    if(isNaN(lastName.substring(0, 1))){
-                                        if (address) {
-                                            setErrorState({address: false})
-                                            if (mobileNo) {
-                                                setErrorState({mobileNo: false})
-                                                if (email) {
-                                                    setErrorState({email: false})
-
-                                                    setUsers([...users, newUser])
-                                                    setAccountNo('')
-                                                    setUserName('')
-                                                    setPassword('')
-                                                    setRetypePassword('')
-                                                    setFirstName('')
-                                                    setLastName('')
-                                                    setAddress('')
-                                                    setMobileNo('')
-                                                    setEmail('')
-                                                    setBalance(0)
-                                                    setAmountToWithdraw(0)
-                                                    setAmountToTransfer(0)
-                                                    setAmountToDeposit(0)
-                                                    setTransferTo('')
-                                                    setModalShow(false)
-                                                    alert('Account created')
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        alert(`Last name cannot start with a number`)
-                                    }
-                                }
-                            }
-                            else {
-                                alert(`First name cannot start with a number`)
-                            }
-                        }
-                    }
-                }
-        } 
-    }
     
 
-    const handleSaveUsers = (e) => {
-        e.preventDefault();
-        try {
-            let enPassword = Buffer.from(password).toString('base64');
-            let lowerCasedUserName= userName.toLowerCase()
-            const newUser = {
-                account_no: accountNo,
-                username: lowerCasedUserName, 
-                password: enPassword,
-                first_name: firstName,
-                last_name: lastName,
-                address: address,
-                mobile_no: mobileNo,
-                email: email,
-                balance: balance,
-                role: 'client' ,
-                latestWithdrawnAmount: amountToWithdraw,
-                latestDepositAmount: amountToDeposit,
-                latestTransferAmount: amountToTransfer,
-                latestTransferTo: transferTo,
-            }
-            validation(newUser);
-       
-        } catch(e) {
-            console.log(`Error in handleSaveUsers`, e)
-        }
-    }
 
-    const handleDeleteUser = (id) => {
-        const index = users.findIndex(user => {return user.account_no === id})
-        users.splice(index, 1)
-        setUsers([...users])
-    }
+    
+    let userSelected = users.find((user) => {return user.account_no === currentSelectedData.account_no})
 
     const handleHistories = (action) => {
         const newHistory = {
-            account_no: loginAccount[0].account_no,
-            username: loginAccount[0].username, 
-            first_name: loginAccount[0].first_name,
-            last_name: loginAccount[0].last_name,
-            address: loginAccount[0].address,
-            mobile_no: loginAccount[0].mobile_no,
-            email: loginAccount[0].email,
-            balance: loginAccount[0].balance,
-            latestWithdrawnAmount: loginAccount[0].latestWithdrawnAmount,
-            latestDepositAmount: loginAccount[0].latestDepositAmount,
-            latestTransferAmount: loginAccount[0].latestTransferAmount,
-            latestTransferTo: loginAccount[0].latestTransferTo,
+                account_no: currentSelectedData.account_no,
+                username: currentSelectedData.username, 
+                first_name: currentSelectedData.first_name,
+                last_name: currentSelectedData.last_name,
+                address: currentSelectedData.address,
+                mobile_no: currentSelectedData.mobile_no,
+                email: currentSelectedData.email,
+                balance: currentSelectedData.balance,
+                latestWithdrawnAmount: currentSelectedData.latestWithdrawnAmount,
+                latestDepositAmount: currentSelectedData.latestDepositAmount,
+                latestTransferAmount: currentSelectedData.latestTransferAmount,
+                latestTransferTo: currentSelectedData.latestTransferTo,
             currentDatenTime: new Date().toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
         }
         if(action === 'withdraw') {
@@ -225,15 +103,11 @@ const useHooks = (props) => {
         }
     }
 
-
     const handleWithdraw = () => {
-      
         if(amountToWithdraw > 0) {
-            if(amountToWithdraw < loginAccount[0].balance) {                
-                let currentBalance = loginAccount[0].balance - amountToWithdraw;
-                setUsers([...users], loginAccount[0].balance = currentBalance, loginAccount[0].latestWithdrawnAmount = amountToWithdraw)
-                console.log(loginAccount[0].balance);
-                console.log(users);
+            if(amountToWithdraw <= userSelected.balance) {                
+                let currentBalance = userSelected.balance - amountToWithdraw;
+                setUsers([...users], userSelected.balance = currentBalance, userSelected.latestWithdrawnAmount = amountToWithdraw)
                 handleHistories('withdraw');
                 setModalDetailsAlert({insufficientBalance: false})
                 setModalDetailsAlert({successful: true})
@@ -242,15 +116,14 @@ const useHooks = (props) => {
                 setModalDetailsAlert({insufficientBalance: true})
             }
         } else {
-            
             setModalDetailsAlert({enterAnAmountToWithdraw: true})
         }
     }
 
     const handleDeposit = () => {
         if(amountToDeposit > 0) {
-            let currentBalance = (+loginAccount[0].balance) + (+amountToDeposit);
-            setUsers([...users], loginAccount[0].balance = currentBalance, loginAccount[0].latestDepositAmount = amountToDeposit)
+            let currentBalance = (+userSelected.balance) + (+amountToDeposit);
+            setUsers([...users], userSelected.balance = currentBalance, userSelected.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
             setAmountToDeposit('')
             setModalDetailsAlert({successfulDeposit: true})
@@ -265,15 +138,15 @@ const useHooks = (props) => {
         if(transferTo){
             const toUser = users.find(user => {return user.account_no === transferTo})                    
             if(toUser) {
-                if(toUser.account_no !== loginAccount[0].account_no) {
+                if(toUser.account_no !== userSelected.account_no) {
                     if(amountToTransfer > 0) {
-                        if(amountToTransfer <= loginAccount[0].balance) {
-                            let currentBalance = (+loginAccount[0].balance) - (+amountToTransfer)
+                        if(amountToTransfer <= userSelected.balance) {
+                            let currentBalance = (+userSelected.balance) - (+amountToTransfer)
                             let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
                             setUsers([...users], 
-                                loginAccount[0].balance = currentBalance, 
-                                loginAccount[0].latestTransferAmount = amountToTransfer, 
-                                loginAccount[0].latestTransferTo = transferTo,
+                                userSelected.balance = currentBalance, 
+                                userSelected.latestTransferAmount = amountToTransfer, 
+                                userSelected.latestTransferTo = transferTo,
                                 toUser.balance = toUserCurrentBalance)
                             handleHistories('transfer');
                             setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, firstName: toUser.first_name, lastName: toUser.last_name})                            
@@ -350,9 +223,6 @@ const useHooks = (props) => {
         transferMessage,
         amountToTransfer, 
         setAmountToTransfer,
-        handleGenerateAccountNo,
-        handleSaveUsers,
-        handleDeleteUser,
         handleWithdraw,
         handleDeposit,
         handleTransfer,
@@ -363,7 +233,9 @@ const useHooks = (props) => {
         resetTransaction,
         setModalShow,
         modalShow,
-        closeModalComponent
+        closeModalComponent,
+        loginAccount,
+        userSelected
     }
 }
 

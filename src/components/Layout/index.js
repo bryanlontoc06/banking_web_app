@@ -212,7 +212,6 @@ const Index = () => {
             {isUser &&
                 <Route path="/transactions" exact  component={TransactionComponent}>
                     <TransactionComponent 
-                        loginAccount={loginAccount}
                     />
                 </Route>
             }

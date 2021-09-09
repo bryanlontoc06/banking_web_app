@@ -5,8 +5,7 @@ import { convertToMoney } from '../lib/helpers'
 import useHooks from './hooks'
 
 
-const Index = (props)  => {  
-    const {loginAccount} = props
+const Index = ()  => {  
     const {      
       amountToWithdraw, 
       setAmountToWithdraw, 
@@ -22,7 +21,9 @@ const Index = (props)  => {
       handleTransfer,           
       modalDetailsAlert,
       resetTransaction,
-    } = useHooks(props)
+      userSelected
+    } = useHooks()
+
     return (
         <>
             <div>
@@ -46,7 +47,7 @@ const Index = (props)  => {
                              placeholderTitle={"Account No."}
                              inputID={"floatingAccountNumberDetails"}
                              isReadOnly={true}
-                             inputValue={loginAccount[0].account_no}
+                             inputValue={userSelected.account_no}
                              label={"Account No."}
                             />
                             </div>
@@ -57,7 +58,7 @@ const Index = (props)  => {
                              placeholderTitle={"User Name"}
                              inputID={"floatingUserNameDetails"}
                              isReadOnly={true}
-                             inputValue={loginAccount[0].username}
+                             inputValue={userSelected.username}
                              label={"User Name"}
                             />
                             </div>
@@ -70,7 +71,7 @@ const Index = (props)  => {
                                  placeholderTitle={"First Name"}
                                  inputID={"floatingFirstNameDetails"}
                                  isReadOnly={true}
-                                 inputValue={loginAccount[0].first_name}
+                                 inputValue={userSelected.first_name}
                                  label={"First Name"}
                                  />
                             </div>
@@ -81,7 +82,7 @@ const Index = (props)  => {
                                  placeholderTitle={"Last Name"}
                                  inputID={"floatingLastNameDetails"}
                                  isReadOnly={true}
-                                 inputValue={loginAccount[0].last_name}
+                                 inputValue={userSelected.last_name}
                                  label={"Last Name"}
                                  />
                             </div>
@@ -94,7 +95,7 @@ const Index = (props)  => {
                                  placeholderTitle={"Address"}
                                  inputID={"floatingAddressDetails"}
                                  isReadOnly={true}
-                                 inputValue={loginAccount[0].address}
+                                 inputValue={userSelected.address}
                                  label={"Address"}
                                  />
                             </div>
@@ -105,7 +106,7 @@ const Index = (props)  => {
                                 placeholderTitle={"Active Mobile No."}
                                 inputID={"floatingActiveNoDetails"}
                                 isReadOnly={true}
-                                inputValue={loginAccount[0].mobile_no}
+                                inputValue={userSelected.mobile_no}
                                 label={"Active Mobile No."}
                                 />
                             </div>
@@ -118,7 +119,7 @@ const Index = (props)  => {
                                 placeholderTitle={"Email Address"}
                                 inputID={"floatingEmailDetails"}
                                 isReadOnly={true}
-                                inputValue={loginAccount[0].email}
+                                inputValue={userSelected.email}
                                 label={"Email Address"}
                                 />
                             </div>
@@ -129,7 +130,7 @@ const Index = (props)  => {
                                 placeholderTitle={"Balance"}
                                 inputID={"floatingBalanceDetails"}
                                 isReadOnly={true}
-                                inputValue={convertToMoney(loginAccount[0].balance)}
+                                inputValue={convertToMoney(userSelected.balance)}
                                 label={"Balance"}
                                 />
                             </div>

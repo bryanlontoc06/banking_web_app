@@ -227,7 +227,7 @@ const useHooks = () => {
 
     const handleWithdraw = () => {
         if(amountToWithdraw > 0) {
-            if(amountToWithdraw < currentSelectedData.balance) {
+            if(amountToWithdraw <= currentSelectedData.balance) {
                 let currentBalance = currentSelectedData.balance - amountToWithdraw;
                 setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
                 handleHistories('withdraw');
