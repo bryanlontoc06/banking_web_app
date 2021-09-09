@@ -3,6 +3,7 @@ import ButtonComponent from './ButtonComponent'
 import InputComponent from './InputComponent'
 import { convertToMoney } from '../lib/helpers'
 import useHooks from './hooks'
+import "./style.css"
 
 
 const Index = ()  => {  
@@ -26,8 +27,8 @@ const Index = ()  => {
 
     return (
         <>
-            <div>
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div className="container-fluid col-lg-8 col-sm-10">
+                <div className="modal-dialog-centered">
                     <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
