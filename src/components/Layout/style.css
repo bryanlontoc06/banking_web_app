@@ -18,12 +18,12 @@ div#root {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1240px) {
     .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
         margin: 50px 0 0         
     }
     .routes-container {        
-        padding: 5rem 0 5rem 0
+        padding: 5rem 0 5rem 0;        
     }
     
 }
