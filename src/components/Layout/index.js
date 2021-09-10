@@ -201,6 +201,7 @@ const Index = () => {
 
         <Switch>
             <>
+                <div className="routes-container">
                 <Route path="/" exact component={HomeComponent}>
                     <HomeComponent />
                 </Route>
@@ -227,6 +228,7 @@ const Index = () => {
                 <Route path="/profile" exact  component={Profile}>
                     <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
                 </Route>
+                </div>
             </>
         </Switch>
 

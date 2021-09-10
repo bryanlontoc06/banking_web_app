@@ -16,6 +16,7 @@ const LinkComponent = ({
         to={path}
         className={`nav-link ${selected === index ? "active" : ""} link-dark`}
         onClick={() => handleSelectedMenu(index)}
+        // style={{color: "#000"}}
       >
         {hasSpan ? null : description}
         {hasSpan && (

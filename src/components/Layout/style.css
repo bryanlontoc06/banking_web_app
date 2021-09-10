@@ -8,11 +8,30 @@ div#root {
     div#root {
         flex-direction: unset;
     }
+    .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
+        margin: 50px 0 0 250px;
+        background-color: unset !important;    
+    }
+    .routes-container {
+        width: 100%;
+        padding: 5rem 250px 5rem 0
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
+        margin: 50px 0 0         
+    }
+    .routes-container {        
+        padding: 5rem 0 5rem 0
+    }
+    
 }
 
 .side-bar {
     width: 15rem;
-    height: 100vh;
+    height: 80vh;
+
 }
 
 
@@ -51,6 +70,14 @@ div#root {
 
 button.accordion-button {
     padding: 0.5rem 1rem;
+}
+
+button.accordion-button.collapsed {
+    background-color: #f7f7ff !important;
+}
+
+ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small {
+    background-color: #f7f7ff;
 }
 
 .accordion-button::after {
@@ -136,3 +163,4 @@ a {
     text-decoration: none;
     color: #000;
 }
+

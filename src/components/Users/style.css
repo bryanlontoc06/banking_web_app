@@ -25,10 +25,6 @@ button {
     width: 3rem;
 }
 
-table.table {
-    margin-top: 1rem;
-}
-
 .action-btns {
     display: flex;
     justify-content: center;
@@ -146,10 +142,11 @@ div#contained-modal-title-vcenter {
 table.table {
     overflow-x: auto;
     display: block;
+    margin-top: 1rem;
 }
 @media (min-width: 768px) {
     table.table {
-        overflow-x: auto;
+        overflow-x: unset;
         display: block;
     }
 }
