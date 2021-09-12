@@ -9,7 +9,7 @@ div#root {
         flex-direction: unset;
     }
     .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
-        margin: 50px 0 0 250px;
+        margin: 5rem 0 0 250px;
         background-color: unset !important;    
     }
     .routes-container {
@@ -20,10 +20,10 @@ div#root {
 
 @media (min-width: 769px) and (max-width: 1240px) {
     .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
-        margin: 50px 0 0         
+        margin: 5rem 0 0         
     }
     .routes-container {        
-        padding: 5rem 0 5rem 0;        
+        padding: 5rem 0;        
     }
     
 }

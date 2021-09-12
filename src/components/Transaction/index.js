@@ -20,16 +20,14 @@ const Index = ()  => {
       handleWithdraw,
       handleDeposit,
       handleTransfer,           
-      modalDetailsAlert,
-      resetTransaction,
+      modalDetailsAlert,      
       userSelected,
       matchesLG
     } = useHooks()
 
     return (
         <>
-            <div className="container-fluid">
-                {/* <div className="modal-dialog-centered"> */}
+            <div className="container-fluid">                
                     <div>
                     <div className="modal-header">                    
                     <div className="col-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
@@ -154,8 +152,7 @@ const Index = ()  => {
                                         // successfulMessage={modalDetailsAlert.successful && <p className="success-message">Withdrawn Successfully!</p>}
                                         // enterAnAmountToWithdraw={modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
                                     />
-                                </div>
-                                
+                                </div>                                
                                 <ButtonComponent
                                     btnClass={"btn btn-primary"}                                   
                                     handleFunction={() => handleWithdraw()}
@@ -241,8 +238,7 @@ const Index = ()  => {
                     </div>
                 </div>                
             </div>
-         </div>
-            {/* </div>         */}
+         </div>            
         </>
     )
 }

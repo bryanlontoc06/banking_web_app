@@ -11,8 +11,8 @@ const Index = (props) => {
 
     const handleSaveNewPassword = () => {
         let enPassword = Buffer.from(oldPassword).toString('base64');
-        console.log({loginAccount})
-        console.log({enPassword})
+        // console.log({loginAccount})
+        // console.log({enPassword})
         if(loginAccount[0].password === enPassword) {
             if(newPassword === retypePassword) {
                 let enPasswordNewPassword = Buffer.from(newPassword).toString('base64');

@@ -162,6 +162,18 @@ const useHooks = () => {
                 }
         } 
     }
+
+    const resetUserInput = () => {
+        setAccountNo("");
+        setUserName("");
+        setPassword("");
+        setRetypePassword("");
+        setFirstName("");
+        setLastName("");
+        setAddress("");
+        setMobileNo("");
+        setEmail("");
+    }
     
 
     const handleSaveUsers = (e) => {
@@ -361,7 +373,8 @@ const useHooks = () => {
         resetTransaction,
         setModalShow,
         modalShow,
-        closeModalComponent
+        closeModalComponent,
+        resetUserInput
     }
 }
 

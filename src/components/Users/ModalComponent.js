@@ -3,7 +3,7 @@ import InputComponent from './InputComponent'
 import Modal from 'react-bootstrap/Modal'
 
 
-const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, setModalShow, modalShow, closeModalComponent}) => {
+const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, modalShow, closeModalComponent, resetUserInput}) => {
 
     return (
         
@@ -22,7 +22,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                 <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
                                 <p className="required">***All Fields are REQUIRED***</p>
                             </div>
-                             <button type="button" className="btn-close modal-close-btn" data-bs-dismiss="modal" aria-label="Close" onClick={() => closeModalComponent()}></button>
+                             <button type="button" className="btn-close modal-close-btn" data-bs-dismiss="modal" aria-label="Close" onClick={() => {closeModalComponent(); resetUserInput()}}></button>
                              </Modal.Title>
                          </Modal.Header>
                          <Modal.Body>
