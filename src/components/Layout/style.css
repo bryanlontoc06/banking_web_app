@@ -1,26 +1,57 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+}
+
 div#root {
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;    
 }
+
+
 
 @media (min-width: 768px) {
     div#root {
         flex-direction: unset;
     }
     .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
-        margin: 10vh 0 0 10vh;
+        margin: 10vh 0 0 10vw;
         background-color: unset !important;    
     }
     .routes-container {
         width: 100%;
-        margin: 10vh 10vh 0 0;
+        margin: 10vh 10vw 0 0;
     }
 }
 
 @media (min-width: 769px) and (max-width: 1240px) {
     .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
-        margin: 5rem 0 5rem         
+        margin: 10vh 0 0 10vw       
+    }
+
+    .routes-container {
+        margin: 10vh 10vw 0 0     
+    }
+    
+}
+
+@media (max-width: 900px) {
+    .side-bar.d-flex.flex-column.flex-shrink-0.p-3.bg-light {
+        margin: 10vh 0 0 0       
+    }
+
+    .routes-container {
+        margin: 10vh 0 0 0     
+    }
+    
+}
+
+@media (max-width: 750px) {    
+
+    .routes-container {
+        margin: 15vh 5vw 0 5vw     
     }
     
 }
@@ -146,6 +177,11 @@ button.navbar-toggler {
     padding: 0;
 }
 
+.dropdown-menu {
+    background-color: #f7f7ff;
+    border: unset
+}
+
 a.nav-link {
     padding: 0.5rem 1rem !important;
     border-radius: 5px;
@@ -160,3 +196,6 @@ a {
     color: #000;
 }
 
+.navbar-light .navbar-nav .nav-link {
+    color: #000 !important;
+}
