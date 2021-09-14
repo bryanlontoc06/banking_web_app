@@ -41,6 +41,9 @@ const useHooks = () => {
         sameAccountNumber: false,
         accountNumberNotValidTransfer: false,
         accountNumberCannotBeBlank: false,
+        amountEnteredIsNegative: false,
+        amountEnteredIsNegativeWithdraw: false,
+        amountEnteredIsNegativeDeposit: false
     });
     const [errorState, setErrorState] = useState({
         username: false,
@@ -263,25 +266,32 @@ const useHooks = () => {
 
 
     const handleWithdraw = () => {
-        if(amountToWithdraw > 0) {
-            if(amountToWithdraw <= currentSelectedData.balance) {
-                let currentBalance = currentSelectedData.balance - amountToWithdraw;
-                setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
-                handleHistories('withdraw');
-                setModalDetailsAlert({insufficientBalance: false})
-                setModalDetailsAlert({successful: true})
-                setAmountToWithdraw('')
-            } else {
-                setModalDetailsAlert({insufficientBalance: true})
+        if(amountToWithdraw < 0){
+            setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})
+        }
+        else if(amountToWithdraw > 0) {                        
+                if(amountToWithdraw <= currentSelectedData.balance) {
+                     let currentBalance = currentSelectedData.balance - amountToWithdraw;
+                     setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
+                     handleHistories('withdraw');
+                     setModalDetailsAlert({insufficientBalance: false})
+                     setModalDetailsAlert({successful: true})
+                     setAmountToWithdraw('')
+                } else {
+                 setModalDetailsAlert({insufficientBalance: true})
+                } 
             }
-        } else {
+         else {
             
             setModalDetailsAlert({enterAnAmountToWithdraw: true})
         }
     }
 
     const handleDeposit = () => {
-        if(amountToDeposit > 0) {
+        if(amountToDeposit < 0){
+            setModalDetailsAlert({amountEnteredIsNegativeDeposit: true,})
+        }
+        else if(amountToDeposit > 0) {
             let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
             setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
@@ -300,7 +310,7 @@ const useHooks = () => {
             if(toUser) {
                 if(toUser.account_no !== currentSelectedData.account_no) {
                     if(amountToTransfer < 0) {
-                        setModalDetailsAlert({insufficientBalanceTransfer: true})
+                        setModalDetailsAlert({amountEnteredIsNegative: true})
                     } else {
                         if(amountToTransfer > 0) {
                             if(amountToTransfer <= currentSelectedData.balance) {
@@ -352,6 +362,8 @@ const useHooks = () => {
             sameAccountNumber: false,
             accountNumberNotValidTransfer: false,
             accountNumberCannotBeBlank: false,
+            amountEnteredIsNegative: false,
+            amountEnteredIsNegativeWithdraw: false,
         });
     }
 

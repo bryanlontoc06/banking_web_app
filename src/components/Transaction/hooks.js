@@ -46,6 +46,9 @@ const useHooks = () => {
         sameAccountNumber: false,
         accountNumberNotValidTransfer: false,
         accountNumberCannotBeBlank: false,
+        amountEnteredIsNegative: false,
+        amountEnteredIsNegativeWithdraw: false,
+        amountEnteredIsNegativeDeposit: false,
     });
     const [errorState, setErrorState] = useState({
         username: false,
@@ -197,6 +200,9 @@ const useHooks = () => {
             sameAccountNumber: false,
             accountNumberNotValidTransfer: false,
             accountNumberCannotBeBlank: false,
+            amountEnteredIsNegative: false,
+            amountEnteredIsNegativeWithdraw: false,
+            amountEnteredIsNegativeDeposit: false
         });
     }
 
