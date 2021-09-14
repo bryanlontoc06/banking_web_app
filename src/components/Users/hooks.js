@@ -3,7 +3,7 @@ import {AppContext} from '../Global/AppContext'
 import useLocalStorage from './useLocalStorage'
 import {convertToMoney} from '../lib/helpers'
 
-const useHooks = () => {
+const useHooks = () => {    
     const {withdrawalHistories,
         depositHistories,
         transfersHistories,
@@ -13,6 +13,7 @@ const useHooks = () => {
 
     const [currentSelectedData, setCurrentSelectedData] = useState({});
     const [users, setUsers] = useLocalStorage('usersData', [])
+    const [loadDummyData, setLoadDummyData] = useLocalStorage('dummyAccounts', false)
     const [accountNo, setAccountNo] = useState('')
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -30,8 +31,7 @@ const useHooks = () => {
     const [withdrawMessage, setwithdrawMessage] = useState('')
     const [depositMessage, setDepositMessage] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState('')
-    const [modalShow, setModalShow] = useState(false);
-    const [loadDummyData, setLoadDummyData] = useState(false)
+    const [modalShow, setModalShow] = useState(false);    
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -179,46 +179,7 @@ const useHooks = () => {
         setAddress("");
         setMobileNo("");
         setEmail("");
-    }
-
-    const insertUserData = () => {        
-        if(!loadDummyData){
-        setUsers([...users, {
-            account_no: "220902201921",
-            username: "Bryan", 
-            password: "Bryan",
-            first_name: "Bryan",
-            last_name: "L",
-            address: "Avion School",
-            mobile_no: 123456789,
-            email: "Bryan@email.com",
-            balance: 1000000,
-            role: 'client' ,
-            latestWithdrawnAmount: amountToWithdraw,
-            latestDepositAmount: amountToDeposit,
-            latestTransferAmount: amountToTransfer,
-            latestTransferTo: transferTo,
-        }, {
-            account_no: "220902201921",
-            username: "Bryan", 
-            password: "Bryan",
-            first_name: "Bryan",
-            last_name: "L",
-            address: "Avion School",
-            mobile_no: 123456789,
-            email: "Bryan@email.com",
-            balance: 1000000,
-            role: 'client' ,
-            latestWithdrawnAmount: amountToWithdraw,
-            latestDepositAmount: amountToDeposit,
-            latestTransferAmount: amountToTransfer,
-            latestTransferTo: transferTo,
-        }
-        ])
-    }
-        setLoadDummyData(true)
-    }
-    
+    }   
 
     const handleSaveUsers = (e) => {
         e.preventDefault();
@@ -384,6 +345,178 @@ const useHooks = () => {
         });
     }
 
+    const insertUserData = (e) => {          
+
+        if(!loadDummyData){
+        setUsers([...users, {
+            account_no: "22902201921",
+            username: "Bryan", 
+            password: "Bryan",
+            first_name: "Bryan",
+            last_name: "L",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Bryan@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201922",
+            username: "Greg", 
+            password: "Greg",
+            first_name: "Greg",
+            last_name: "L",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Greg@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201923",
+            username: "Martney", 
+            password: "Martney",
+            first_name: "Martney",
+            last_name: "A",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Martney@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,   
+        },
+        {
+            account_no: "22902201924",
+            username: "Lebron", 
+            password: "Lebron",
+            first_name: "Lebron",
+            last_name: "J",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Lebron@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201925",
+            username: "Adrian", 
+            password: "Adrian",
+            first_name: "Adrian",
+            last_name: "C",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Adrian@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201926",
+            username: "John", 
+            password: "John",
+            first_name: "John",
+            last_name: "Y",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "John@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201927",
+            username: "Victor", 
+            password: "Victor",
+            first_name: "Victor",
+            last_name: "R",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Victor@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201928",
+            username: "Jerick", 
+            password: "Jerick",
+            first_name: "Jerick",
+            last_name: "B",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Jerick@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201929",
+            username: "Isiah", 
+            password: "Isiah",
+            first_name: "Isiah",
+            last_name: "R",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Isiah@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        },
+        {
+            account_no: "22902201930",
+            username: "Carla", 
+            password: "Carla",
+            first_name: "Carla",
+            last_name: "M",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Carla@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        }
+        ])
+        setLoadDummyData(true)
+    } else {
+        e.preventDefault()
+    }
+        
+    }
+
+
     return {
         currentSelectedData,
         setCurrentSelectedData, 
@@ -435,7 +568,8 @@ const useHooks = () => {
         resetUserInput,
         insertUserData,
         withdrawMessage,
-        depositMessage        
+        depositMessage,
+        loadDummyData        
     }
 }
 

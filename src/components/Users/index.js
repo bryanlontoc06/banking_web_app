@@ -58,7 +58,8 @@ const Index = () => {
         resetUserInput,
         insertUserData,
         withdrawMessage,
-        depositMessage
+        depositMessage,
+        loadDummyData
     } = useHooks();
 
     return (
@@ -75,7 +76,8 @@ const Index = () => {
             <ButtonComponent
                 handleFunction = {insertUserData}                               
                 btnDescription = {"Load Data"} 
-                btnClass= {"btn btn-primary"}              
+                btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}
+                             
             />
             </div>
             <TableComponent
