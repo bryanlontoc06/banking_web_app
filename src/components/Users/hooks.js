@@ -174,6 +174,31 @@ const useHooks = () => {
         setMobileNo("");
         setEmail("");
     }
+
+    const insertUserData = () => {
+        let date = new Date();
+        let minutes = '0' + date.getMinutes().toString().substr(-2)
+        let hours = '0' + date.getHours().toString().substr(-2)
+        let month = '0' + (date.getMonth() + 1).toString().substr(-2)
+        let year = date.getFullYear().toString().substr(-2)
+        setAccountNo(year + month + hours + minutes + Math.floor(10 + Math.random() * 90))
+        setUsers([...users, {
+            account_no: accountNo,
+            username: "dummyUsername", 
+            password: "dummyPassword",
+            first_name: "dummyFirstname",
+            last_name: "dummyLastName",
+            address: "dummyAddress",
+            mobile_no: 1321321465465,
+            email: "DummyEmail",
+            balance: 100000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        }])
+    }
     
 
     const handleSaveUsers = (e) => {
@@ -374,7 +399,8 @@ const useHooks = () => {
         setModalShow,
         modalShow,
         closeModalComponent,
-        resetUserInput
+        resetUserInput,
+        insertUserData
     }
 }
 

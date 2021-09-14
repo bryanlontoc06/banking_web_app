@@ -10,12 +10,15 @@ const Index = (props) => {
 
 
     return (
-        <div className="dashboard-container">
+        <>
+          <div className="transaction-header">
             <h1>Transaction History</h1>
-
             <h3>Withdrawals</h3>
+            </div>  
+        <div className="dashboard-container">  
+      
             <table className="table">
-                <thead className="table-dark">
+                <thead className="table-dark table-header">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Account No.</th>
@@ -25,6 +28,7 @@ const Index = (props) => {
                         <th scope="col">Current Balance</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     {!isUser ? 
                     withdrawalHistories.map((user, index) => {
@@ -56,6 +60,7 @@ const Index = (props) => {
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
 

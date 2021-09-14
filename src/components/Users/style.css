@@ -141,8 +141,7 @@ div#contained-modal-title-vcenter {
 
 table.table {
     overflow-x: auto;
-    display: block;
-    margin-top: 1rem;
+    display: block;    
 }
 @media (min-width: 768px) {
     table.table {

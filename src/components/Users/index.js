@@ -55,11 +55,13 @@ const Index = () => {
         resetTransaction,        
         modalShow,
         closeModalComponent,
-        resetUserInput
+        resetUserInput,
+        insertUserData
     } = useHooks();
 
     return (
-        <div className="users-container">            
+        <div className="users-container">       
+        <div style={{display: "flex", gap: "1rem", marginBottom: "0.5rem"}}>
             <ButtonComponent
                 handleFunction = {handleGenerateAccountNo}
                 iconName = {<PersonPlus/>}                
@@ -68,6 +70,12 @@ const Index = () => {
                 dbsToggle={"modal"}
                 dbsTarget={"#exampleModal"}
             />
+            <ButtonComponent
+                handleFunction = {insertUserData}                               
+                btnDescription = {"Load Data"} 
+                btnClass= {"btn btn-primary"}              
+            />
+            </div>
             <TableComponent
                 handleDeleteUser={handleDeleteUser}
                 users={users}

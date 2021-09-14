@@ -11,12 +11,15 @@ const Index = (props) => {
     const filteredHistory = transfersHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
 
     return (
-        <div className="dashboard-container">
+        <>
+        <div className="transaction-header">
             <h1>Transaction History</h1>
-
             <h3>Transfers</h3>
+            </div>
+        <div className="dashboard-container">
+            
             <table className="table">
-                <thead className="table-dark">
+                <thead className="table-dark table-header">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Account No.</th>
@@ -61,6 +64,7 @@ const Index = (props) => {
                 </tbody>
             </table>
         </div>
+        </>
     )
 }
 
