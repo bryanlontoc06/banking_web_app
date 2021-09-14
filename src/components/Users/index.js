@@ -56,7 +56,9 @@ const Index = () => {
         modalShow,
         closeModalComponent,
         resetUserInput,
-        insertUserData
+        insertUserData,
+        withdrawMessage,
+        depositMessage
     } = useHooks();
 
     return (
@@ -127,6 +129,8 @@ const Index = () => {
                 handleTransfer={handleTransfer}
                 modalDetailsAlert={modalDetailsAlert}
                 resetTransaction={resetTransaction}
+                withdrawMessage={withdrawMessage}
+                depositMessage={depositMessage}
             />
         </div>
     )

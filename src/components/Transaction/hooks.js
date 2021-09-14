@@ -31,7 +31,7 @@ const useHooks = () => {
     const [amountToWithdraw, setAmountToWithdraw] = useState('')
     const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
-    const [transferMessage, setTransferMessage] = useState({})
+    const [transferMessage, setTransferMessage] = useState({})    
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalShow, setModalShow] = useState(false);
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
@@ -113,9 +113,8 @@ const useHooks = () => {
             if(amountToWithdraw <= userSelected.balance) {                
                 let currentBalance = userSelected.balance - amountToWithdraw;
                 setUsers([...users], userSelected.balance = currentBalance, userSelected.latestWithdrawnAmount = amountToWithdraw)
-                handleHistories('withdraw');
-                setModalDetailsAlert({insufficientBalance: false})
-                setModalDetailsAlert({successful: true})
+                handleHistories('withdraw');                
+                setModalDetailsAlert({successful: true})                
                 setAmountToWithdraw('')
             } else {
                 setModalDetailsAlert({insufficientBalance: true})

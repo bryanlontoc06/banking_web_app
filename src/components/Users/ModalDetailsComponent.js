@@ -18,7 +18,9 @@ const ModalForDetailsComponent = (
   transferMessage,
   handleTransfer,
   modalDetailsAlert,
-  resetTransaction
+  resetTransaction,
+  withdrawMessage,
+  depositMessage
   }
 ) => {
     return (
@@ -163,7 +165,7 @@ const ModalForDetailsComponent = (
 
                             <div style={{marginBottom: '1rem'}}>
                                 {modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
-                                {modalDetailsAlert.successful && <p className="success-message">Withdrawn {amountToWithdraw} Successfully!</p>}
+                                {modalDetailsAlert.successful && <p className="success-message">Withdrawn {convertToMoney(withdrawMessage)} Successfully!</p>}
                                 {modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw.</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeWithdraw && <p className="error-message">Amount withdrawn cannot be negative.</p>}                                
                             </div>
@@ -189,7 +191,7 @@ const ModalForDetailsComponent = (
                             </div>
 
                             <div style={{marginBottom: '1rem'}}>
-                                {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposited {amountToDeposit} Successfully!</p>}
+                                {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposited {convertToMoney(depositMessage)} Successfully!</p>}
                                 {modalDetailsAlert.enterAnAmountToDeposit && <p className="enter-an-amount-message">Please enter an Amount to Deposit.</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeDeposit && <p className="error-message">Amount deposited cannot be negative.</p>}
                             </div>

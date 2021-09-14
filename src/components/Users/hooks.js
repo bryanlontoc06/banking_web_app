@@ -27,6 +27,8 @@ const useHooks = () => {
     const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
     const [transferMessage, setTransferMessage] = useState({})
+    const [withdrawMessage, setwithdrawMessage] = useState('')
+    const [depositMessage, setDepositMessage] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalShow, setModalShow] = useState(false);
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
@@ -267,7 +269,7 @@ const useHooks = () => {
 
     const handleWithdraw = () => {
         if(amountToWithdraw < 0){
-            setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})
+            setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})                        
         }
         else if(amountToWithdraw > 0) {                        
                 if(amountToWithdraw <= currentSelectedData.balance) {
@@ -276,13 +278,13 @@ const useHooks = () => {
                      handleHistories('withdraw');
                      setModalDetailsAlert({insufficientBalance: false})
                      setModalDetailsAlert({successful: true})
+                     setwithdrawMessage(amountToWithdraw)
                      setAmountToWithdraw('')
                 } else {
                  setModalDetailsAlert({insufficientBalance: true})
                 } 
             }
-         else {
-            
+         else {            
             setModalDetailsAlert({enterAnAmountToWithdraw: true})
         }
     }
@@ -295,6 +297,7 @@ const useHooks = () => {
             let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
             setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
+            setDepositMessage(amountToDeposit)
             setAmountToDeposit('')
             setModalDetailsAlert({successfulDeposit: true})
         } else {
@@ -416,7 +419,9 @@ const useHooks = () => {
         modalShow,
         closeModalComponent,
         resetUserInput,
-        insertUserData
+        insertUserData,
+        withdrawMessage,
+        depositMessage        
     }
 }
 
