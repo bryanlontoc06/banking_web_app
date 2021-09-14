@@ -31,6 +31,7 @@ const useHooks = () => {
     const [depositMessage, setDepositMessage] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalShow, setModalShow] = useState(false);
+    const [loadDummyData, setLoadDummyData] = useState(false)
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -180,29 +181,42 @@ const useHooks = () => {
         setEmail("");
     }
 
-    const insertUserData = () => {
-        let date = new Date();
-        let minutes = '0' + date.getMinutes().toString().substr(-2)
-        let hours = '0' + date.getHours().toString().substr(-2)
-        let month = '0' + (date.getMonth() + 1).toString().substr(-2)
-        let year = date.getFullYear().toString().substr(-2)
-        setAccountNo(year + month + hours + minutes + Math.floor(10 + Math.random() * 90))
+    const insertUserData = () => {        
+        if(!loadDummyData){
         setUsers([...users, {
-            account_no: accountNo,
-            username: "dummyUsername", 
-            password: "dummyPassword",
-            first_name: "dummyFirstname",
-            last_name: "dummyLastName",
-            address: "dummyAddress",
-            mobile_no: 1321321465465,
-            email: "DummyEmail",
-            balance: 100000,
+            account_no: "220902201921",
+            username: "Bryan", 
+            password: "Bryan",
+            first_name: "Bryan",
+            last_name: "L",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Bryan@email.com",
+            balance: 1000000,
             role: 'client' ,
             latestWithdrawnAmount: amountToWithdraw,
             latestDepositAmount: amountToDeposit,
             latestTransferAmount: amountToTransfer,
             latestTransferTo: transferTo,
-        }])
+        }, {
+            account_no: "220902201921",
+            username: "Bryan", 
+            password: "Bryan",
+            first_name: "Bryan",
+            last_name: "L",
+            address: "Avion School",
+            mobile_no: 123456789,
+            email: "Bryan@email.com",
+            balance: 1000000,
+            role: 'client' ,
+            latestWithdrawnAmount: amountToWithdraw,
+            latestDepositAmount: amountToDeposit,
+            latestTransferAmount: amountToTransfer,
+            latestTransferTo: transferTo,
+        }
+        ])
+    }
+        setLoadDummyData(true)
     }
     
 
