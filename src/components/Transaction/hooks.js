@@ -32,6 +32,8 @@ const useHooks = () => {
     const [amountToDeposit, setAmountToDeposit] = useState('')
     const [transferTo, setTransferTo] = useState('')
     const [transferMessage, setTransferMessage] = useState({})    
+    const [withdrawMessage, setwithdrawMessage] = useState('')
+    const [depositMessage, setDepositMessage] = useState('')    
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalShow, setModalShow] = useState(false);
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
@@ -117,7 +119,8 @@ const useHooks = () => {
                 let currentBalance = userSelected.balance - amountToWithdraw;
                 setUsers([...users], userSelected.balance = currentBalance, userSelected.latestWithdrawnAmount = amountToWithdraw)
                 handleHistories('withdraw');                
-                setModalDetailsAlert({successful: true})                
+                setModalDetailsAlert({successful: true})
+                setwithdrawMessage(amountToWithdraw)                
                 setAmountToWithdraw('')
             } else {
                 setModalDetailsAlert({insufficientBalance: true})
@@ -135,7 +138,8 @@ const useHooks = () => {
             let currentBalance = (+userSelected.balance) + (+amountToDeposit);
             setUsers([...users], userSelected.balance = currentBalance, userSelected.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
-            setAmountToDeposit('')
+            setDepositMessage(amountToDeposit)
+            setAmountToDeposit('')            
             setModalDetailsAlert({successfulDeposit: true})
         } else {
             setModalDetailsAlert({enterAnAmountToDeposit: true})
@@ -203,7 +207,7 @@ const useHooks = () => {
             accountNumberCannotBeBlank: false,
             amountEnteredIsNegative: false,
             amountEnteredIsNegativeWithdraw: false,
-            amountEnteredIsNegativeDeposit: false
+            amountEnteredIsNegativeDeposit: false,            
         });
     }
 
@@ -252,7 +256,10 @@ const useHooks = () => {
         closeModalComponent,
         loginAccount,
         userSelected,
-        matchesLG
+        matchesLG,
+        withdrawMessage,
+        depositMessage
+
     }
 }
 
