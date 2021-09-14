@@ -299,25 +299,29 @@ const useHooks = () => {
             const toUser = users.find(user => {return user.account_no === transferTo})                    
             if(toUser) {
                 if(toUser.account_no !== currentSelectedData.account_no) {
-                    if(amountToTransfer > 0) {
-                        if(amountToTransfer <= currentSelectedData.balance) {
-                            let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
-                            let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
-                            setUsers([...users], 
-                                currentSelectedData.balance = currentBalance, 
-                                currentSelectedData.latestTransferAmount = amountToTransfer, 
-                                currentSelectedData.latestTransferTo = transferTo,
-                                toUser.balance = toUserCurrentBalance)
-                            handleHistories('transfer');
-                            setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, firstName: toUser.first_name, lastName: toUser.last_name})                            
-                            setTransferTo('')
-                            setAmountToTransfer('')
-                            setModalDetailsAlert({successfulTransfer: true})
-                        } else {
-                            setModalDetailsAlert({insufficientBalanceTransfer: true})
-                        }
+                    if(amountToTransfer < 0) {
+                        setModalDetailsAlert({insufficientBalanceTransfer: true})
                     } else {
-                        setModalDetailsAlert({amountToTransfer: true})
+                        if(amountToTransfer > 0) {
+                            if(amountToTransfer <= currentSelectedData.balance) {
+                                let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
+                                let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
+                                setUsers([...users], 
+                                    currentSelectedData.balance = currentBalance, 
+                                    currentSelectedData.latestTransferAmount = amountToTransfer, 
+                                    currentSelectedData.latestTransferTo = transferTo,
+                                    toUser.balance = toUserCurrentBalance)
+                                handleHistories('transfer');
+                                setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, firstName: toUser.first_name, lastName: toUser.last_name})                            
+                                setTransferTo('')
+                                setAmountToTransfer('')
+                                setModalDetailsAlert({successfulTransfer: true})
+                            } else {
+                                setModalDetailsAlert({insufficientBalanceTransfer: true})
+                            }
+                        } else {
+                            setModalDetailsAlert({amountToTransfer: true})
+                        }
                     }
                 } else {
                     setModalDetailsAlert({sameAccountNumber: true})
