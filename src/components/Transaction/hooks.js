@@ -109,7 +109,10 @@ const useHooks = () => {
     }
 
     const handleWithdraw = () => {
-        if(amountToWithdraw > 0) {
+        if(amountToWithdraw < 0){
+            setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})                        
+        }
+        else if(amountToWithdraw > 0) {
             if(amountToWithdraw <= userSelected.balance) {                
                 let currentBalance = userSelected.balance - amountToWithdraw;
                 setUsers([...users], userSelected.balance = currentBalance, userSelected.latestWithdrawnAmount = amountToWithdraw)
@@ -125,7 +128,10 @@ const useHooks = () => {
     }
 
     const handleDeposit = () => {
-        if(amountToDeposit > 0) {
+        if(amountToDeposit < 0){
+            setModalDetailsAlert({amountEnteredIsNegativeDeposit: true,})
+        }
+        else if(amountToDeposit > 0) {
             let currentBalance = (+userSelected.balance) + (+amountToDeposit);
             setUsers([...users], userSelected.balance = currentBalance, userSelected.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
@@ -144,13 +150,10 @@ const useHooks = () => {
             if(toUser) {                
                 if(toUser.account_no !== userSelected.account_no) {
                     if(amountToTransfer < 0){
-                        setModalDetailsAlert({insufficientBalanceTransfer: true})
-                        setAmountToTransfer('')
-                        console.log("test");
+                        setModalDetailsAlert({amountEnteredIsNegative: true})                                              
                     } else {
                         if(amountToTransfer > 0) {
                             if(amountToTransfer <= currentSelectedData.balance) {
-
                                 let currentBalance = (+currentSelectedData.balance) - (+amountToTransfer)
                                 let toUserCurrentBalance = (+toUser.balance) + (+amountToTransfer);
                                 setUsers([...users], 
