@@ -140,9 +140,7 @@ const useHooks = () => {
         } else {
             setModalDetailsAlert({enterAnAmountToDeposit: true})
         }
-    }
-
-    
+    }   
 
     const handleTransfer = () => {
         if(transferTo){
@@ -167,6 +165,7 @@ const useHooks = () => {
                                 setAmountToTransfer('')
                                 setModalDetailsAlert({successfulTransfer: true})
                             } else {
+                                console.log("test");
                                 setModalDetailsAlert({insufficientBalanceTransfer: true})
                             }
                         } else {
@@ -181,7 +180,7 @@ const useHooks = () => {
             }
         } else {
             setModalDetailsAlert({accountNumberCannotBeBlank: true})
-        }
+        }     
     }
 
     const resetTransaction = () => {
