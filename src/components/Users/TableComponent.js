@@ -21,7 +21,8 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((data, index) => {
+                    {users.length > 0 ?
+                    users.map((data, index) => {
                         return (
                             <tr key={index}>
                                 <th scope="row">{data.account_no}</th>
@@ -48,7 +49,7 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users}) {
                                 </td>
                             </tr>
                         )
-                    })}
+                    }) : <th className="no-user-available" colSpan="100%"><h3>No User Available</h3></th>}
                 </tbody>
             </table>
         </>
