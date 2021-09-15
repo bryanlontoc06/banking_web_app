@@ -86,9 +86,9 @@ const Index = () => {
                                     
                     />
                 </div>
-                <form class="d-flex">
+                <div class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
-                </form>
+                </div>
             </div>
             <TableComponent
                 handleDeleteUser={handleDeleteUser}
