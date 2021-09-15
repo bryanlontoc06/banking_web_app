@@ -61,26 +61,11 @@ const Index = () => {
         depositMessage,
         loadDummyData,
         searchTerm,
-        setSearchTerm,
         searchResults,
-        setSearchResults
+        searchHandler
     } = useHooks();
 
-    const searchHandler = (e) => {
-        setSearchTerm(e.target.value)
-        if(searchTerm !== '') {
-            const newUserList = users.filter((user) => {
-               return Object.values(user)
-                .join(" ")
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase())
-            });
-            setSearchResults(newUserList)
-        }
-        else {
-            setSearchResults(users)
-        }
-    }
+    
 
     return (
         <div className="users-container">       
