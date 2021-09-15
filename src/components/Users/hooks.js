@@ -215,7 +215,17 @@ const useHooks = () => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
         setUsers([...users])
+
+        checkDummyData(users)   
     }
+
+    const checkDummyData = (users) => {
+        const userAccounts = users.map(user=>user.account_no)
+        const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
+        if(!dummyAccounts.some(val=>userAccounts.includes(val))){
+            setLoadDummyData(false)            
+        }        
+   }        
 
     const handleHistories = (action) => {
         const newHistory = {
