@@ -158,3 +158,35 @@ table.table {
 .add-user-btn {
     width: 9rem;
 }
+
+.add-client-btns {
+    display: flex;
+    margin-bottom: 0.5rem;
+    justify-content: space-between;
+}
+
+.btns-n-search {
+    margin-bottom: 0.5rem;
+}
+
+.me-2 {
+    margin-right: 0rem !important;
+}
+
+@media (min-width: 768px) {
+    .add-client-btns {
+        display: flex;
+        margin-bottom: 0.5rem;
+        justify-content: unset;
+        gap: 1rem;
+    }
+
+    .btns-n-search {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.no-user-available {
+    
+}

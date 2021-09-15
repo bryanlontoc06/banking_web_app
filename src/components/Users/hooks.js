@@ -31,7 +31,9 @@ const useHooks = () => {
     const [withdrawMessage, setwithdrawMessage] = useState('')
     const [depositMessage, setDepositMessage] = useState('')
     const [amountToTransfer, setAmountToTransfer] = useState('')
-    const [modalShow, setModalShow] = useState(false);    
+    const [modalShow, setModalShow] = useState(false);  
+    const [searchTerm, setSearchTerm] = useState('');  
+    const [searchResults, setSearchResults] = useState([]);
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -569,7 +571,11 @@ const useHooks = () => {
         insertUserData,
         withdrawMessage,
         depositMessage,
-        loadDummyData        
+        loadDummyData,
+        searchTerm,
+        setSearchTerm,
+        searchResults,
+        setSearchResults
     }
 }
 

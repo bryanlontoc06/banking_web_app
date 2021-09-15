@@ -59,30 +59,55 @@ const Index = () => {
         insertUserData,
         withdrawMessage,
         depositMessage,
-        loadDummyData
+        loadDummyData,
+        searchTerm,
+        setSearchTerm,
+        searchResults,
+        setSearchResults
     } = useHooks();
+
+    const searchHandler = (e) => {
+        setSearchTerm(e.target.value)
+        if(searchTerm !== '') {
+            const newUserList = users.filter((user) => {
+               return Object.values(user)
+                .join(" ")
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase())
+            });
+            setSearchResults(newUserList)
+        }
+        else {
+            setSearchResults(users)
+        }
+    }
 
     return (
         <div className="users-container">       
-        <div style={{display: "flex", gap: "1rem", marginBottom: "0.5rem"}}>
-            <ButtonComponent
-                handleFunction = {handleGenerateAccountNo}
-                iconName = {<PersonPlus/>}                
-                btnDescription = {" Add Client"}
-                btnClass= {"btn btn-primary add-user-btn"}
-                dbsToggle={"modal"}
-                dbsTarget={"#exampleModal"}
-            />
-            <ButtonComponent
-                handleFunction = {insertUserData}                               
-                btnDescription = {"Load Data"} 
-                btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}
-                             
-            />
+            <div className='btns-n-search'>
+                <div className="add-client-btns">
+                    <ButtonComponent
+                        handleFunction = {handleGenerateAccountNo}
+                        iconName = {<PersonPlus/>}                
+                        btnDescription = {" Add Client"}
+                        btnClass= {"btn btn-primary add-user-btn"}
+                        dbsToggle={"modal"}
+                        dbsTarget={"#exampleModal"}
+                    />
+                    <ButtonComponent
+                        handleFunction = {insertUserData}                               
+                        btnDescription = {"Load Data"} 
+                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}
+                                    
+                    />
+                </div>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
+                </form>
             </div>
             <TableComponent
                 handleDeleteUser={handleDeleteUser}
-                users={users}
+                users={searchTerm.length < 1 ? users : searchResults}
                 setCurrentSelectedData={setCurrentSelectedData}
             />       
             {/* <!-- Modal --> */}
