@@ -196,7 +196,8 @@ const Index = () => {
                         <UserSectionComponent
                             loginAccount={loginAccount}
                             handleSelectedMenu={handleSelectedMenu}
-                            handleLogout={handleLogout} 
+                            handleLogout={handleLogout}
+                            Link={Link} 
                         />
                     : ''}
                 </Nav>
