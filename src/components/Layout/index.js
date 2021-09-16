@@ -102,7 +102,7 @@ const Index = () => {
                                             path={"/dashboard/withdrawals"}
                                             handleSelectedMenu={handleSelectedMenu}
                                             index={1}
-                                            description={"Withdrawals"}
+                                            description={"Withdrawals History"}
                                         />
                                         </li>                                                                      
                                         <li className="dashboard-list">
@@ -112,7 +112,7 @@ const Index = () => {
                                             handleSelectedMenu={handleSelectedMenu}
                                             selected={selected}
                                             index={2}
-                                            description={"Deposits"}
+                                            description={"Deposits History"}
                                         />
                                         </li>                                        
                                         <li className="dashboard-list">
@@ -122,7 +122,7 @@ const Index = () => {
                                             handleSelectedMenu={handleSelectedMenu}
                                             selected={selected}
                                             index={3}
-                                            description={"Transfers"}
+                                            description={"Transfers History"}
                                         />
                                         </li>
                                     </ul>

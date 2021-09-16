@@ -13,8 +13,7 @@ const Index = (props) => {
     return (
         <>
         <div className="transaction-header">
-            <h1>Transaction History</h1>
-            <h3>Transfers</h3>
+            <h1>Transfers History</h1>            
             </div>
         <div className="dashboard-container">
             

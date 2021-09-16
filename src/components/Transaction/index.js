@@ -194,7 +194,7 @@ const Index = ()  => {
                             </div> */}
                             {/* <h6 className="modal-title" >Transfer Funds</h6> */}
                             
-                            <p>To</p>
+                            <p>To:</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form mb-3">
                                     <InputComponent
@@ -207,7 +207,7 @@ const Index = ()  => {
                                     />
                                 </div>
                             </div>
-                            <p>Amount</p>
+                            <p>Amount:</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">                                                                
                                     <InputComponent 
