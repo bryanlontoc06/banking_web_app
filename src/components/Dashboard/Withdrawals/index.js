@@ -12,8 +12,7 @@ const Index = (props) => {
     return (
         <>
           <div className="transaction-header">
-            <h1>Transaction History</h1>
-            <h3>Withdrawals</h3>
+            <h1>Withdrawals History</h1>            
             </div>  
         <div className="dashboard-container">  
       
