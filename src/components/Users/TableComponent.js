@@ -29,7 +29,7 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                     <ButtonComponent
                         handleFunction={deleteDummyAccounts}
                         btnDescription = {"Delete Data"}
-                        btnClass={loadDummyData ? "btn btn-primary user-btn": "btn btn-secondary user-btn"}                                     
+                        btnClass={loadDummyData ? "btn btn-primary user-btn": "btn btn-secondary user-btn"}                                
                     />
 
                 </div>
@@ -39,7 +39,7 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
             </div>
             <div className="table-container">
              <table className="table">
-                <thead className="table-dark table-header">
+                <thead className="table-header">
                     <tr>
                         <th scope="col">Acct #</th>
                         <th scope="col">First name</th>

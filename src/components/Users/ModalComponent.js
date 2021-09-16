@@ -7,7 +7,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
 
     return (
         
-        <div>
+        <div className="modal-details-component">
               <Modal
                     show={modalShow}
                     size="md"
@@ -15,6 +15,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                     centered
                     backdrop="static"
                     keyboard={false}
+                    dialogClassName="modal-details-component"
                 >
                         <Modal.Header>
                              <Modal.Title id="contained-modal-title-vcenter">

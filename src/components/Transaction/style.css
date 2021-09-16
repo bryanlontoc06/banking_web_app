@@ -15,7 +15,15 @@ h5 {
     display: none;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 479px) {
+    .transaction-body {
+        display: flex;
+        flex-direction: column;
+    }
+    .user-row {
+        display: flex;
+        flex-direction: column;
+    }
     
 }
 

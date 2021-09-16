@@ -77,13 +77,14 @@ const Index = (props) => {
             <div className="main-body">
                 <div className="row">
                     <div className="col-lg-4">
+                    {loginAccount[0] && 
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={loginAccount[0].thumbnail_url || defaultProfPic} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
+                                <img src={loginAccount[0].thumbnail_url || defaultProfPic} alt="Profile Pic" className="rounded-circle p-1 bg-primary" width="110"/>
                                     <div className="mt-3">
-                                        <h4>{loginAccount[0].first_name + " " +loginAccount[0].last_name}</h4>
-                                        <p className="text-secondary mb-1">{loginAccount[0].role}</p>
+                                        <h4>{loginAccount[0] ? loginAccount[0].first_name + " " +loginAccount[0].last_name : null}</h4>
+                                        <p className="text-secondary mb-1">{loginAccount[0] ? loginAccount[0].role : null}</p>
                                     </div>
                                 </div>
                                 {/* <hr className="my-4" />
@@ -110,12 +111,13 @@ const Index = (props) => {
                                     </li>
                                 </ul> */}
                             </div>
-                        </div>
+                        </div>}
                     </div>
                     <div className="col-lg-8 user-info-details">
                         <div className="card">
+                        {loginAccount[0] && 
                             <div className="card-body">
-                            <div className="row mb-3">
+                                <div className="row mb-3">
                                     <div className="col-sm-3">
                                         <h6 className="mb-0">{loginAccount[0].role === 'admin' ? 'ID Number' : 'Client Number'}</h6>
                                     </div>
@@ -160,8 +162,9 @@ const Index = (props) => {
                                     <div className="col-sm-9 text-secondary">
                                         <input type="button" className="btn btn-primary px-4" value="Change Password" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
+                        }
                         </div>
                     </div>
 

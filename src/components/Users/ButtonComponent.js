@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, dbsDismiss, handleFunction, iconName, ariaLabel, btnDescription, resetTransaction}) => {
+const ButtonComponent = ({btnClass, dbsToggle, dbsTarget, dbsDismiss, handleFunction, iconName, ariaLabel, btnDescription, resetTransaction, style}) => {
     
     return (
         <>

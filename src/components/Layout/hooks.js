@@ -6,6 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const useHooks = () => {
 
+    const [modalShow, setModalShow] = useState(true);
     const matchesMD = useMediaQuery('(min-width: 768px)')
     const [usernameInput, setUsernameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
@@ -56,6 +57,9 @@ const useHooks = () => {
                 setIsAdmin(true)
                 setIsUser(false)
                 setLoginAccount(loginFilterAdmin)
+                setModalShow(false)
+                setUsernameInput('')
+                setPasswordInput('')
             }
             else {
                 alert('Wrong password. Please Try Again.')
@@ -68,6 +72,9 @@ const useHooks = () => {
                 setIsAdmin(false)
                 setIsUser(true)
                 setLoginAccount(loginFilterUser)
+                setModalShow(false)
+                setUsernameInput('')
+                setPasswordInput('')
             }
             else {
                 alert('Wrong password. Please Try Again.')
@@ -84,6 +91,7 @@ const useHooks = () => {
         setIsUser(false)
         setLoginAccount([])
         setSelected(0)
+        setModalShow(true)
     }
 
     const [passwordState, setPasswordState] = useState({
@@ -121,7 +129,9 @@ const useHooks = () => {
         passwordState,
         handleShowPassword,
         handleHidePassword,
-        setSelected
+        setSelected,
+        modalShow,
+        setModalShow
     }
 }
 
