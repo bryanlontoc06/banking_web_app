@@ -3,6 +3,12 @@
     flex-direction: column;
     padding: 1rem;
     width: 100%;
+    overflow-y: scroll;
+    height: 80vh;
+}
+
+.users-container::-webkit-scrollbar { /* WebKit */   
+    display: none;
 }
 
 button {
@@ -143,6 +149,7 @@ table.table {
     overflow-x: auto;
     display: block;    
 }
+
 @media (min-width: 768px) {
     table.table {
         overflow-x: unset;
@@ -190,3 +197,4 @@ table.table {
 .no-user-available {
     
 }
+

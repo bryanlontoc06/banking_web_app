@@ -4,6 +4,7 @@ import {
     ContactInfo
 } from './component';
 import ButtonComponent from './ButtonComponent';
+import "./style.css"
 
 function TableComponent({setCurrentSelectedData, handleDeleteUser, users}) {
     return (
