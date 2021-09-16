@@ -18,7 +18,7 @@ const Index = (props) => {
             </div>
         <div className="dashboard-container">            
             <table className="table">
-                <thead className="table-dark table-header">
+                <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Account No.</th>

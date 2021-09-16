@@ -38,7 +38,7 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
             </div>
             <div className="table-container">
              <table className="table">
-                <thead className="table-dark table-header">
+                <thead className="table-light table-header">
                     <tr>
                         <th scope="col">Acct #</th>
                         <th scope="col">First name</th>
