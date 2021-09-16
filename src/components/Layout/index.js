@@ -20,6 +20,7 @@ import Deposits from '../Dashboard/Deposits'
 import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
 import bankLogo from '../../assets/bdpi.png'
+import defaultProfPic from '../../assets/blank_image.png'
 import useHooks from './hooks'
 import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
@@ -37,8 +38,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
 
-
-
 const Index = () => {
     const {
         usernameInput,
@@ -48,6 +47,7 @@ const Index = () => {
         selected,
         isAdmin,
         loginAccount,
+        setLoginAccount,
         admin,
         setAdmin,
         historiesSelected,
@@ -57,7 +57,11 @@ const Index = () => {
         matchesMD,
         users,
         setUsers,
-        isUser
+        isUser,
+        passwordState,
+        handleShowPassword,
+        handleHidePassword,
+        setSelected        
     } = useHooks();
 
     return (
@@ -172,6 +176,7 @@ const Index = () => {
                     loginAccount={loginAccount}
                     handleSelectedMenu={handleSelectedMenu}
                     handleLogout={handleLogout}
+                    defaultProfPic={defaultProfPic}
                 /> : ''}
         </div>
          : 
@@ -218,7 +223,10 @@ const Index = () => {
             <>
                 <div className="routes-container">
                 <Route path="/" exact component={HomeComponent}>
-                    <HomeComponent />
+                    <HomeComponent
+                    setSelected={setSelected}
+                    isAdmin={isAdmin}
+                     />
                 </Route>
             {isAdmin &&
                 <Route path="/users" exact  component={UsersComponent}>
@@ -247,7 +255,7 @@ const Index = () => {
                     <Transfers loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/profile" exact  component={Profile}>
-                    <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
+                    <Profile defaultProfPic={defaultProfPic} loginAccount={loginAccount} setLoginAccount={setLoginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
                 </Route>
                 </div>
             </>
@@ -265,6 +273,9 @@ const Index = () => {
                 passwordInput={passwordInput}
                 setPasswordInput={setPasswordInput}
                 handleCheckUser={handleCheckUser}
+                passwordState={passwordState}
+                handleShowPassword={handleShowPassword}
+                handleHidePassword={handleHidePassword}
             /> }     
         </Router>
     </>

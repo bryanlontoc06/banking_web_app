@@ -1,14 +1,9 @@
 .users-container {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 100%;
-    overflow-y: scroll;
     height: 80vh;
-}
-
-.users-container::-webkit-scrollbar { /* WebKit */   
-    display: none;
 }
 
 button {
@@ -51,9 +46,9 @@ button {
     width: 100%;
 }
 
-.title {
+/* .title {
     padding: 0rem 1rem;
-}
+} */
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -198,3 +193,17 @@ table.table {
     
 }
 
+.table-container {   
+    overflow-y: scroll;    
+    padding: 0
+}
+
+.table-container::-webkit-scrollbar { /* WebKit */   
+    display: none;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+    background: #ffff
+}

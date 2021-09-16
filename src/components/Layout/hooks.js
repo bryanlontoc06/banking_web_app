@@ -86,6 +86,18 @@ const useHooks = () => {
         setSelected(0)
     }
 
+    const [passwordState, setPasswordState] = useState({
+        password: false,
+    })
+
+    const handleShowPassword = (bool) => {
+        setPasswordState({password: bool})
+    }
+
+    const handleHidePassword = (bool) => {
+        setPasswordState({password: bool})
+    }
+
     return {
         usernameInput,
         setUsernameInput,
@@ -106,6 +118,10 @@ const useHooks = () => {
         matchesMD,
         users,
         setUsers,
+        passwordState,
+        handleShowPassword,
+        handleHidePassword,
+        setSelected
     }
 }
 

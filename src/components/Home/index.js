@@ -4,11 +4,10 @@ import phone from "../../assets/phone.svg"
 import revenue from "../../assets/revenue.svg"
 import security from "../../assets/security.svg"
 import feedback from "../../assets/feedback.svg"
-const Index = () => {    
+import { Link } from "react-router-dom";
 
-
+const Index = ({setSelected, isAdmin}) => {
     
-
     return (
       <>
         {/* <h1>Homepage</h1> */}
@@ -20,7 +19,13 @@ const Index = () => {
         <object className="svg" data={cc} width="auto" height="auto"> </object>
          <div className="card-body">
         <h5 className="card-title">Open and manage accounts with ease.</h5>
-        <span style={{display: "flex", justifyContent: "space-between"}}><p className="card-text">No need to drop by a branch.</p><a href="#test" className="btn btn-primary">Get started!</a></span>
+        
+        <span style={{display: "flex", justifyContent: "space-between"}}><p className="card-text">No need to drop by a branch.</p>
+        <Link
+        to={isAdmin ? "/users" : "/transactions"}>
+        <button onClick={()=>setSelected(isAdmin ? 4 : 5)} className="btn btn-primary">Get started!</button></Link>
+        </span>
+        
         {/* <p className="card-text">No need to drop by a branch.</p> */}
         </div>
         </div>        
