@@ -19,6 +19,7 @@ import Deposits from '../Dashboard/Deposits'
 import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
 import bankLogo from '../../assets/bdpi.png'
+import defaultProfPic from '../../assets/blank_image.png'
 import useHooks from './hooks'
 import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
@@ -159,6 +160,7 @@ const Index = () => {
                     loginAccount={loginAccount}
                     handleSelectedMenu={handleSelectedMenu}
                     handleLogout={handleLogout}
+                    defaultProfPic={defaultProfPic}
                 /> : ''}
         </div>
          : 
@@ -228,7 +230,7 @@ const Index = () => {
                     <Transfers loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/profile" exact  component={Profile}>
-                    <Profile loginAccount={loginAccount} setLoginAccount={setLoginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
+                    <Profile defaultProfPic={defaultProfPic} loginAccount={loginAccount} setLoginAccount={setLoginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
                 </Route>
                 </div>
             </>

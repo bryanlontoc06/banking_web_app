@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './style.css'
 
 const Index = (props) => {
-    const {setLoginAccount, loginAccount, admin, setAdmin, users, setUsers} = props;
+    const {setLoginAccount, loginAccount, admin, setAdmin, users, setUsers, defaultProfPic} = props;
 
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
@@ -80,7 +80,7 @@ const Index = (props) => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={loginAccount[0].thumbnail_url || 'https://bootdey.com/img/Content/avatar/avatar6.png'} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
+                                    <img src={loginAccount[0].thumbnail_url || defaultProfPic} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
                                     <div className="mt-3">
                                         <h4>{loginAccount[0].first_name + " " +loginAccount[0].last_name}</h4>
                                         <p className="text-secondary mb-1">{loginAccount[0].role}</p>

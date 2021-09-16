@@ -22,7 +22,7 @@ const Index = ()  => {
       handleTransfer,           
       modalDetailsAlert,      
       userSelected,
-      matchesLG,
+      matchesXL,
       withdrawMessage,
       depositMessage,
     } = useHooks()
@@ -32,8 +32,8 @@ const Index = ()  => {
             <div className="container-fluid">                
                     <div>
                     <div className="modal-header">                    
-                    <div className="col-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
-                    {matchesLG && <div className="col-6"><h5 className="modal-title">Transactions</h5></div>}
+                    <div className="col-12 col-lg-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
+                    {matchesXL && <div className="col-6"><h5 className="modal-title">Transactions</h5></div>}
                     </div>                                        
                 <div className="flex-container">                
                     <div className="modal-body">
@@ -134,12 +134,12 @@ const Index = ()  => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-6 col-md-12" style={{paddingTop: "1rem"}}>
-                        <div className="title">
-                            
+                    <div className="col-xl-6 col-md-12 user-transaction-section" style={{paddingTop: "1rem"}}>
+                        <div className="title modal-header">
+                            {!matchesXL && <h5 className="modal-title">Transactions</h5>}
                         </div>
                         <div>
-                            {!matchesLG && <h5>Transactions</h5>}
+                            
                             <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <InputComponent

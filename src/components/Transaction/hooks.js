@@ -14,7 +14,7 @@ const useHooks = () => {
         setDepositHistories,
         setTransfersHistories} = useContext(AppContext)
 
-    const matchesLG = useMediaQuery('(min-width: 1024px)')
+    const matchesXL = useMediaQuery('(min-width: 1240px)')
     const [users, setUsers] = useLocalStorage('usersData', [])
     const [loginAccount, setLoginAccount] = useSessionStorage('loginAccount', []);
     const [currentSelectedData, setCurrentSelectedData] = useState(loginAccount[0])
@@ -256,7 +256,7 @@ const useHooks = () => {
         closeModalComponent,
         loginAccount,
         userSelected,
-        matchesLG,
+        matchesXL,
         withdrawMessage,
         depositMessage
 
