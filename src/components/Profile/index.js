@@ -112,7 +112,7 @@ const Index = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 user-info-details">
                         <div className="card">
                             <div className="card-body">
                             <div className="row mb-3">
