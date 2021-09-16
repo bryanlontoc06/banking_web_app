@@ -23,12 +23,12 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                     <ButtonComponent
                         handleFunction = {insertUserData}                               
                         btnDescription = {"Load Data"} 
-                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}                                    
+                        btnClass={loadDummyData ? "btn btn-secondary load-user-btn" : "btn btn-primary load-user-btn"}                                    
                     />
                     <ButtonComponent
                         handleFunction={deleteDummyAccounts}
                         btnDescription = {"Delete Data"}
-                        btnClass={loadDummyData ? "btn btn-primary": "btn btn-secondary"}                                     
+                        btnClass={loadDummyData ? "btn btn-primary delete-dummy-btn": "btn btn-secondary delete-dummy-btn"}                                     
                     />
 
                 </div>
