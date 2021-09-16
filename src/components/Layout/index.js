@@ -35,8 +35,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
 
-
-
 const Index = () => {
     const {
         usernameInput,
@@ -56,7 +54,10 @@ const Index = () => {
         matchesMD,
         users,
         setUsers,
-        isUser
+        isUser,
+        passwordState,
+        handleShowPassword,
+        handleHidePassword
     } = useHooks();
 
     return (
@@ -245,6 +246,9 @@ const Index = () => {
                 passwordInput={passwordInput}
                 setPasswordInput={setPasswordInput}
                 handleCheckUser={handleCheckUser}
+                passwordState={passwordState}
+                handleShowPassword={handleShowPassword}
+                handleHidePassword={handleHidePassword}
             /> }     
         </Router>
     </>
