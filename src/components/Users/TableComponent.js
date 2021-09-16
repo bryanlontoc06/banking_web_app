@@ -4,6 +4,7 @@ import {
     ContactInfo,
     PersonPlus
 } from './component';
+
 import ButtonComponent from './ButtonComponent';
 
 function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insertUserData, loadDummyData, searchHandler, deleteDummyAccounts, handleGenerateAccountNo, searchTerm}) {
@@ -35,8 +36,9 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
                 </div>
             </div>
+            <div className="table-container">
              <table className="table">
-                <thead className="table-dark">
+                <thead className="table-dark table-header">
                     <tr>
                         <th scope="col">Acct #</th>
                         <th scope="col">First name</th>
@@ -47,6 +49,7 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                         <th scope="col" className="action-col">Action</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     {users.length > 0 ?
                     users.map((data, index) => {
@@ -78,7 +81,9 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                         )
                     }) : <th className="no-user-available" colSpan="100%"><h3>No User Available</h3></th>}
                 </tbody>
+                
             </table>
+            </div>
         </>
     )
 }

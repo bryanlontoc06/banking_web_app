@@ -120,7 +120,8 @@ const useHooks = () => {
         setUsers,
         passwordState,
         handleShowPassword,
-        handleHidePassword
+        handleHidePassword,
+        setSelected
     }
 }
 
