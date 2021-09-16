@@ -1,8 +1,7 @@
 import React from 'react'
 
 
-const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout, defaultProfPic}) => {
-    console.log({defaultProfPic})
+const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout, defaultProfPic}) => {    
     return (
         <>
              <div className="dropdown">

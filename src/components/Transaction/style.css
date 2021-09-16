@@ -20,6 +20,10 @@ h5 {
         display: flex;
         flex-direction: column;
     }
+    .user-row {
+        display: flex;
+        flex-direction: column;
+    }
     
 }
 
@@ -39,6 +43,7 @@ h5 {
 .modal-title {
     padding: 1rem 1rem
 }
+
 
 
 
