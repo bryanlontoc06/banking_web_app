@@ -1,44 +1,45 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-const LoginModalComponent = ({loginAccount, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser, passwordState, handleShowPassword, handleHidePassword}) => {
-    
-    
-
+const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser, passwordState, handleShowPassword, handleHidePassword}) => {
     
     return (
         <>
-             <div className={`modal fade ${loginAccount.length === 0 && 'show'}`} id="exampleModalLive" tabIndex="-1" aria-labelledby="exampleModalLiveLabel" style={{display: loginAccount.length === 0 && "block"}} aria-modal="true" role="dialog">
-                <div className="login-modal-dialog modal-dialog modal-dialog-centered">
-                    <div className="modal-content login-modal">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
-                    </div>
-                    <div className="modal-body">
-                        <div className="account-row input-group mb-3">
-                            <span>Username</span>
-                            <input type="text" className="login form-control" placeholder="Username" onChange={(e) => setUsernameInput(e.target.value)} value={usernameInput}/>
+            <Modal
+                show={modalShow}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                backdrop="static"
+                keyboard={false}
+            >
+            <Modal.Header>
+                <Modal.Title id="contained-modal-title-vcenter" className="login-modal-title-container">
+                    <h5 className="modal-title log-in-account-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="account-row input-group mb-3">
+                    <span>Username</span>
+                    <input type="text" className="login form-control" placeholder="Username" onChange={(e) => setUsernameInput(e.target.value)} value={usernameInput}/>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-group" id="show_hide_password">
+                        <input placeholder="Password" class="form-control" type={passwordState.password? 'text':"password"} onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
+                        <div class="input-group-addon" onMouseDown={() => handleShowPassword(true)} onMouseUp={() => handleHidePassword(false)}>
+                        {passwordState.password? <i class="fa fa-eye-slash" aria-hidden="true"></i>:
+                            <i class="fa fa-eye" aria-hidden="true" ></i>}
                         </div>
-                        {/* <div className="account-row input-group mb-3">
-                            <span>Password</span>
-                            <input type="password" className="login form-control" placeholder="Password" onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
-                        </div> */}
-                        <div class="form-group">
-                            <label>Password</label>
-                            <div class="input-group" id="show_hide_password">
-                                <input placeholder="Password" class="form-control" type={passwordState.password? 'text':"password"} onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
-                                <div class="input-group-addon" onMouseDown={() => handleShowPassword(true)} onMouseUp={() => handleHidePassword(false)}>
-                                {passwordState.password? <i class="fa fa-eye-slash" aria-hidden="true"></i>:
-                                    <i class="fa fa-eye" aria-hidden="true" ></i>}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={() => handleCheckUser()}>Login</button>
-                    </div>
                     </div>
                 </div>
-            </div>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => handleCheckUser()}>Login</Button>
+            </Modal.Footer>
+            </Modal>
         </>
     )
 }

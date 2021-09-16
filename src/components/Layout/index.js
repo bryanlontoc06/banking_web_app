@@ -59,7 +59,9 @@ const Index = () => {
         passwordState,
         handleShowPassword,
         handleHidePassword,
-        setSelected        
+        setSelected,
+        modalShow,
+        setModalShow   
     } = useHooks();
 
     return (
@@ -257,6 +259,8 @@ const Index = () => {
                 passwordState={passwordState}
                 handleShowPassword={handleShowPassword}
                 handleHidePassword={handleHidePassword}
+                modalShow={modalShow}
+                setModalShow={setModalShow}
             /> }     
         </Router>
     </>
