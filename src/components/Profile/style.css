@@ -22,3 +22,22 @@ body{
 .container {
     padding-top: 1rem;
 }
+
+.show-hide-password-btn{
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .user-info-details {
+        overflow-y: auto;
+        height: 45vh;
+    }
+}
+
+@media (min-width: 1024px) {
+    .user-info-details {
+        overflow-y: unset;
+        height: unset;
+    }
+}

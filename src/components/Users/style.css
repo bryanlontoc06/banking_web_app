@@ -1,8 +1,9 @@
 .users-container {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    /* padding: 1rem; */
     width: 100%;
+    height: 80vh;
 }
 
 button {
@@ -45,9 +46,9 @@ button {
     width: 100%;
 }
 
-.title {
+/* .title {
     padding: 0rem 1rem;
-}
+} */
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -148,6 +149,34 @@ table.table {
         overflow-x: unset;
         display: block;
     }
+
+    .add-client-btns {
+        display: flex;
+        margin-bottom: 0.5rem;
+        justify-content: unset;
+        gap: 1rem;
+        flex-direction: unset !important;
+    }
+
+    .add-user-btn {
+        width: unset !important;
+        margin-bottom: unset !important;
+    }
+
+    .load-user-btn {
+        width: unset !important;
+        margin-bottom: unset !important;
+    }
+    
+    .delete-dummy-btn {
+        width: unset !important;
+        margin-bottom: unset !important;
+    }
+
+    .btns-n-search {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 @media (min-width: 1024px) {
     table.table {
@@ -157,12 +186,25 @@ table.table {
 
 .add-user-btn {
     width: 9rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.load-user-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.delete-dummy-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 .add-client-btns {
     display: flex;
     margin-bottom: 0.5rem;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .btns-n-search {
@@ -173,20 +215,21 @@ table.table {
     margin-right: 0rem !important;
 }
 
-@media (min-width: 768px) {
-    .add-client-btns {
-        display: flex;
-        margin-bottom: 0.5rem;
-        justify-content: unset;
-        gap: 1rem;
-    }
-
-    .btns-n-search {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
 .no-user-available {
     
+}
+
+.table-container {   
+    overflow-y: scroll;    
+    padding: 0
+}
+
+.table-container::-webkit-scrollbar { /* WebKit */   
+    display: none;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+    background: #ffff
 }

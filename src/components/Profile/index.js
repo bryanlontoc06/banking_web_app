@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import './style.css'
 
 const Index = (props) => {
-    const {loginAccount, admin, setAdmin, users, setUsers} = props;
+    const {setLoginAccount, loginAccount, admin, setAdmin, users, setUsers, defaultProfPic} = props;
 
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
@@ -11,31 +11,64 @@ const Index = (props) => {
 
     const handleSaveNewPassword = () => {
         let enPassword = Buffer.from(oldPassword).toString('base64');
-        // console.log({loginAccount})
-        // console.log({enPassword})
         if(loginAccount[0].password === enPassword) {
-            if(newPassword === retypePassword) {
-                let enPasswordNewPassword = Buffer.from(newPassword).toString('base64');
-                let enPasswordRetypePassword = Buffer.from(retypePassword).toString('base64');
-                setNewPassword(enPasswordRetypePassword)
-                let findLoginAccount = admin.find((item) => item.id === loginAccount[0].id)
-                let findLoginAccountUsers = users.find((item) => item.account_no === loginAccount[0].account_no)
-                if(findLoginAccount) {
-                    setAdmin([...admin], findLoginAccount.password = enPasswordNewPassword)
-                    setOldPassword('')
-                    setNewPassword('')
-                    setRetypePassword('')
-                } 
-                else if (findLoginAccountUsers) {
-                    setUsers([...users], findLoginAccountUsers.password = enPasswordNewPassword)
-                    setOldPassword('')
-                    setNewPassword('')
-                    setRetypePassword('')
+            if(newPassword){
+                if(newPassword === retypePassword) {
+                    let enPasswordNewPassword = Buffer.from(newPassword).toString('base64');
+                    let enPasswordRetypePassword = Buffer.from(retypePassword).toString('base64');
+                    setNewPassword(enPasswordRetypePassword)
+                    let findLoginAccount = admin.find((item) => item.id === loginAccount[0].id)
+                    let findLoginAccountUsers = users.find((item) => item.account_no === loginAccount[0].account_no)
+                    if(findLoginAccount) {
+                        setAdmin([...admin], findLoginAccount.password = enPasswordNewPassword)
+                        setLoginAccount([...loginAccount], loginAccount[0].password = enPasswordNewPassword)
+                        setOldPassword('')
+                        setNewPassword('')
+                        setRetypePassword('')
+                        alert('Password changed succesfully')
+                    } 
+                    else if (findLoginAccountUsers) {
+                        setUsers([...users], findLoginAccountUsers.password = enPasswordNewPassword)
+                        setLoginAccount([...loginAccount], loginAccount[0].password = enPasswordNewPassword)
+                        setOldPassword('')
+                        setNewPassword('')
+                        setRetypePassword('')
+                        alert('Password changed succesfully')
+                    }
+                } else {
+                    alert(`Password did not match`)
                 }
-                else {
-                    alert(`Account did not match`)
-                }
+            } else {
+                alert('Please type a new password.')
             }
+        } else {
+            alert('Old Password is incorrect')
+        }
+    }
+    
+    const [passwordState, setPasswordState] = useState({
+        oldPassword: false,
+        newPassword: false,
+        retypePassword: false,
+    })
+
+    const handleShowPassword = (password, bool) => {
+        if(password === 'oldPassword') {
+            setPasswordState({oldPassword: bool})
+        } else if(password === 'newPassword') {
+            setPasswordState({newPassword: bool})
+        } else if(password === 'retypePassword') {
+            setPasswordState({retypePassword: bool})
+        }
+    }
+
+    const handleHidePassword = (password, bool) => {
+        if(password === 'oldPassword') {
+            setPasswordState({oldPassword: bool})
+        } else if(password === 'newPassword') {
+            setPasswordState({newPassword: bool})
+        } else if(password === 'retypePassword') {
+            setPasswordState({retypePassword: bool})
         }
     }
 
@@ -47,7 +80,7 @@ const Index = (props) => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={loginAccount[0].thumbnail_url || 'https://bootdey.com/img/Content/avatar/avatar6.png'} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
+                                    <img src={loginAccount[0].thumbnail_url || defaultProfPic} alt="Admin" className="rounded-circle p-1 bg-primary" width="110"/>
                                     <div className="mt-3">
                                         <h4>{loginAccount[0].first_name + " " +loginAccount[0].last_name}</h4>
                                         <p className="text-secondary mb-1">{loginAccount[0].role}</p>
@@ -79,7 +112,7 @@ const Index = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-8 user-info-details">
                         <div className="card">
                             <div className="card-body">
                             <div className="row mb-3">
@@ -143,21 +176,24 @@ const Index = (props) => {
 
                             <div className="modal-body">
                                 <div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="floatingOldPassword" placeholder="Old Password" onChange={(e) => setOldPassword(e.target.value)} value={oldPassword} />
+                                    <input type={passwordState.oldPassword? 'text' : 'password'}  className="form-control" id="floatingOldPassword" placeholder="Old Password" onChange={(e) => setOldPassword(e.target.value)} value={oldPassword} />
                                     <label>Old Password</label>
+                                    <button className="btn btn-primary show-hide-password-btn" onMouseDown={() => handleShowPassword('oldPassword', true)} onMouseUp={() => handleHidePassword('oldPassword', false)}>{passwordState.oldPassword? 'Hide old password' : 'Show old password'}</button>
                                 </div>  
                                 <div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="floatingNewPassword" placeholder="New Password" onChange={(e) => setNewPassword(e.target.value)} value={newPassword}/>
+                                    <input type={passwordState.newPassword? 'text' : 'password'} className="form-control" id="floatingNewPassword" placeholder="New Password" onChange={(e) => setNewPassword(e.target.value)} value={newPassword}/>
+                                    <button className="btn btn-primary show-hide-password-btn" onMouseDown={() => handleShowPassword('newPassword', true)} onMouseUp={() => handleHidePassword('newPassword', false)}>{passwordState.newPassword? 'Hide old password' : 'Show old password'}</button>
                                     <label>New Password</label>
                                 </div> 
                                 <div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="floatingRetypePassword" placeholder="Retype Password" onChange={(e) => setRetypePassword(e.target.value)} value={retypePassword}/>
+                                    <input type={passwordState.retypePassword? 'text' : 'password'} className="form-control" id="floatingRetypePassword" placeholder="Retype Password" onChange={(e) =>setRetypePassword(e.target.value)} value={retypePassword}/>
+                                    <button className="btn btn-primary show-hide-password-btn" onMouseDown={() => handleShowPassword('retypePassword', true)} onMouseUp={() => handleHidePassword('retypePassword', false)}>{passwordState.retypePassword? 'Hide old password' : 'Show old password'}</button>
                                     <label>Retype Password</label>
                                 </div> 
                             </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ModalForgotPassword" onClick={() => handleSaveNewPassword()}>Save</button>
+                                    <button type="button" className="btn btn-primary" data-bs-dismiss={'modal'} data-bs-toggle={"modal"} data-bs-target={"#ModalForgotPassword"} onClick={() => handleSaveNewPassword()}>Save</button>
                                 </div>
                             </div>
                         </div>

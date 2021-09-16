@@ -3,7 +3,6 @@ import {
     PersonPlus,
 } from './component';
 
-import ButtonComponent from './ButtonComponent';
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
 import ModalDetailsComponent from './ModalDetailsComponent';
@@ -62,38 +61,24 @@ const Index = () => {
         loadDummyData,
         searchTerm,
         searchResults,
-        searchHandler
+        searchHandler,
+        deleteDummyAccounts
     } = useHooks();
 
     
 
     return (
-        <div className="users-container">       
-            <div className='btns-n-search'>
-                <div className="add-client-btns">
-                    <ButtonComponent
-                        handleFunction = {handleGenerateAccountNo}
-                        iconName = {<PersonPlus/>}                
-                        btnDescription = {" Add Client"}
-                        btnClass= {"btn btn-primary add-user-btn"}
-                        dbsToggle={"modal"}
-                        dbsTarget={"#exampleModal"}
-                    />
-                    <ButtonComponent
-                        handleFunction = {insertUserData}                               
-                        btnDescription = {"Load Data"} 
-                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}
-                                    
-                    />
-                </div>
-                <div class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
-                </div>
-            </div>
+        <div className="users-container">            
             <TableComponent
                 handleDeleteUser={handleDeleteUser}
                 users={searchTerm.length < 1 ? users : searchResults}
                 setCurrentSelectedData={setCurrentSelectedData}
+                insertUserData={insertUserData}
+                loadDummyData={loadDummyData}
+                searchHandler={searchHandler}
+                searchTerm={searchTerm}
+                deleteDummyAccounts={deleteDummyAccounts}
+                handleGenerateAccountNo={handleGenerateAccountNo}
             />       
             {/* <!-- Modal --> */}
             <ModalComponent

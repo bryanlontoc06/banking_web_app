@@ -22,7 +22,7 @@ const Index = ()  => {
       handleTransfer,           
       modalDetailsAlert,      
       userSelected,
-      matchesLG,
+      matchesXL,
       withdrawMessage,
       depositMessage,
     } = useHooks()
@@ -32,8 +32,8 @@ const Index = ()  => {
             <div className="container-fluid">                
                     <div>
                     <div className="modal-header">                    
-                    <div className="col-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
-                    {matchesLG && <div className="col-6"><h5 className="modal-title">Transactions</h5></div>}
+                    <div className="col-12 col-lg-6"><h5 className="modal-title" id="exampleModalLabel">User Information</h5></div>
+                    {matchesXL && <div className="col-6"><h5 className="modal-title">Transfer Funds</h5></div>}
                     </div>                                        
                 <div className="flex-container">                
                     <div className="modal-body">
@@ -134,13 +134,11 @@ const Index = ()  => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-6 col-md-12" style={{paddingTop: "1rem"}}>
-                        <div className="title">
-                            
-                        </div>
+                    <div className="col-xl-6 col-md-12 user-transaction-section">                        
+                            {!matchesXL && <h5 className="modal-title">Transfer Funds</h5>}
                         <div>
-                            {!matchesLG && <h5>Transactions</h5>}
-                            <div className="transaction-body user-row">
+                            
+                            {/* <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <InputComponent
                                         inputType={"number"}
@@ -167,9 +165,9 @@ const Index = ()  => {
                                 {modalDetailsAlert.successful && <p className="success-message">Withdrawn {convertToMoney(withdrawMessage)} Successfully!</p>}
                                 {modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeWithdraw && <p className="error-message">Amount withdrawn cannot be negative.</p>}                                
-                            </div>
+                            </div> */}
 
-                            <div className="transaction-body user-row">
+                            {/* <div className="transaction-body user-row">
                                 <div className="transaction form-floating mb-3">
                                     <InputComponent
                                         inputType={"number"}
@@ -187,15 +185,15 @@ const Index = ()  => {
                                     handleFunction={() => handleDeposit()}
                                     btnDescription={"Deposit"}
                                 />
-                            </div>
+                            </div> */}
 
-                            <div style={{marginBottom: '1rem'}}>
+                            {/* <div style={{marginBottom: '1rem'}}>
                                 {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposited {convertToMoney(depositMessage)} Successfully!</p>}
                                 {modalDetailsAlert.enterAnAmountToDeposit && <p className="enter-an-amount-message">Please enter an Amount to Deposit</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeDeposit && <p className="error-message">Amount deposited cannot be negative.</p>}
-                            </div>
-
-                            <h6 className="modal-title" >Transfer Funds</h6>
+                            </div> */}
+                            {/* <h6 className="modal-title" >Transfer Funds</h6> */}
+                            
                             <p>To</p>
                             <div className="transaction-body user-row">
                                 <div className="transaction form mb-3">

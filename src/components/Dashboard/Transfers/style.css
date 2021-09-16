@@ -4,10 +4,17 @@
     padding: 0 1rem 1rem;
     width: 100%;
     overflow-y: scroll;
-    height: 80vh;
+    height: 70vh;
 }
 
-.dashboard-container::-webkit-scrollbar { /* WebKit */   
+@media (min-width: 920px) {
+    .dashboard-container {
+        height: 70vh !important;
+    }
+}
+
+.dashboard-container::-webkit-scrollbar { 
+    /* WebKit */   
     display: none;
 }
 
@@ -25,5 +32,5 @@ h3 {
 .table-header {
     position: sticky;
     top: 0;
-    background: #ffff
+    background-color: #f7f7ff !important;
 }
