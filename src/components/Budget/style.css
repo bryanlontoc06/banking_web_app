@@ -1,9 +1,8 @@
 .users-container {
     display: flex;
     flex-direction: column;
-    /* padding: 1rem; */
+    padding: 1rem;
     width: 100%;
-    height: 80vh;
 }
 
 button {
@@ -33,7 +32,7 @@ button {
     gap: 1rem;
 }
 
-.read-only-user-detail {
+.read-only-user-detail { 
     pointer-events: none;
 }
 
@@ -46,20 +45,19 @@ button {
     width: 100%;
 }
 
-/* .title {
+.title {
     padding: 0rem 1rem;
-} */
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 .transaction {
@@ -85,7 +83,7 @@ p {
     height: calc(3.5rem + 2px);
 }
 
-.submit-btn {
+.submit-btn { 
     color: #fff;
     background-color: #0d6efd;
     border-color: #0d6efd;
@@ -113,7 +111,7 @@ p {
 }
 
 .success-message {
-    color: green;
+   color: green;
 }
 
 .enter-an-amount-message {
@@ -143,59 +141,28 @@ div#contained-modal-title-vcenter {
 
 table.table {
     overflow-x: auto;
-    display: block;
+    display: block;    
 }
-
 @media (min-width: 768px) {
     table.table {
         overflow-x: unset;
         display: block;
     }
-
-    .add-client-btns {
-        display: flex;
-        margin-bottom: 0.5rem;
-        justify-content: unset;
-        gap: 1rem;
-        flex-direction: unset !important;
-    }
-
-    .add-user-btn {
-        width: unset !important;
-        margin-bottom: unset !important;
-    }
-
-    .load-user-btn {
-        width: unset !important;
-        margin-bottom: unset !important;
-    }
-    
-    .delete-dummy-btn {
-        width: unset !important;
-        margin-bottom: unset !important;
-    }
-
-    .btns-n-search {
-        display: flex;
-        justify-content: space-between;
-    }
 }
-
 @media (min-width: 1024px) {
     table.table {
-        display: inline-table;        
+        display: inline-table;
     }
 }
-.user-btn {    
-    width: 100%;
+
+.add-user-btn {
+    width: 9rem;
 }
 
 .add-client-btns {
     display: flex;
     margin-bottom: 0.5rem;
-
-    flex-direction: column;
-    gap: 1rem;
+    justify-content: space-between;
 }
 
 .btns-n-search {
@@ -210,48 +177,20 @@ table.table {
     .add-client-btns {
         display: flex;
         margin-bottom: 0.5rem;
+        justify-content: unset;
         gap: 1rem;
-        flex-direction: unset;
-    }
-
-    .user-btn {
-        width: 9rem;
     }
 
     .btns-n-search {
         display: flex;
         justify-content: space-between;
-        flex-direction: column;
     }
 }
 
-@media screen and (min-width: 1240px) {
-        .btns-n-search {
-            flex-direction: row;
-        }
-
+.no-user-available {
+    
 }
 
-
-.table-container {
-    overflow-y: scroll;
-    padding: 0
-}
-
-.table-container::-webkit-scrollbar {
-    /* WebKit */
-    display: none;
-}
-
-.table-header {
-    position: sticky;
-    top: 0;
-    background: #f7f7ff
-}
-
-
-@media (min-width: 480px) {
-    .modal-details-component {
-        max-width: 435px !important;
-    }
+.add-expense-btn {
+    width: 12rem;
 }

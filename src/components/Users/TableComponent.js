@@ -6,6 +6,7 @@ import {
 } from './component';
 
 import ButtonComponent from './ButtonComponent';
+import "./style.css"
 
 function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insertUserData, loadDummyData, searchHandler, deleteDummyAccounts, handleGenerateAccountNo, searchTerm}) {
     return (
@@ -16,24 +17,24 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                         handleFunction = {handleGenerateAccountNo}
                         iconName = {<PersonPlus/>}                
                         btnDescription = {" Add Client"}
-                        btnClass= {"btn btn-primary add-user-btn"}
+                        btnClass= {"btn btn-primary user-btn"}
                         dbsToggle={"modal"}
                         dbsTarget={"#exampleModal"}
                     />
                     <ButtonComponent
                         handleFunction = {insertUserData}                               
-                        btnDescription = {"Load Test Data"} 
-                        btnClass={loadDummyData ? "btn btn-secondary load-user-btn" : "btn btn-primary load-user-btn"}                                                                                  
+                        btnDescription = {"Load Data"} 
+                        btnClass={loadDummyData ? "btn btn-secondary user-btn" : "btn btn-primary user-btn"}                                    
                     />
                     <ButtonComponent
                         handleFunction={deleteDummyAccounts}
-                        btnDescription = {"Delete Test Data"}
-                        btnClass={loadDummyData ? "btn btn-primary delete-dummy-btn": "btn btn-secondary delete-dummy-btn"}                                                             
+                        btnDescription = {"Delete Data"}
+                        btnClass={loadDummyData ? "btn btn-primary user-btn": "btn btn-secondary user-btn"}                                
                     />
 
                 </div>
-                <div class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
+                <div className="d-flex user-input">
+                    <input className="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
                 </div>
             </div>
             <div className="table-container">
