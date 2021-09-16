@@ -58,7 +58,8 @@ const Index = () => {
         isUser,
         passwordState,
         handleShowPassword,
-        handleHidePassword
+        handleHidePassword,
+        setSelected        
     } = useHooks();
 
     return (
@@ -207,7 +208,9 @@ const Index = () => {
             <>
                 <div className="routes-container">
                 <Route path="/" exact component={HomeComponent}>
-                    <HomeComponent />
+                    <HomeComponent
+                    setSelected={setSelected}
+                     />
                 </Route>
             {isAdmin &&
                 <Route path="/users" exact  component={UsersComponent}>
