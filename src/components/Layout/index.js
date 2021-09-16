@@ -10,7 +10,8 @@ import {
     OutlineDashboard,
     UsersIcon,
     LogIn,
-    TransactionIcon
+    TransactionIcon,
+    StatisticsIcon
 } from './components'
 import HomeComponent from '../Home'
 import UsersComponent from '../Users'
@@ -24,6 +25,7 @@ import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
 import UserSectionComponent from './UserSectionComponent';
 import TransactionComponent from '../Transaction'
+import BudgetComponent from '../Budget'
 import { Link } from "react-router-dom";
 
 
@@ -138,17 +140,30 @@ const Index = () => {
                         </li> 
                     }
                     {isUser && 
-                        <li>          
-                            <LinkComponent
-                                path={"/transactions"}
-                                handleSelectedMenu={handleSelectedMenu}
-                                selected={selected}
-                                index={5}
-                                hasSpan={true}
-                                Icon={TransactionIcon}
-                                description={"Transactions"}
-                            />
-                        </li>
+                        <>
+                            <li>          
+                                <LinkComponent
+                                    path={"/transactions"}
+                                    handleSelectedMenu={handleSelectedMenu}
+                                    selected={selected}
+                                    index={5}
+                                    hasSpan={true}
+                                    Icon={TransactionIcon}
+                                    description={"Transactions"}
+                                />
+                            </li>
+                            <li>          
+                                <LinkComponent
+                                    path={"/budget"}
+                                    handleSelectedMenu={handleSelectedMenu}
+                                    selected={selected}
+                                    index={6}
+                                    hasSpan={true}
+                                    Icon={StatisticsIcon}
+                                    description={"Budget"}
+                                />
+                            </li>
+                        </>
                     }
                 </ul>
                 <hr/>
@@ -179,6 +194,7 @@ const Index = () => {
                     </NavDropdown>
                     {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}>🧘Users</Link></Nav.Link>}
                     {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''}`}><TransactionIcon />Transactions</Link></Nav.Link>}
+                    {isUser &&  <Nav.Link className={`${selected === 6 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(6)}><Link to="/budget" className={`${selected === 6 ? 'mobile-menus' : ''}`}><TransactionIcon />Budget</Link></Nav.Link>}
 
 
                     <NavDropdown.Divider />
@@ -211,10 +227,14 @@ const Index = () => {
                 </Route>
             }
             {isUser &&
-                <Route path="/transactions" exact  component={TransactionComponent}>
-                    <TransactionComponent 
-                    />
-                </Route>
+                <>
+                    <Route path="/transactions" exact  component={TransactionComponent}>
+                        <TransactionComponent />
+                    </Route>
+                    <Route path="/budget" exact  component={BudgetComponent}>
+                        <BudgetComponent />
+                    </Route>
+                </>
             }
                 <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
                     <Withdrawals loginAccount={loginAccount} isUser={isUser}/>
