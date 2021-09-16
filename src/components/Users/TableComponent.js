@@ -17,24 +17,24 @@ function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insert
                         handleFunction = {handleGenerateAccountNo}
                         iconName = {<PersonPlus/>}                
                         btnDescription = {" Add Client"}
-                        btnClass= {"btn btn-primary add-user-btn"}
+                        btnClass= {"btn btn-primary user-btn"}
                         dbsToggle={"modal"}
                         dbsTarget={"#exampleModal"}
                     />
                     <ButtonComponent
                         handleFunction = {insertUserData}                               
                         btnDescription = {"Load Data"} 
-                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}                                    
+                        btnClass={loadDummyData ? "btn btn-secondary user-btn" : "btn btn-primary user-btn"}                                    
                     />
                     <ButtonComponent
                         handleFunction={deleteDummyAccounts}
                         btnDescription = {"Delete Data"}
-                        btnClass={loadDummyData ? "btn btn-primary": "btn btn-secondary"}                                     
+                        btnClass={loadDummyData ? "btn btn-primary user-btn": "btn btn-secondary user-btn"}                                     
                     />
 
                 </div>
-                <div class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
+                <div className="d-flex user-input">
+                    <input className="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
                 </div>
             </div>
             <div className="table-container">
