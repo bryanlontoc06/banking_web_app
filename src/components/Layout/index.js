@@ -146,30 +146,30 @@ const Index = () => {
                         </li> 
                     }
                     {isUser && 
-                    <>
-                        <li>          
-                            <LinkComponent
-                                path={"/transactions"}
-                                handleSelectedMenu={handleSelectedMenu}
-                                selected={selected}
-                                index={5}
-                                hasSpan={true}
-                                Icon={TransactionIcon}
-                                description={"Transactions"}
-                            />
-                        </li>
-                        <li>          
-                            <LinkComponent
-                                path={"/budget-app"}
-                                handleSelectedMenu={handleSelectedMenu}
-                                selected={selected}
-                                index={6}
-                                hasSpan={true}
-                                Icon={Calculator}
-                                description={"Budget App"}
-                            />
-                        </li>
-                    </>
+                        <>
+                            <li>          
+                                <LinkComponent
+                                    path={"/transactions"}
+                                    handleSelectedMenu={handleSelectedMenu}
+                                    selected={selected}
+                                    index={5}
+                                    hasSpan={true}
+                                    Icon={TransactionIcon}
+                                    description={"Transactions"}
+                                />
+                            </li>
+                            {/* <li>          
+                                <LinkComponent
+                                    path={"/budget"}
+                                    handleSelectedMenu={handleSelectedMenu}
+                                    selected={selected}
+                                    index={6}
+                                    hasSpan={true}
+                                    Icon={StatisticsIcon}
+                                    description={"Budget"}
+                                />
+                            </li> */}
+                        </>
                     }
                 </ul>
                 <hr/>
@@ -202,8 +202,10 @@ const Index = () => {
                     <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}><div className='mobile-links'>Transfers</div></Link></NavDropdown.Item>
                     
                     </NavDropdown>
+
                     {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''} mobile-links`}>🧘Users</Link></Nav.Link>}
                     {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Transactions</Link></Nav.Link>}
+                    {isUser &&  <Nav.Link className={`${selected === 6 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(6)}><Link to="/budget" className={`${selected === 6 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Budget</Link></Nav.Link>}
 
 
                     <NavDropdown.Divider />
