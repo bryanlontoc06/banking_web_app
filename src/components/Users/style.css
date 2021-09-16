@@ -150,6 +150,18 @@ table.table {
         overflow-x: unset;
         display: block;
     }
+
+    .add-client-btns {
+        display: flex;
+        margin-bottom: 0.5rem;
+        justify-content: unset;
+        gap: 1rem;
+    }
+
+    .btns-n-search {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 @media (min-width: 1024px) {
     table.table {
@@ -173,24 +185,6 @@ table.table {
 
 .me-2 {
     margin-right: 0rem !important;
-}
-
-@media (min-width: 768px) {
-    .add-client-btns {
-        display: flex;
-        margin-bottom: 0.5rem;
-        justify-content: unset;
-        gap: 1rem;
-    }
-
-    .btns-n-search {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-.no-user-available {
-    
 }
 
 .table-container {   
