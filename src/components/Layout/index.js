@@ -19,7 +19,7 @@ import Withdrawals from '../Dashboard/Withdrawals'
 import Deposits from '../Dashboard/Deposits'
 import Transfers from '../Dashboard/Transfers'
 import Profile from '../Profile';
-import bankLogo from '../../assets/bdpi.png'
+import bankLogo from '../../assets/blg.png'
 import defaultProfPic from '../../assets/blank_image.png'
 import useHooks from './hooks'
 import LinkComponent from './LinkComponent';
