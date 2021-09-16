@@ -134,10 +134,8 @@ const Index = ()  => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 col-md-12 user-transaction-section" style={{paddingTop: "1rem"}}>
-                        <div className="title modal-header">
+                    <div className="col-xl-6 col-md-12 user-transaction-section">                        
                             {!matchesXL && <h5 className="modal-title">Transactions</h5>}
-                        </div>
                         <div>
                             
                             <div className="transaction-body user-row">

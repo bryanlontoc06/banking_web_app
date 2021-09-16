@@ -11,6 +11,10 @@
     display: none;
 }
 
+.card-title {
+    text-align: left;
+}
+
 .svg {
     background-color: #f7f7ff !important;
 }

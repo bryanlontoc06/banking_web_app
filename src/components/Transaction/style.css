@@ -23,10 +23,15 @@ h5 {
     .flex-container {
         display: flex;
     }    
+    
 }
 
 @media (min-width: 1200px) and (max-width: 1239px) {
     .user-transaction-section {
         width: 100%;
     }
+}
+
+.modal-title {
+    padding: 1rem 1rem
 }
