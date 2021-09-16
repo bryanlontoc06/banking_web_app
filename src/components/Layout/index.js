@@ -10,7 +10,8 @@ import {
     OutlineDashboard,
     UsersIcon,
     LogIn,
-    TransactionIcon
+    TransactionIcon,
+    Calculator
 } from './components'
 import HomeComponent from '../Home'
 import UsersComponent from '../Users'
@@ -24,6 +25,7 @@ import LinkComponent from './LinkComponent';
 import LoginModalComponent from './LoginComponent';
 import UserSectionComponent from './UserSectionComponent';
 import TransactionComponent from '../Transaction'
+import BudgetAppComponent from '../BudgetApp'
 import { Link } from "react-router-dom";
 
 
@@ -138,6 +140,7 @@ const Index = () => {
                         </li> 
                     }
                     {isUser && 
+                    <>
                         <li>          
                             <LinkComponent
                                 path={"/transactions"}
@@ -149,6 +152,18 @@ const Index = () => {
                                 description={"Transactions"}
                             />
                         </li>
+                        <li>          
+                            <LinkComponent
+                                path={"/budget-app"}
+                                handleSelectedMenu={handleSelectedMenu}
+                                selected={selected}
+                                index={6}
+                                hasSpan={true}
+                                Icon={Calculator}
+                                description={"Budget App"}
+                            />
+                        </li>
+                    </>
                     }
                 </ul>
                 <hr/>
@@ -211,10 +226,16 @@ const Index = () => {
                 </Route>
             }
             {isUser &&
+            <>
                 <Route path="/transactions" exact  component={TransactionComponent}>
                     <TransactionComponent 
                     />
                 </Route>
+                <Route path="/budget-app" exact  component={BudgetAppComponent}>
+                    <BudgetAppComponent 
+                    />
+                </Route>
+            </>
             }
                 <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
                     <Withdrawals loginAccount={loginAccount} isUser={isUser}/>
