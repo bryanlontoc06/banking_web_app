@@ -1,13 +1,40 @@
 import React from 'react'
 import {    
     FillDelete,
-    ContactInfo
+    ContactInfo,
+    PersonPlus
 } from './component';
 import ButtonComponent from './ButtonComponent';
 
-function TableComponent({setCurrentSelectedData, handleDeleteUser, users}) {
+function TableComponent({setCurrentSelectedData, handleDeleteUser, users, insertUserData, loadDummyData, searchHandler, deleteDummyAccounts, handleGenerateAccountNo, searchTerm}) {
     return (
         <>
+        <div className='btns-n-search'>
+                <div className="add-client-btns">
+                    <ButtonComponent
+                        handleFunction = {handleGenerateAccountNo}
+                        iconName = {<PersonPlus/>}                
+                        btnDescription = {" Add Client"}
+                        btnClass= {"btn btn-primary add-user-btn"}
+                        dbsToggle={"modal"}
+                        dbsTarget={"#exampleModal"}
+                    />
+                    <ButtonComponent
+                        handleFunction = {insertUserData}                               
+                        btnDescription = {"Load Data"} 
+                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}                                    
+                    />
+                    <ButtonComponent
+                        handleFunction={deleteDummyAccounts}
+                        btnDescription = {"Delete Data"}
+                        btnClass={loadDummyData ? "btn btn-primary": "btn btn-secondary"}                                     
+                    />
+
+                </div>
+                <div class="d-flex">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
+                </div>
+            </div>
              <table className="table">
                 <thead className="table-dark">
                     <tr>
