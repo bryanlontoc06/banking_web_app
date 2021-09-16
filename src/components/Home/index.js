@@ -6,7 +6,7 @@ import security from "../../assets/security.svg"
 import feedback from "../../assets/feedback.svg"
 import { Link } from "react-router-dom";
 
-const Index = ({setSelected}) => {
+const Index = ({setSelected, isAdmin}) => {
     
     return (
       <>
@@ -22,8 +22,9 @@ const Index = ({setSelected}) => {
         
         <span style={{display: "flex", justifyContent: "space-between"}}><p className="card-text">No need to drop by a branch.</p>
         <Link
-        to="/users">
-        <button onClick={()=>setSelected(4)} className="btn btn-primary">Get started!</button></Link></span>
+        to={isAdmin ? "/users" : "/transactions"}>
+        <button onClick={()=>setSelected(isAdmin ? 4 : 5)} className="btn btn-primary">Get started!</button></Link>
+        </span>
         
         {/* <p className="card-text">No need to drop by a branch.</p> */}
         </div>

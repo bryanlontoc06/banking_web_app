@@ -210,6 +210,7 @@ const Index = () => {
                 <Route path="/" exact component={HomeComponent}>
                     <HomeComponent
                     setSelected={setSelected}
+                    isAdmin={isAdmin}
                      />
                 </Route>
             {isAdmin &&
