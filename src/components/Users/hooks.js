@@ -215,7 +215,6 @@ const useHooks = () => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
         setUsers([...users])
-
         checkDummyData(users)   
     }
 
@@ -225,7 +224,14 @@ const useHooks = () => {
         if(!dummyAccounts.some(val=>userAccounts.includes(val))){
             setLoadDummyData(false)            
         }        
-   }        
+   }   
+   
+   const deleteDummyAccounts = ()=> {           
+        const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
+        const newUsers = users.filter(user=>user =! dummyAccounts.includes(user.account_no))
+        setLoadDummyData(false)   
+        setUsers([...newUsers])    
+   }
 
     const handleHistories = (action) => {
         const newHistory = {
@@ -601,7 +607,8 @@ const useHooks = () => {
         setSearchTerm,
         searchResults,
         setSearchResults,
-        searchHandler
+        searchHandler,
+        deleteDummyAccounts
     }
 }
 

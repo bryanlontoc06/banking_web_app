@@ -62,7 +62,8 @@ const Index = () => {
         loadDummyData,
         searchTerm,
         searchResults,
-        searchHandler
+        searchHandler,
+        deleteDummyAccounts
     } = useHooks();
 
     
@@ -82,9 +83,14 @@ const Index = () => {
                     <ButtonComponent
                         handleFunction = {insertUserData}                               
                         btnDescription = {"Load Data"} 
-                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}
-                                    
+                        btnClass={loadDummyData ? "btn btn-secondary" : "btn btn-primary"}                                    
                     />
+                    <ButtonComponent
+                        handleFunction={deleteDummyAccounts}
+                        btnDescription = {"Delete Data"}
+                        btnClass={loadDummyData ? "btn btn-primary": "btn btn-secondary"}                                     
+                    />
+
                 </div>
                 <div class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchHandler} value={searchTerm}/>
