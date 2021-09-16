@@ -176,14 +176,14 @@ const Index = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link className={`${selected === 0 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(0)}><Link to="/" className={`${selected === 0 ? 'mobile-menus' : ''}`}>🏠Home</Link></Nav.Link>
+                    <Nav.Link className={`${selected === 0 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(0)}><Link to="/" className={`${selected === 0 ? 'mobile-menus' : ''} mobile-links`}>🏠Home</Link></Nav.Link>
                     <NavDropdown title={`⏲️Dashboard`} id="basic-nav-dropdown">
-                    <NavDropdown.Item className={`${selected === 1 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(1)}><Link to="/dashboard/withdrawals" className={`${selected === 1 ? 'mobile-menus' : ''}`}>Withdrawals</Link></NavDropdown.Item>
-                    <NavDropdown.Item className={`${selected === 2 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(2)}><Link to="/dashboard/deposits" className={`${selected === 2 ? 'mobile-menus' : ''}`}>Deposits</Link></NavDropdown.Item>
-                    <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></NavDropdown.Item>
+                    <NavDropdown.Item className={`${selected === 1 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(1)}><div className='mobile-links'><Link to="/dashboard/withdrawals" className={`${selected === 1 ? 'mobile-menus' : ''} `}>Withdrawals</Link></div></NavDropdown.Item>
+                    <NavDropdown.Item className={`${selected === 2 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(2)}><div className='mobile-links'><Link to="/dashboard/deposits" className={`${selected === 2 ? 'mobile-menus' : ''}`}>Deposits</Link></div></NavDropdown.Item>
+                    <NavDropdown.Item className={`${selected === 3 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(3)}><div className='mobile-links'><Link to="/dashboard/transfers" className={`${selected === 3 ? 'mobile-menus' : ''}`}>Transfers</Link></div></NavDropdown.Item>
                     </NavDropdown>
-                    {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''}`}>🧘Users</Link></Nav.Link>}
-                    {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''}`}><TransactionIcon />Transactions</Link></Nav.Link>}
+                    {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''} mobile-links`}>🧘Users</Link></Nav.Link>}
+                    {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Transactions</Link></Nav.Link>}
 
 
                     <NavDropdown.Divider />
