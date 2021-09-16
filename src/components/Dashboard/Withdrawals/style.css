@@ -7,6 +7,12 @@
     height: 70vh;
 }
 
+@media (min-width: 920px) {
+    .dashboard-container {
+        height: 70vh !important;
+    }
+}
+
 .dashboard-container::-webkit-scrollbar {
     /* WebKit */
     display: none;
