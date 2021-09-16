@@ -164,6 +164,7 @@ const Index = () => {
                     handleSelectedMenu={handleSelectedMenu}
                     handleLogout={handleLogout}
                     defaultProfPic={defaultProfPic}
+                    Link={Link}
                 /> : ''}
         </div>
          : 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout, defaultProfPic}) => {    
+const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout, defaultProfPic, Link}) => {    
     return (
         <>
              <div className="dropdown">
@@ -10,7 +10,7 @@ const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout, d
                         <strong>{loginAccount[0].first_name}</strong>
                     </a>
                     <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a className="dropdown-item" href="/profile" onClick={() => handleSelectedMenu()}>Profile</a></li>
+                        <Link to="/profile"><li><p className="dropdown-item" onClick={() => handleSelectedMenu()}>Profile</p></li></Link>
                         <li><hr className="dropdown-divider"/></li>
                         <li><div className="dropdown-item" onClick={() => handleLogout()}>Sign out</div></li>
                     </ul>
