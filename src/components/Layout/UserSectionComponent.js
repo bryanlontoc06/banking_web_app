@@ -9,7 +9,7 @@ const UserSectionComponent = ({loginAccount, handleSelectedMenu, handleLogout}) 
                         <strong>{loginAccount[0].first_name}</strong>
                     </a>
                     <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a className="dropdown-item" href="/profile" onClick={() => handleSelectedMenu(5)}>Profile</a></li>
+                        <li><a className="dropdown-item" href="/profile" onClick={() => handleSelectedMenu()}>Profile</a></li>
                         <li><hr className="dropdown-divider"/></li>
                         <li><a className="dropdown-item" href="/" onClick={() => handleLogout()}>Sign out</a></li>
                     </ul>

@@ -46,6 +46,7 @@ const Index = () => {
         selected,
         isAdmin,
         loginAccount,
+        setLoginAccount,
         admin,
         setAdmin,
         historiesSelected,
@@ -226,7 +227,7 @@ const Index = () => {
                     <Transfers loginAccount={loginAccount} isUser={isUser}/>
                 </Route>
                 <Route path="/profile" exact  component={Profile}>
-                    <Profile loginAccount={loginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
+                    <Profile loginAccount={loginAccount} setLoginAccount={setLoginAccount} admin={admin} setAdmin={setAdmin} users={users} setUsers={setUsers}/>
                 </Route>
                 </div>
             </>

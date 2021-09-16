@@ -22,3 +22,8 @@ body{
 .container {
     padding-top: 1rem;
 }
+
+.show-hide-password-btn{
+    width: 100%;
+    margin-top: 0.5rem;
+}
