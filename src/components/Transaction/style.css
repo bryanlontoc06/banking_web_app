@@ -15,7 +15,11 @@ h5 {
     display: none;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 479px) {
+    .transaction-body {
+        display: flex;
+        flex-direction: column;
+    }
     
 }
 
@@ -35,3 +39,7 @@ h5 {
 .modal-title {
     padding: 1rem 1rem
 }
+
+
+
+
