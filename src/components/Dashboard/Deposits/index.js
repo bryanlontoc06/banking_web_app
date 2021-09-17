@@ -1,14 +1,20 @@
 import './style.css';
-import useLocalStorage from '../../Users/useLocalStorage';
 import {convertToMoney} from '../../lib/helpers'
+import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
+import useHooks from './hooks';
 
-const Index = (props) => {
+const Index = ({loginAccount, isUser}) => {       
 
-    const {loginAccount, isUser} = props;
+    const {depositHistories,
+        setDepositHistories,
+        isOrdered,
+        sortByAccountNumber,        
+        sortByDate,
+        sortByFullName,
+        sortByDepositAmount,
+        sortByCurrentBalance} = useHooks()   
 
-    const [depositHistories, setDepositHistories] = useLocalStorage('depositHistories', [])
-
-    const filteredHistory = depositHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
+        const filteredHistory = depositHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
 
     return (
         <>
@@ -20,11 +26,21 @@ const Index = (props) => {
                 <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Account No.</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Deposit Amount</th>
-                        <th scope="col">Current Balance</th>
+                        <th onClick={()=>!isUser && sortByAccountNumber()} scope="col">
+                        Account No. {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
+                        </th>
+                        <th onClick={()=> !isUser &&  sortByFullName()} scope="col">
+                        Full Name {!isUser ? isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
+                        </th> 
+                        <th onClick={()=>sortByDate()} scope="col">
+                        Date {isOrdered.date ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByDepositAmount()} scope="col">
+                        Deposit Amount {isOrdered.depositAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByCurrentBalance()} scope="col">
+                        Current Balance {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
