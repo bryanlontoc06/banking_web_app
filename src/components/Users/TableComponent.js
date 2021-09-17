@@ -84,7 +84,7 @@ function TableComponent({
                 Address {isOrdered.address ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByMobileNo()} scope="col">
-              No. {isOrdered.mobileNo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              Phone No. {isOrdered.mobileNo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByEmail()} scope="col">
               Email {isOrdered.email ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
