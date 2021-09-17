@@ -1,5 +1,5 @@
 import React from "react";
-import {FillDelete, ContactInfo, PersonPlus} from "./component";
+import {FillDelete, ContactInfo, PersonPlus, ArrowSortedDownIcon, ArrowSortedUpIcon} from "./component";
 
 import ButtonComponent from "./ButtonComponent";
 import "./style.css";
@@ -19,7 +19,8 @@ function TableComponent({
   sortByLastName,
   sortByAddress,
   sortByMobileNo,
-  sortByEmail
+  sortByEmail,
+  isOrdered
 }) {
   return (
     <>
@@ -67,20 +68,24 @@ function TableComponent({
         <table className="table">
           <thead className="table-header">
             <tr>
-              <th onClick={() => sortByAccountNumber()} scope="col">
-                Acct #
+              <th style={{cursor: "pointer"}} onClick={() => sortByAccountNumber()} scope="col">
+                Acct # {isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
-              <th onClick={() => sortByFirstName()} scope="col">
-                First name
+              <th style={{cursor: "pointer"}} onClick={() => sortByFirstName()} scope="col">
+                First name {isOrdered.firstName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
-              <th onClick={() => sortByLastName()} scope="col">
-                Last name
+              <th style={{cursor: "pointer"}} onClick={() => sortByLastName()} scope="col">
+                Last name {isOrdered.lastName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
-              <th onClick={() => sortByAddress()} scope="col">
-                Address
+              <th style={{cursor: "pointer"}} onClick={() => sortByAddress()} scope="col">
+                Address {isOrdered.address ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
-              <th onClick={() => sortByMobileNo()} scope="col">Mobile Number</th>
-              <th onClick={() => sortByEmail()} scope="col">Email Address</th>
+              <th style={{cursor: "pointer"}} onClick={() => sortByMobileNo()} scope="col">
+              Mobile Number {isOrdered.mobileNo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              </th>
+              <th style={{cursor: "pointer"}} onClick={() => sortByEmail()} scope="col">
+              Email Address {isOrdered.email ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              </th>
               <th scope="col" className="action-col">
                 Action
               </th>

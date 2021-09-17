@@ -35,8 +35,7 @@ const useHooks = () => {
     const [amountToTransfer, setAmountToTransfer] = useState('')
     const [modalShow, setModalShow] = useState(false);  
     const [searchTerm, setSearchTerm] = useState('');  
-    const [searchResults, setSearchResults] = useState([]);
-    const [isOrdered, setIsOrdered] = useState(false)
+    const [searchResults, setSearchResults] = useState([]);    
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -53,6 +52,16 @@ const useHooks = () => {
         amountEnteredIsNegativeWithdraw: false,
         amountEnteredIsNegativeDeposit: false
     });
+
+    const [isOrdered, setIsOrdered] = useState({
+        accountNumber: false,
+        firstName: false,
+        lastName: false,
+        address: false,
+        mobileNo: false,
+        email: false
+    })  
+
     const [errorState, setErrorState] = useState({
         username: false,
         password: false,
@@ -62,8 +71,7 @@ const useHooks = () => {
         address: false,
         mobileNo: false,
         email: false
-    })
-    
+    })    
 
     const handleGenerateAccountNo = () => {
         let date = new Date();
@@ -564,24 +572,38 @@ const useHooks = () => {
     }
     
     const sortByAccountNumber = () => {
-        setIsOrdered(!isOrdered)        
+        setIsOrdered({...isOrdered,
+            accountNumber: !isOrdered.accountNumber,
+            // firstName: false,
+            // lastName: false,
+            // address: false,
+            // mobileNo: false,
+            // email: false  
+        })        
         users.sort((a, b)=>{
-        return (isOrdered ? a.account_no - b.account_no : b.account_no - a.account_no)
+        return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
         setUsers([...users])         
     } 
 
     
     const sortByFirstName = () => {  
-        setIsOrdered(!isOrdered)                  
+        setIsOrdered({...isOrdered,
+            firstName: !isOrdered.firstName,
+            // accountNumber: false,    
+            // lastName: false,
+            // address: false,
+            // mobileNo: false,
+            // email: false  
+        })                
             users.sort((a, b)=>{              
             let nameA = a.first_name.toUpperCase();
             let nameB = b.first_name.toUpperCase();                    
             if (nameA > nameB) {
-                return (isOrdered ? 1: -1)
+                return (isOrdered.firstName ? 1: -1)
               }
             if (nameA < nameB) {
-                return (isOrdered ? -1: 1)
+                return (isOrdered.firstName ? -1: 1)
               }
               return 0        
           });            
@@ -589,15 +611,22 @@ const useHooks = () => {
     }
 
     const sortByLastName = () => {
-        setIsOrdered(!isOrdered)                  
+        setIsOrdered({...isOrdered,
+            lastName: !isOrdered.lastName,
+            // firstName: !isOrdered.firstName,
+            // accountNumber: false,   
+            // address: false,
+            // mobileNo: false,
+            // email: false  
+        })                   
         users.sort((a, b)=>{              
         let nameA = a.last_name.toUpperCase();
         let nameB = b.last_name.toUpperCase();                    
         if (nameA > nameB) {
-            return (isOrdered ? 1: -1)
+            return (isOrdered.lastName ? 1: -1)
           }
         if (nameA < nameB) {
-            return (isOrdered ? -1: 1)
+            return (isOrdered.lastName ? -1: 1)
           } 
           return 0          
       });            
@@ -605,15 +634,22 @@ const useHooks = () => {
     }
 
     const sortByAddress = () => {
-        setIsOrdered(!isOrdered)                  
+        setIsOrdered({...isOrdered,
+            address: !isOrdered.address,
+            // lastName: false
+            // firstName: false
+            // accountNumber: false,    
+            // mobileNo: false,
+            // email: false  
+        })                 
         users.sort((a, b)=>{              
         let nameA = a.address.toUpperCase();
         let nameB = b.address.toUpperCase();                    
         if (nameA > nameB) {
-            return (isOrdered ? 1: -1)
+            return (!isOrdered.address ? 1: -1)
           }
         if (nameA < nameB) {
-            return (isOrdered ? -1: 1)
+            return (!isOrdered.address ? -1: 1)
           } 
           return 0          
       });            
@@ -621,29 +657,43 @@ const useHooks = () => {
     }
 
     const sortByMobileNo = () => {
-        setIsOrdered(!isOrdered)        
+        setIsOrdered({...isOrdered,
+            mobileNo: !isOrdered.mobileNo,
+            // address: false
+            // lastName: false
+            // firstName: false
+            // accountNumber: false,       
+            // email: false  
+        })        
         users.sort((a, b)=>{
-        return (isOrdered ? a.mobile_no - b.mobile_no : b.mobile_no - a.mobile_no)
+        return (isOrdered.mobileNo ? a.mobile_no - b.mobile_no : b.mobile_no - a.mobile_no)
         })
         setUsers([...users])         
     } 
 
     const sortByEmail = () => {
-        setIsOrdered(!isOrdered)                  
+        setIsOrdered({...isOrdered,
+            email: !isOrdered.email  
+            // mobileNo: false
+            // address: false
+            // lastName: false
+            // firstName: false
+            // accountNumber: false,           
+        })                  
         users.sort((a, b)=>{              
         let emailA = a.email.toUpperCase();
         let emailB = b.email.toUpperCase();                    
         if (emailA > emailB) {
-            return (isOrdered ? 1: -1)
+            return (isOrdered.email ? 1: -1)
           }
         if (emailA < emailB) {
-            return (isOrdered ? -1: 1)
+            return (isOrdered.email ? -1: 1)
           } 
           return 0          
       });            
         setUsers([...users])
     }
-
+    
     return {
         currentSelectedData,
         setCurrentSelectedData, 
@@ -708,7 +758,8 @@ const useHooks = () => {
         sortByLastName,
         sortByAddress,
         sortByMobileNo,
-        sortByEmail
+        sortByEmail,
+        isOrdered
     }
 }
 

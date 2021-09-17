@@ -64,7 +64,8 @@ const Index = () => {
         sortByLastName,
         sortByAddress,
         sortByMobileNo,
-        sortByEmail
+        sortByEmail,
+        isOrdered        
     } = useHooks();
 
     
@@ -87,6 +88,8 @@ const Index = () => {
                 sortByAddress={sortByAddress}
                 sortByMobileNo={sortByMobileNo}
                 sortByEmail={sortByEmail}
+                isOrdered={isOrdered}
+
             />       
             {/* <!-- Modal --> */}
             <ModalComponent
@@ -135,8 +138,7 @@ const Index = () => {
                 modalDetailsAlert={modalDetailsAlert}
                 resetTransaction={resetTransaction}
                 withdrawMessage={withdrawMessage}
-                depositMessage={depositMessage}
-                sortByAccountNumber={sortByAccountNumber}
+                depositMessage={depositMessage}                
             />
         </div>
     )
