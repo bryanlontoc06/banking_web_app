@@ -34,7 +34,7 @@ const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usern
                     <div class="input-group" id="show_hide_password">
                         <input placeholder="Password" class="form-control" type={passwordState.password? 'text':"password"} onChange={(e) => setPasswordInput(e.target.value)} value={passwordInput}/>
                         <div class="input-group-addon" onMouseDown={() => handleShowPassword(true)} onMouseUp={() => handleHidePassword(false)}>
-                        {passwordState.password? <i class="fa fa-eye-slash" aria-hidden="true"></i>:
+                        {!passwordState.password? <i class="fa fa-eye-slash" aria-hidden="true"></i>:
                             <i class="fa fa-eye" aria-hidden="true" ></i>}
                         </div>
                     </div>
