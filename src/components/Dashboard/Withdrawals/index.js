@@ -1,13 +1,20 @@
 import './style.css';
-import useLocalStorage from '../../Users/useLocalStorage';
 import {convertToMoney} from '../../lib/helpers'
+import useHooks from './hooks';
+import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
 
-const Index = (props) => {
-    const {loginAccount, isUser} = props;
-    const [withdrawalHistories, setWithdrawalHistories] = useLocalStorage('withdrawalHistories', [])
+const Index = ({loginAccount, isUser}) => {    
+    
+    const {withdrawalHistories,
+        setWithdrawalHistories,
+        isOrdered,
+        sortByAccountNumber,        
+        sortByDate,
+        sortByFullName,
+        sortByWithdrawAmount,
+        sortByCurrentBalance} = useHooks()
 
     const filteredHistory = withdrawalHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
-
 
     return (
         <>
@@ -20,11 +27,21 @@ const Index = (props) => {
                 <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Account No.</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Withdrawn Amount</th>
-                        <th scope="col">Current Balance</th>
+                        <th onClick={()=>sortByAccountNumber()} scope="col">
+                        Account No. {isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByFullName()} scope="col">
+                        Full Name {isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByDate()} scope="col">
+                        Date {isOrdered.date ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByWithdrawAmount()} scope="col">
+                        Withdrawn Amount {isOrdered.withdrawnAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByCurrentBalance()} scope="col">
+                        Current Balance {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
                     </tr>
                 </thead>
                 
