@@ -1,8 +1,4 @@
 import './style.css';
-import {
-    PersonPlus,
-} from './component';
-
 import TableComponent from './TableComponent';
 import ModalComponent from './ModalComponent';
 import ModalDetailsComponent from './ModalDetailsComponent';
@@ -62,7 +58,13 @@ const Index = () => {
         searchTerm,
         searchResults,
         searchHandler,
-        deleteDummyAccounts
+        deleteDummyAccounts,
+        sortByAccountNumber,
+        sortByFirstName,
+        sortByLastName,
+        sortByAddress,
+        sortByMobileNo,
+        sortByEmail
     } = useHooks();
 
     
@@ -79,6 +81,12 @@ const Index = () => {
                 searchTerm={searchTerm}
                 deleteDummyAccounts={deleteDummyAccounts}
                 handleGenerateAccountNo={handleGenerateAccountNo}
+                sortByAccountNumber={sortByAccountNumber}
+                sortByFirstName={sortByFirstName}
+                sortByLastName={sortByLastName}
+                sortByAddress={sortByAddress}
+                sortByMobileNo={sortByMobileNo}
+                sortByEmail={sortByEmail}
             />       
             {/* <!-- Modal --> */}
             <ModalComponent
@@ -128,6 +136,7 @@ const Index = () => {
                 resetTransaction={resetTransaction}
                 withdrawMessage={withdrawMessage}
                 depositMessage={depositMessage}
+                sortByAccountNumber={sortByAccountNumber}
             />
         </div>
     )

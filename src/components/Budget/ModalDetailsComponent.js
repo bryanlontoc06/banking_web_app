@@ -22,7 +22,7 @@ const ModalForDetailsComponent = (
   withdrawMessage,
   depositMessage,
   userSelected,
-  expenseItems
+  expenseItems,  
   }
 ) => {
     return (
@@ -50,6 +50,7 @@ const ModalForDetailsComponent = (
                              isReadOnly={true}
                              inputValue={userSelected.account_no}
                              label={"Account No."}
+                            
                             />
                             </div>
                             <div className="form-floating mb-3">

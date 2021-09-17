@@ -3,6 +3,8 @@ import {AppContext} from '../Global/AppContext'
 import useLocalStorage from './useLocalStorage'
 import {convertToMoney} from '../lib/helpers'
 
+
+
 const useHooks = () => {    
     const {withdrawalHistories,
         depositHistories,
@@ -34,6 +36,7 @@ const useHooks = () => {
     const [modalShow, setModalShow] = useState(false);  
     const [searchTerm, setSearchTerm] = useState('');  
     const [searchResults, setSearchResults] = useState([]);
+    const [isOrdered, setIsOrdered] = useState(false)
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -373,8 +376,8 @@ const useHooks = () => {
                 password: "QnJ5YW4=",
                 first_name: "Bryan",
                 last_name: "L",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Boardwalk",
+                mobile_no: 921985641,
                 email: "Bryan@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -390,8 +393,8 @@ const useHooks = () => {
                 password: "R3JlZw==",
                 first_name: "Greg",
                 last_name: "L",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Park Place",
+                mobile_no: 952314785,
                 email: "Greg@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -407,8 +410,8 @@ const useHooks = () => {
                 password: "TWFydG5leQ==",
                 first_name: "Martney",
                 last_name: "A",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Pennsylvania Avenue",
+                mobile_no: 996214756,
                 email: "Martney@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -424,8 +427,8 @@ const useHooks = () => {
                 password: "TGVicm9u",
                 first_name: "Lebron",
                 last_name: "J",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "North Carolina Avenue",
+                mobile_no: 965987412,
                 email: "Lebron@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -441,8 +444,8 @@ const useHooks = () => {
                 password: "QWRyaWFu",
                 first_name: "Adrian",
                 last_name: "C",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Pacific Avenue",
+                mobile_no: 975632145,
                 email: "Adrian@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -458,8 +461,8 @@ const useHooks = () => {
                 password: "Sm9obg==",
                 first_name: "John",
                 last_name: "Y",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Marvin Gardens",
+                mobile_no: 932564782,
                 email: "John@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -475,8 +478,8 @@ const useHooks = () => {
                 password: "VmljdG9y",
                 first_name: "Victor",
                 last_name: "R",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Ventnor Avenue",
+                mobile_no: 945632187,
                 email: "Victor@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -492,8 +495,8 @@ const useHooks = () => {
                 password: "SmVyaWNr",
                 first_name: "Jerick",
                 last_name: "B",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Atlantic Avenue",
+                mobile_no: 986325412,
                 email: "Jerick@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -509,8 +512,8 @@ const useHooks = () => {
                 password: "SXNpYWg=",
                 first_name: "Isiah",
                 last_name: "R",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Indiana Avenue",
+                mobile_no: 916543874,
                 email: "Isiah@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -526,8 +529,8 @@ const useHooks = () => {
                 password: "Q2FybGE=",
                 first_name: "Carla",
                 last_name: "M",
-                address: "Avion School",
-                mobile_no: 123456789,
+                address: "Kentucky Avenue",
+                mobile_no: 932564128,
                 email: "Carla@email.com",
                 balance: 1000000,
                 role: 'client' ,
@@ -559,7 +562,87 @@ const useHooks = () => {
             setSearchResults(users)
         }
     }
+    
+    const sortByAccountNumber = () => {
+        setIsOrdered(!isOrdered)        
+        users.sort((a, b)=>{
+        return (isOrdered ? a.account_no - b.account_no : b.account_no - a.account_no)
+        })
+        setUsers([...users])         
+    } 
 
+    
+    const sortByFirstName = () => {  
+        setIsOrdered(!isOrdered)                  
+            users.sort((a, b)=>{              
+            let nameA = a.first_name.toUpperCase();
+            let nameB = b.first_name.toUpperCase();                    
+            if (nameA > nameB) {
+                return (isOrdered ? 1: -1)
+              }
+            if (nameA < nameB) {
+                return (isOrdered ? -1: 1)
+              }
+              return 0        
+          });            
+            setUsers([...users])        
+    }
+
+    const sortByLastName = () => {
+        setIsOrdered(!isOrdered)                  
+        users.sort((a, b)=>{              
+        let nameA = a.last_name.toUpperCase();
+        let nameB = b.last_name.toUpperCase();                    
+        if (nameA > nameB) {
+            return (isOrdered ? 1: -1)
+          }
+        if (nameA < nameB) {
+            return (isOrdered ? -1: 1)
+          } 
+          return 0          
+      });            
+        setUsers([...users])
+    }
+
+    const sortByAddress = () => {
+        setIsOrdered(!isOrdered)                  
+        users.sort((a, b)=>{              
+        let nameA = a.address.toUpperCase();
+        let nameB = b.address.toUpperCase();                    
+        if (nameA > nameB) {
+            return (isOrdered ? 1: -1)
+          }
+        if (nameA < nameB) {
+            return (isOrdered ? -1: 1)
+          } 
+          return 0          
+      });            
+        setUsers([...users])
+    }
+
+    const sortByMobileNo = () => {
+        setIsOrdered(!isOrdered)        
+        users.sort((a, b)=>{
+        return (isOrdered ? a.mobile_no - b.mobile_no : b.mobile_no - a.mobile_no)
+        })
+        setUsers([...users])         
+    } 
+
+    const sortByEmail = () => {
+        setIsOrdered(!isOrdered)                  
+        users.sort((a, b)=>{              
+        let emailA = a.email.toUpperCase();
+        let emailB = b.email.toUpperCase();                    
+        if (emailA > emailB) {
+            return (isOrdered ? 1: -1)
+          }
+        if (emailA < emailB) {
+            return (isOrdered ? -1: 1)
+          } 
+          return 0          
+      });            
+        setUsers([...users])
+    }
 
     return {
         currentSelectedData,
@@ -619,7 +702,13 @@ const useHooks = () => {
         searchResults,
         setSearchResults,
         searchHandler,
-        deleteDummyAccounts
+        deleteDummyAccounts,
+        sortByAccountNumber,
+        sortByFirstName,
+        sortByLastName,
+        sortByAddress,
+        sortByMobileNo,
+        sortByEmail
     }
 }
 
