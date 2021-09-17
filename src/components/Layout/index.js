@@ -69,7 +69,8 @@ const Index = () => {
     return (
         <>
             <Router>
-                {matchesMD ?
+            {loginAccount[0] ?
+                matchesMD ?
             <div className="side-bar d-flex flex-column flex-shrink-0 p-3 bg-light" styled={{width: '280px'}}>
                 <a href="/" onClick={() => handleSelectedMenu(0)} className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <span className="fs-4"><img src={bankLogo} style={{width: '50%'}} alt="Bank Logo"/></span>
@@ -205,7 +206,7 @@ const Index = () => {
 
                     {isAdmin &&  <Nav.Link className={`${selected === 4 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(4)}><Link to="/users" className={`${selected === 4 ? 'mobile-menus' : ''} mobile-links`}>🧘Users</Link></Nav.Link>}
                     {isUser &&  <Nav.Link className={`${selected === 5 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(5)}><Link to="/transactions" className={`${selected === 5 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Transactions</Link></Nav.Link>}
-                    {isUser &&  <Nav.Link className={`${selected === 6 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(6)}><Link to="/budget" className={`${selected === 6 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Budget</Link></Nav.Link>}
+                    {/* {isUser &&  <Nav.Link className={`${selected === 6 ? 'mobile-menus' : ''}`} onClick={() => handleSelectedMenu(6)}><Link to="/budget" className={`${selected === 6 ? 'mobile-menus' : ''} mobile-links`}><TransactionIcon />Budget</Link></Nav.Link>} */}
 
 
                     <NavDropdown.Divider />
@@ -223,10 +224,12 @@ const Index = () => {
 
         </Navbar>
         <hr className="hr" />
-        </>  }
+        </>  
+       : '' }
 
 
 
+        {loginAccount[0] &&
         <Switch>
             <>
                 <div className="routes-container">
@@ -247,10 +250,10 @@ const Index = () => {
                     <TransactionComponent 
                     />
                 </Route>
-                <Route path="/budget-app" exact  component={BudgetAppComponent}>
+                {/* <Route path="/budget-app" exact  component={BudgetAppComponent}>
                     <BudgetAppComponent 
                     />
-                </Route>
+                </Route> */}
             </>
             }
                 <Route path="/dashboard/withdrawals" exact  component={Withdrawals}>
@@ -268,6 +271,7 @@ const Index = () => {
                 </div>
             </>
         </Switch>
+        }
 
         
 

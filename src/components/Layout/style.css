@@ -226,10 +226,18 @@ a {
 
 .log-in-account-title {
     padding: unset !important;
+    margin-top: 1rem;
 }
 
 .login-modal-title-container {
     padding: 0rem !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-bank-logo {
+    display: flex;
+    justify-content: center;
 }
 
 @media (min-width: 480px){

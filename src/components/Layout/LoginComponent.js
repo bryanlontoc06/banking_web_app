@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import bankLogo from '../../assets/blg.png'
 
 const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser, passwordState, handleShowPassword, handleHidePassword}) => {
     
@@ -16,7 +17,8 @@ const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usern
             >
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter" className="login-modal-title-container">
-                    <h5 className="modal-title log-in-account-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h5>
+                    <span className="fs-4 login-bank-logo"><img src={bankLogo} style={{width: '50%'}} alt="Bank Logo"/></span>
+                    <h6 className="modal-title log-in-account-title" id="exampleModalLiveLabel"><LogIn/>Login to your account</h6>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
