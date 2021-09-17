@@ -106,7 +106,7 @@ function TableComponent({
                     <td className="action-btns">
                       <ButtonComponent
                         handleFunction={() => setCurrentSelectedData(data)}
-                        iconName={<ContactInfo />}
+                        iconName={<ContactInfo className="white" />}
                         btnClass={"btn btn-info"}
                         dbsToggle={"modal"}
                         dbsTarget={"#detailsModal"}

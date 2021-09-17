@@ -8,7 +8,7 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: #f7f7ff;
     background-clip: border-box;
     border: 0 solid transparent;
     border-radius: .25rem;
@@ -21,6 +21,11 @@ body{
 
 .container {
     padding-top: 1rem;
+    background-color: #f7f7ff;
+}
+
+.bg-light {
+    background-color: #f7f7ff !important;
 }
 
 .show-hide-password-btn{

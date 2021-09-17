@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.02em
+}
+
+tbody, td, tfoot, th, thead, tr {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;  
+  padding: 1rem 1rem !important;
+}
+
 div#root {
   display: flex;
 }

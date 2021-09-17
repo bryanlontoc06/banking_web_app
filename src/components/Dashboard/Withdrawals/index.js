@@ -27,19 +27,19 @@ const Index = ({loginAccount, isUser}) => {
                 <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th onClick={()=> !isUser && sortByAccountNumber()} scope="col">
+                        <th style={{cursor: "pointer"}} onClick={()=> !isUser && sortByAccountNumber()} scope="col">
                         Account No. {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
                         </th>
-                        <th onClick={()=> !isUser && sortByFullName()} scope="col">
+                        <th style={{cursor: "pointer"}} onClick={()=> !isUser && sortByFullName()} scope="col">
                         Full Name {!isUser ? isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
                         </th>
-                        <th onClick={()=>sortByDate()} scope="col">
+                        <th style={{cursor: "pointer"}} onClick={()=>sortByDate()} scope="col">
                         Date {isOrdered.date ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
-                        <th onClick={()=>sortByWithdrawAmount()} scope="col">
+                        <th style={{cursor: "pointer"}} onClick={()=>sortByWithdrawAmount()} scope="col">
                         Withdrawn Amount {isOrdered.withdrawnAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
-                        <th onClick={()=>sortByCurrentBalance()} scope="col">
+                        <th style={{cursor: "pointer"}} onClick={()=>sortByCurrentBalance()} scope="col">
                         Current Balance {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
                     </tr>

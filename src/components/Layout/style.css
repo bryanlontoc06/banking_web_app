@@ -64,7 +64,7 @@ div#root {
 
 .nav-link {
     display: flex;
-    align-items: center;
+    align-items: center;    
 } 
 
 .menus {
@@ -88,7 +88,7 @@ div#root {
     border: unset;
 }
 .accordion-header {
-    color: #fff;
+    color: #f7f7ff !important;
 }
 
 .accorder-button {
@@ -169,7 +169,7 @@ button.navbar-toggler {
 }
 
 .mobile-menus {
-    background-color: #0d6efd;
+    background-color: #7245B7;
     color: #fff !important;
     text-decoration: none;
 }
@@ -184,7 +184,7 @@ button.navbar-toggler {
 }
 
 a.nav-link {
-    padding: 0.5rem 1rem !important;
+    padding: rem 1rem !important;
     border-radius: 5px;
 }
 
