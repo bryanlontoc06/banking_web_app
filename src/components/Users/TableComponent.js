@@ -107,11 +107,11 @@ function TableComponent({
                         dbsTarget={"#detailsModal"}
                       />
 
-                      <ButtonComponent
+                      {/* <ButtonComponent
                         handleFunction={() => handleDeleteUser(data.account_no)}
                         iconName={<FillDelete />}
                         btnClass={"btn btn-danger"}
-                      />
+                      /> */}
                     </td>
                   </tr>
                 );

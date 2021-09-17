@@ -2,11 +2,12 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import bankLogo from '../../assets/blg.png'
+import { Link } from "react-router-dom";
 
 const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usernameInput, setUsernameInput, passwordInput, setPasswordInput, handleCheckUser, passwordState, handleShowPassword, handleHidePassword}) => {
     
     return (
-        <>
+        <div className="login-modal-main-container">
             <Modal
                 show={modalShow}
                 size="lg"
@@ -14,6 +15,7 @@ const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usern
                 centered
                 backdrop="static"
                 keyboard={false}
+                dialogClassName="login-modal-main-container"
             >
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter" className="login-modal-title-container">
@@ -39,10 +41,12 @@ const LoginModalComponent = ({modalShow,setModalShow, loginAccount, LogIn, usern
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={() => handleCheckUser()}>Login</Button>
+                <Link to="/"> 
+                    <Button onClick={() => handleCheckUser()}>Login</Button>
+                </Link>
             </Modal.Footer>
             </Modal>
-        </>
+        </div>
     )
 }
 

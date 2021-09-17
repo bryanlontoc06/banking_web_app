@@ -37,7 +37,7 @@ const ModalForDetailsComponent = (
                          resetTransaction={resetTransaction}
                          />
                     </div>
-                    <div className="modal-body">
+                    <div className="modal-body admin-modal-details">
                         <div className="user-row">
                             <div className="form-floating mb-3">
                             <InputComponent
@@ -136,7 +136,7 @@ const ModalForDetailsComponent = (
                         </div>
                     </div>
                     <div>
-                        <div className="title">
+                        {/* <div className="title"> */} <div className='modal-header'>
                             <h5 className="modal-title" >Transactions</h5>
                         </div>
                         <div className="transaction-body-container">

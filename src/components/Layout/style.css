@@ -241,7 +241,7 @@ a {
 }
 
 @media (min-width: 480px){
-    .modal-dialog {
+    .login-modal-main-container {
         max-width: 300px;
         margin: 1.75rem auto;
     }
