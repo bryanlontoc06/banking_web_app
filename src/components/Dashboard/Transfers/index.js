@@ -1,12 +1,19 @@
 import './style.css';
-import useLocalStorage from '../../Users/useLocalStorage';
 import {convertToMoney} from '../../lib/helpers'
+import useHooks from './hooks';
+import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
 
-const Index = (props) => {
+const Index = ({loginAccount, isUser}) => {
 
-    const {loginAccount, isUser} = props;
- 
-    const [transfersHistories, setTransfersHistories] = useLocalStorage('transfersHistories', [])
+    const {transfersHistories,
+        setTransfersHistories,
+        isOrdered,
+        sortByAccountNumber,        
+        sortByDate,
+        sortByFullName,
+        sortByTransferredTo,
+        sortByTransferredAmount,
+        sortByCurrentBalance} = useHooks()    
 
     const filteredHistory = transfersHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
 
@@ -21,12 +28,24 @@ const Index = (props) => {
                 <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Account No.</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">To</th>
-                        <th scope="col">Transferred Amount</th>
-                        <th scope="col">Current Balance</th>
+                        <th onClick={()=> !isUser && sortByAccountNumber()} scope="col">
+                        Account No. {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
+                        </th>
+                        <th onClick={()=> !isUser &&  sortByFullName()} scope="col">
+                        Full Name {!isUser ? isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
+                        </th>
+                        <th onClick={()=>sortByDate()} scope="col">
+                        Date {isOrdered.date ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByTransferredTo()} scope="col">
+                        To {isOrdered.latestTransferTo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByTransferredAmount()} scope="col">
+                        Transferred Amount {isOrdered.latestTransferAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
+                        <th onClick={()=>sortByCurrentBalance()} scope="col">
+                        Current Balance {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>

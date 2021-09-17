@@ -27,11 +27,11 @@ const Index = ({loginAccount, isUser}) => {
                 <thead className="table-header">
                     <tr>
                         <th scope="col">#</th>
-                        <th onClick={()=>sortByAccountNumber()} scope="col">
-                        Account No. {isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        <th onClick={()=> !isUser && sortByAccountNumber()} scope="col">
+                        Account No. {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
                         </th>
-                        <th onClick={()=>sortByFullName()} scope="col">
-                        Full Name {isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        <th onClick={()=> !isUser && sortByFullName()} scope="col">
+                        Full Name {!isUser ? isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
                         </th>
                         <th onClick={()=>sortByDate()} scope="col">
                         Date {isOrdered.date ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}

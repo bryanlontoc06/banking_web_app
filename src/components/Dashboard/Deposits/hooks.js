@@ -2,33 +2,32 @@ import { useState } from 'react'
 import useLocalStorage from '../../Users/useLocalStorage'
 
 const useHooks = () => {    
-    const [withdrawalHistories, setWithdrawalHistories] = useLocalStorage('withdrawalHistories', [])
+    const [transfersHistories, setTransfersHistories] = useLocalStorage('transfersHistories', [])
 
     const [isOrdered, setIsOrdered] = useState({
         accountNumber: false,
         fullName: false,
         date: false,
-        withdrawnAmount: false,
+        latestTransferTo: false,        
+        latestTransferAmount: false,
         currentBalance: false,            
-    })  
-    
+    })    
 
     const sortByAccountNumber = () => {
         setIsOrdered({...isOrdered,
             accountNumber: !isOrdered.accountNumber,        
         })        
-        withdrawalHistories.sort((a, b)=>{
+        transfersHistories.sort((a, b)=>{
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setTransfersHistories([...transfersHistories])         
     } 
-
     
     const sortByFullName = () => {  
         setIsOrdered({...isOrdered,
             fullName: !isOrdered.fullName,         
         })                
-            withdrawalHistories.sort((a, b)=>{              
+            transfersHistories.sort((a, b)=>{              
             let nameA = `${a.first_name.toUpperCase()} ${a.last_name.toUpperCase()}`;
             let nameB = `${b.first_name.toUpperCase()} ${b.last_name.toUpperCase()}`;                    
             if (nameA > nameB) {
@@ -39,51 +38,62 @@ const useHooks = () => {
               }
               return 0        
           });            
-            setWithdrawalHistories([...withdrawalHistories])        
+            setTransfersHistories([...transfersHistories])        
     }
 
     const sortByDate = () => {
         setIsOrdered({...isOrdered,
             date: !isOrdered.date,           
         })        
-        withdrawalHistories.sort((a, b)=>{
+        transfersHistories.sort((a, b)=>{
         const regex = ["/", ":", ",", " "]
         const date1 = parseInt(a.currentDatenTime.slice(0, 16).split("").filter(num=>num =! regex.includes(num)).join(""))
         const date2 = parseInt(b.currentDatenTime.slice(0, 16).split("").filter(num=>num =! regex.includes(num)).join(""))
         return (isOrdered.date ? date1 - date2 : date2 - date1)
         })
-        setWithdrawalHistories([...withdrawalHistories]) 
+        setTransfersHistories([...transfersHistories]) 
     }
   
 
-    const sortByWithdrawAmount = () => {
+    const sortByTransferredTo = () => {
         setIsOrdered({...isOrdered,
-            withdrawnAmount: !isOrdered.withdrawnAmount,           
+            latestTransferTo: !isOrdered.latestTransferTo,           
         })        
-        withdrawalHistories.sort((a, b)=>{
-        return (isOrdered.withdrawnAmount ? a.latestWithdrawnAmount - b.latestWithdrawnAmount : b.latestWithdrawnAmount - a.latestWithdrawnAmount)
+        transfersHistories.sort((a, b)=>{
+        return (isOrdered.latestTransferTo ? a.latestTransferTo - b.latestTransferTo : b.latestTransferTo - a.latestTransferTo)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setTransfersHistories([...transfersHistories])         
+    } 
+
+    const sortByTransferredAmount = () => {
+        setIsOrdered({...isOrdered,
+            latestTransferAmount: !isOrdered.latestTransferAmount,           
+        })        
+        transfersHistories.sort((a, b)=>{
+        return (isOrdered.latestTransferAmount ? a.latestTransferAmount - b.latestTransferAmount : b.latestTransferAmount - a.latestTransferAmount)
+        })
+        setTransfersHistories([...transfersHistories])         
     } 
 
     const sortByCurrentBalance = () => {
         setIsOrdered({...isOrdered,
             currentBalance: !isOrdered.currentBalance,           
         })        
-        withdrawalHistories.sort((a, b)=>{
+        transfersHistories.sort((a, b)=>{
         return (isOrdered.currentBalance ? a.balance - b.balance : b.balance - a.balance)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setTransfersHistories([...transfersHistories])         
     } 
 
     return {      
-        withdrawalHistories,
-        setWithdrawalHistories,
+        transfersHistories,
+        setTransfersHistories,
         isOrdered,  
         sortByAccountNumber,        
         sortByDate,
         sortByFullName,
-        sortByWithdrawAmount,
+        sortByTransferredTo,
+        sortByTransferredAmount,
         sortByCurrentBalance        
     }
 }
