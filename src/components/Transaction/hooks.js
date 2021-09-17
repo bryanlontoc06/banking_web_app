@@ -81,9 +81,10 @@ const useHooks = () => {
     
 
 
-    
+    // Selecting the login account
     let userSelected = users.find((user) => {return user.account_no === currentSelectedData.account_no})
 
+    // Histories for user side
     const handleHistories = (action) => {
         const newHistory = {
                 account_no: userSelected.account_no,
@@ -110,6 +111,7 @@ const useHooks = () => {
         }
     }
 
+    // 
     const handleWithdraw = () => {
         if(amountToWithdraw < 0){
             setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})                        
@@ -130,6 +132,7 @@ const useHooks = () => {
         }
     }
 
+    // 
     const handleDeposit = () => {
         if(amountToDeposit < 0){
             setModalDetailsAlert({amountEnteredIsNegativeDeposit: true,})
@@ -146,6 +149,7 @@ const useHooks = () => {
         }
     }   
 
+    // Transferring amount to another user - user side
     const handleTransfer = () => {
         if(transferTo){
             const toUser = users.find(user => {return user.account_no === transferTo})                    
@@ -187,6 +191,7 @@ const useHooks = () => {
         }     
     }
 
+    // 
     const resetTransaction = () => {
         setAmountToWithdraw('')
         setAmountToDeposit('')

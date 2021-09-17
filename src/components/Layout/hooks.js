@@ -18,7 +18,7 @@ const useHooks = () => {
     const [users, setUsers] = useLocalStorage('usersData', [])
     const historiesSelected = selected === 1 || selected === 2 || selected === 3;
    
-    
+    // Automatically create an admin account in localstorage if adminsdata is null
     if(localStorage.getItem('adminsData') == null) {
             const newAdmin = {
                 id: 1,
@@ -34,19 +34,21 @@ const useHooks = () => {
             setAdmin([...admin, newAdmin])
             setIsAdmin(false)
     }
+    // Setting an empty array loginaccount key inside sessionstorage if loginaccount is null
     if (sessionStorage.getItem('loginAccount') == null) {
         setLoginAccount([])
     }
+    // Setting a 0 state loginaccount key inside sessionstorage if selectedMenu key in sessionstorage is null
     if(sessionStorage.getItem('selectedMenu') == null) {
         setSelected(0)
     }   
-    
+    // Setting a specific user inside selected state
     const handleSelectedMenu = (index) => {
         setSelected(index)
     }
 
    
-
+    // for Login, checking a user (admin and client) if they are registered user for accessing the system
     const handleCheckUser = () => {
         const loginFilterAdmin = admin.filter(obj => obj.username === usernameInput)
         const loginFilterUser = users.filter(obj => obj.username === usernameInput)
@@ -85,7 +87,7 @@ const useHooks = () => {
         }
     }
 
-
+ 
     const handleLogout = () => {
         setIsAdmin(false)
         setIsUser(false)
@@ -94,6 +96,7 @@ const useHooks = () => {
         setModalShow(true)
     }
 
+    // for showing and hiding password when loggin in
     const [passwordState, setPasswordState] = useState({
         password: false,
     })

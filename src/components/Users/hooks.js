@@ -73,6 +73,7 @@ const useHooks = () => {
         email: false
     })    
 
+    // For Generating User Account Number
     const handleGenerateAccountNo = () => {
         let date = new Date();
         let minutes = '0' + date.getMinutes().toString().substr(-2)
@@ -83,6 +84,8 @@ const useHooks = () => {
         setModalShow(true)
     }
 
+
+    // Add user Close Modal - State Reset 
     const closeModalComponent = () => {
         setModalShow(false)
         setErrorState({
@@ -97,6 +100,7 @@ const useHooks = () => {
         })
     }
 
+    // Add user validations
     const validation = (newUser) => {
         if(users.find((user) => {return user.username === userName})) {
             alert('Username already exists.')
@@ -182,6 +186,7 @@ const useHooks = () => {
         } 
     }
 
+    // Modal Component Reset state
     const resetUserInput = () => {
         setAccountNo("");
         setUserName("");
@@ -194,6 +199,7 @@ const useHooks = () => {
         setEmail("");
     }   
 
+    // Adding user Account
     const handleSaveUsers = (e) => {
         e.preventDefault();
         try {
@@ -223,6 +229,7 @@ const useHooks = () => {
         }
     }
 
+    // Deleting User Account
     const handleDeleteUser = (id) => {
         const index = users.findIndex(user => {return user.account_no === id})
         users.splice(index, 1)
@@ -230,6 +237,7 @@ const useHooks = () => {
         checkDummyData(users)   
     }
 
+    // Checking if dummy exist - (Load Data button)
     const checkDummyData = (users) => {
         const userAccounts = users.map(user=>user.account_no)
         const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
@@ -238,6 +246,7 @@ const useHooks = () => {
         }        
    }   
    
+    //  Deleting dummy accounts (Delete Data Button)
    const deleteDummyAccounts = ()=> {           
         const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
         const newUsers = users.filter(user=>user =! dummyAccounts.includes(user.account_no))
@@ -245,6 +254,7 @@ const useHooks = () => {
         setUsers([...newUsers])    
    }
 
+    // Functions for Histories
     const handleHistories = (action) => {
         const newHistory = {
             account_no: currentSelectedData.account_no,
@@ -271,7 +281,7 @@ const useHooks = () => {
         }
     }
 
-
+    // Withdraw Function 
     const handleWithdraw = () => {
         if(amountToWithdraw < 0){
             setModalDetailsAlert({amountEnteredIsNegativeWithdraw: true,})                        
@@ -294,6 +304,7 @@ const useHooks = () => {
         }
     }
 
+    // Depositing Account
     const handleDeposit = () => {
         if(amountToDeposit < 0){
             setModalDetailsAlert({amountEnteredIsNegativeDeposit: true,})
@@ -311,7 +322,7 @@ const useHooks = () => {
     }
 
     
-
+    // Transferring money from user to another
     const handleTransfer = () => {
         if(transferTo){
             const toUser = users.find(user => {return user.account_no === transferTo})                    
@@ -352,6 +363,7 @@ const useHooks = () => {
         }
     }
 
+    // Reset Transaction when click (close button - user modal details)
     const resetTransaction = () => {
         setAmountToWithdraw('')
         setAmountToDeposit('')
@@ -375,6 +387,7 @@ const useHooks = () => {
         });
     }
 
+    // Adding 10 users on one click
     const insertUserData = (e) => {          
 
             if(!loadDummyData){
@@ -555,6 +568,7 @@ const useHooks = () => {
         }   
     }
 
+    // For querying user accounts
     const searchHandler = (e) => {
         setSearchTerm(e.target.value)
         if(searchTerm !== '') {
@@ -571,6 +585,7 @@ const useHooks = () => {
         }
     }
     
+    // Sorting function section
     const sortByAccountNumber = () => {
         setIsOrdered({...isOrdered,
             accountNumber: !isOrdered.accountNumber,
