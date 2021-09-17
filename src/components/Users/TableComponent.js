@@ -1,5 +1,5 @@
 import React from "react";
-import {FillDelete, ContactInfo, PersonPlus, ArrowSortedDownIcon, ArrowSortedUpIcon} from "./component";
+import {FillDelete, Search, ContactInfo, PersonPlus, ArrowSortedDownIcon, ArrowSortedUpIcon} from "./component";
 
 import ButtonComponent from "./ButtonComponent";
 import "./style.css";
@@ -53,7 +53,7 @@ function TableComponent({
             }
           />
         </div>
-        <div className="d-flex user-input">
+        <div className="d-flex user-input">           
           <input
             className="form-control"
             type="search"
@@ -62,6 +62,9 @@ function TableComponent({
             onChange={searchHandler}
             value={searchTerm}
           />
+           <div style={{backgroundColor: "white", border: "1px solid #ced4da", borderRadius: "0.25rem", borderLeft: "none"}}>
+            <Search size={40}/>
+            </div>
         </div>
       </div>
       <div className="table-container">
@@ -72,19 +75,19 @@ function TableComponent({
                 Acct # {isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByFirstName()} scope="col">
-                First name {isOrdered.firstName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                Firstname {isOrdered.firstName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByLastName()} scope="col">
-                Last name {isOrdered.lastName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                Lastname {isOrdered.lastName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByAddress()} scope="col">
                 Address {isOrdered.address ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByMobileNo()} scope="col">
-              Mobile Number {isOrdered.mobileNo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              No. {isOrdered.mobileNo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByEmail()} scope="col">
-              Email Address {isOrdered.email ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              Email {isOrdered.email ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th scope="col" className="action-col">
                 Action

@@ -29,7 +29,7 @@ const Index = ({loginAccount, isUser}) => {
                     <tr>
                         <th scope="col">#</th>
                         <th style={{cursor: "pointer"}} onClick={()=> !isUser && sortByAccountNumber()} scope="col">
-                        Account No. {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
+                        Acct #  {!isUser ? isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
                         </th>
                         <th style={{cursor: "pointer"}} onClick={()=> !isUser &&  sortByFullName()} scope="col">
                         Full Name {!isUser ? isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/> : null}
@@ -41,10 +41,10 @@ const Index = ({loginAccount, isUser}) => {
                         To {isOrdered.latestTransferTo ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
                         <th style={{cursor: "pointer"}} onClick={()=>sortByTransferredAmount()} scope="col">
-                        Transferred Amount {isOrdered.latestTransferAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        Transfer Amt. {isOrdered.latestTransferAmount ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
                         <th style={{cursor: "pointer"}} onClick={()=>sortByCurrentBalance()} scope="col">
-                        Current Balance {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+                        Bal. {isOrdered.currentBalance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
                         </th>
                     </tr>
                 </thead>
