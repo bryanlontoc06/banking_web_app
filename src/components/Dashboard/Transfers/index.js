@@ -13,7 +13,8 @@ const Index = ({loginAccount, isUser}) => {
         sortByFullName,
         sortByTransferredTo,
         sortByTransferredAmount,
-        sortByCurrentBalance} = useHooks()    
+        sortByCurrentBalance,
+    } = useHooks()    
 
     const filteredHistory = transfersHistories.filter((user) => {return user.account_no === loginAccount[0].account_no})
 

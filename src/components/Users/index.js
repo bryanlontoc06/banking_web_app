@@ -60,12 +60,12 @@ const Index = () => {
         searchHandler,
         deleteDummyAccounts,
         sortByAccountNumber,
-        sortByFirstName,
-        sortByLastName,
+        sortByFullName,
         sortByAddress,
         sortByMobileNo,
         sortByEmail,
-        isOrdered        
+        sortByCurrentBalance,
+        isOrdered,              
     } = useHooks();
 
     
@@ -83,11 +83,12 @@ const Index = () => {
                 deleteDummyAccounts={deleteDummyAccounts}
                 handleGenerateAccountNo={handleGenerateAccountNo}
                 sortByAccountNumber={sortByAccountNumber}
-                sortByFirstName={sortByFirstName}
-                sortByLastName={sortByLastName}
+                sortByFullName={sortByFullName}                
                 sortByAddress={sortByAddress}
                 sortByMobileNo={sortByMobileNo}
                 sortByEmail={sortByEmail}
+                sortByCurrentBalance={sortByCurrentBalance}
+                convertToMoney={convertToMoney}
                 isOrdered={isOrdered}
 
             />       

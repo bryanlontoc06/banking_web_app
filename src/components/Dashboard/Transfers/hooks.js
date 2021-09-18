@@ -11,7 +11,7 @@ const useHooks = () => {
         latestTransferTo: false,        
         latestTransferAmount: false,
         currentBalance: false,            
-    })    
+    })   
 
     const sortByAccountNumber = () => {
         setIsOrdered({...isOrdered,
@@ -94,7 +94,7 @@ const useHooks = () => {
         sortByFullName,
         sortByTransferredTo,
         sortByTransferredAmount,
-        sortByCurrentBalance        
+        sortByCurrentBalance,                
     }
 }
 

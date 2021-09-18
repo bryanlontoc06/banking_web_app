@@ -15,11 +15,12 @@ function TableComponent({
   handleGenerateAccountNo,
   searchTerm,
   sortByAccountNumber,
-  sortByFirstName,
-  sortByLastName,
+  sortByFullName,  
   sortByAddress,
   sortByMobileNo,
   sortByEmail,
+  sortByCurrentBalance,
+  convertToMoney,
   isOrdered
 }) {
   return (
@@ -74,12 +75,9 @@ function TableComponent({
               <th style={{cursor: "pointer"}} onClick={() => sortByAccountNumber()} scope="col">
                 Acct # {isOrdered.accountNumber ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
-              <th style={{cursor: "pointer"}} onClick={() => sortByFirstName()} scope="col">
-                Firstname {isOrdered.firstName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
-              </th>
-              <th style={{cursor: "pointer"}} onClick={() => sortByLastName()} scope="col">
-                Lastname {isOrdered.lastName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
-              </th>
+              <th style={{cursor: "pointer"}} onClick={() => sortByFullName()} scope="col">
+                Full Name {isOrdered.fullName ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              </th>              
               <th style={{cursor: "pointer"}} onClick={() => sortByAddress()} scope="col">
                 Address {isOrdered.address ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
@@ -88,6 +86,9 @@ function TableComponent({
               </th>
               <th style={{cursor: "pointer"}} onClick={() => sortByEmail()} scope="col">
               Email {isOrdered.email ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
+              </th>
+              <th style={{cursor: "pointer"}} onClick={() => sortByCurrentBalance()} scope="col">
+                Balance {isOrdered.balance ? <ArrowSortedDownIcon/> : <ArrowSortedUpIcon/>}
               </th>
               <th scope="col" className="action-col">
                 Action
@@ -101,11 +102,11 @@ function TableComponent({
                 return (
                   <tr key={index}>
                     <th scope="row">{data.account_no}</th>
-                    <td>{data.first_name}</td>
-                    <td>{data.last_name}</td>
+                    <td>{data.first_name + " " + data.last_name}</td>                    
                     <td>{data.address}</td>
                     <td>{data.mobile_no}</td>
                     <td>{data.email}</td>
+                    <td>{convertToMoney(data.balance)}</td>
                     <td className="action-btns">
                       <ButtonComponent
                         handleFunction={() => setCurrentSelectedData(data)}

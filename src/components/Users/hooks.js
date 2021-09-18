@@ -55,11 +55,11 @@ const useHooks = () => {
 
     const [isOrdered, setIsOrdered] = useState({
         accountNumber: false,
-        firstName: false,
-        lastName: false,
+        fullName: false,        
         address: false,
         mobileNo: false,
-        email: false
+        email: false,
+        balance: false,
     })  
 
     const [errorState, setErrorState] = useState({
@@ -400,7 +400,7 @@ const useHooks = () => {
                 address: "Boardwalk",
                 mobile_no: 921985641,
                 email: "Bryan@email.com",
-                balance: 1000000,
+                balance: 550000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -417,7 +417,7 @@ const useHooks = () => {
                 address: "Park Place",
                 mobile_no: 952314785,
                 email: "Greg@email.com",
-                balance: 1000000,
+                balance: 575000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -434,7 +434,7 @@ const useHooks = () => {
                 address: "Pennsylvania Avenue",
                 mobile_no: 996214756,
                 email: "Martney@email.com",
-                balance: 1000000,
+                balance: 600000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -451,7 +451,7 @@ const useHooks = () => {
                 address: "North Carolina Avenue",
                 mobile_no: 965987412,
                 email: "Lebron@email.com",
-                balance: 1000000,
+                balance: 650000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -468,7 +468,7 @@ const useHooks = () => {
                 address: "Pacific Avenue",
                 mobile_no: 975632145,
                 email: "Adrian@email.com",
-                balance: 1000000,
+                balance: 700000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -485,7 +485,7 @@ const useHooks = () => {
                 address: "Marvin Gardens",
                 mobile_no: 932564782,
                 email: "John@email.com",
-                balance: 1000000,
+                balance: 750000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -502,7 +502,7 @@ const useHooks = () => {
                 address: "Ventnor Avenue",
                 mobile_no: 945632187,
                 email: "Victor@email.com",
-                balance: 1000000,
+                balance: 800000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -519,7 +519,7 @@ const useHooks = () => {
                 address: "Atlantic Avenue",
                 mobile_no: 986325412,
                 email: "Jerick@email.com",
-                balance: 1000000,
+                balance: 900000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -536,7 +536,7 @@ const useHooks = () => {
                 address: "Indiana Avenue",
                 mobile_no: 916543874,
                 email: "Isiah@email.com",
-                balance: 1000000,
+                balance: 1200000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -553,7 +553,7 @@ const useHooks = () => {
                 address: "Kentucky Avenue",
                 mobile_no: 932564128,
                 email: "Carla@email.com",
-                balance: 1000000,
+                balance: 1100000,
                 role: 'client' ,
                 thumbnail_url: '',
                 latestWithdrawnAmount: amountToWithdraw,
@@ -602,9 +602,9 @@ const useHooks = () => {
     } 
 
     
-    const sortByFirstName = () => {  
+    const sortByFullName = () => {  
         setIsOrdered({...isOrdered,
-            firstName: !isOrdered.firstName,
+            fullName: !isOrdered.fullName,
             // accountNumber: false,    
             // lastName: false,
             // address: false,
@@ -612,41 +612,18 @@ const useHooks = () => {
             // email: false  
         })                
             users.sort((a, b)=>{              
-            let nameA = a.first_name.toUpperCase();
-            let nameB = b.first_name.toUpperCase();                    
+            let nameA = a.first_name.toUpperCase() + " " + a.last_name.toUpperCase();
+            let nameB = b.first_name.toUpperCase() + " " + b.last_name.toUpperCase();                    
             if (nameA > nameB) {
-                return (isOrdered.firstName ? 1: -1)
+                return (isOrdered.fullName ? 1: -1)
               }
             if (nameA < nameB) {
-                return (isOrdered.firstName ? -1: 1)
+                return (isOrdered.fullName ? -1: 1)
               }
               return 0        
           });            
             setUsers([...users])        
-    }
-
-    const sortByLastName = () => {
-        setIsOrdered({...isOrdered,
-            lastName: !isOrdered.lastName,
-            // firstName: !isOrdered.firstName,
-            // accountNumber: false,   
-            // address: false,
-            // mobileNo: false,
-            // email: false  
-        })                   
-        users.sort((a, b)=>{              
-        let nameA = a.last_name.toUpperCase();
-        let nameB = b.last_name.toUpperCase();                    
-        if (nameA > nameB) {
-            return (isOrdered.lastName ? 1: -1)
-          }
-        if (nameA < nameB) {
-            return (isOrdered.lastName ? -1: 1)
-          } 
-          return 0          
-      });            
-        setUsers([...users])
-    }
+    }    
 
     const sortByAddress = () => {
         setIsOrdered({...isOrdered,
@@ -708,6 +685,16 @@ const useHooks = () => {
       });            
         setUsers([...users])
     }
+
+    const sortByCurrentBalance = () => {
+        setIsOrdered({...isOrdered,
+            balance: !isOrdered.balance,           
+        })        
+        users.sort((a, b)=>{
+        return (isOrdered.balance ? a.balance - b.balance : b.balance - a.balance)
+        })
+        setUsers([...users])         
+    } 
     
     return {
         currentSelectedData,
@@ -769,11 +756,11 @@ const useHooks = () => {
         searchHandler,
         deleteDummyAccounts,
         sortByAccountNumber,
-        sortByFirstName,
-        sortByLastName,
+        sortByFullName,        
         sortByAddress,
         sortByMobileNo,
         sortByEmail,
+        sortByCurrentBalance,
         isOrdered
     }
 }
