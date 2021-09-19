@@ -3,7 +3,7 @@ import InputComponent from './InputComponent'
 import Modal from 'react-bootstrap/Modal'
 
 
-const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, modalShow, closeModalComponent, resetUserInput}) => {
+const ModalComponent = ({accountNo, setUserName, userName, setPassword, password, retypePassword, setRetypePassword, setFirstName, firstName, setLastName, lastName, setAddress, address, setMobileNo, mobileNo, setEmail, email, setBalance, balance, handleSaveUsers, errorState, setErrorState, modalShow, closeModalComponent, resetUserInput}) => {
 
     return (
         
@@ -27,7 +27,7 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                              </Modal.Title>
                          </Modal.Header>
                          <Modal.Body>
-                            <form onSubmit={handleSaveUsers}  noValidate>
+                            <form onSubmit={handleSaveUsers} onClick={()=>setErrorState(false)}  noValidate>
                                 <div className="form-floating mb-3">
                                     <InputComponent
                                         inputType={"text"}
@@ -48,8 +48,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setUserName}                                
                                         inputValue={userName}                                
                                         label={`Username`}
-                                        errorMessage={errorState.username && <p className="error-message">Username is required</p>}  
-                                        isError={errorState.username}                                                           
+                                        errorMessage={(errorState.username && <p className="error-message">Username is required</p>) || (errorState.usernameAlreadyExists && <p className="error-message">Username already exists</p>)}  
+                                        isError={errorState.username || errorState.usernameAlreadyExists}                                                           
                                     />
                                 </div>
                                 <div className="form-floating mb-3">
@@ -62,10 +62,10 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         inputValue={password}                                
                                         label={`Password`} 
                                         isPattern={true}     
-                                        errorMessage={errorState.password && <p className="error-message">Password is required</p>}  
-                                        isError={errorState.password}                                                       
+                                        errorMessage={(errorState.password && <p className="error-message">Password is required</p>) || (errorState.passwordsDoNotMatch && <p className="error-message">Passwords do not match</p>)}  
+                                        isError={errorState.password || errorState.passwordsDoNotMatch}                                                       
                                     />
-                                </div>
+                                </div>                                
                                 <div className="form-floating mb-3">
                                     <InputComponent
                                         inputType={"password"}
@@ -88,8 +88,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setFirstName}                                
                                         inputValue={firstName}                                
                                         label={`First Name`}   
-                                        errorMessage={errorState.firstName && <p className="error-message">Firstname is required</p>}  
-                                        isError={errorState.firstName}                                                            
+                                        errorMessage={(errorState.firstName && <p className="error-message">Firstname is required</p>) || (errorState.firstNameCantStartWithNumber && <p className="error-message">First name can't start with a number</p>)}  
+                                        isError={errorState.firstName || errorState.firstNameCantStartWithNumber}                                                            
                                     />
                                 </div>
                                 <div className="form-floating mb-3">
@@ -101,8 +101,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setLastName}                                
                                         inputValue={lastName}                                
                                         label={`Last Name`}  
-                                        errorMessage={errorState.lastName && <p className="error-message">Lastname is required</p>}  
-                                        isError={errorState.lastName}                                                           
+                                        errorMessage={(errorState.lastName && <p className="error-message">Lastname is required</p>) || (errorState.lastNameCantStartWithNumber && <p className="error-message">Last name can't start with a number</p>)}  
+                                        isError={errorState.lastName || errorState.lastNameCantStartWithNumber}                                                           
                                     />
                                 </div>
                                 <div className="form-floating mb-3">

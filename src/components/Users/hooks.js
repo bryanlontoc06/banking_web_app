@@ -70,8 +70,12 @@ const useHooks = () => {
         lastName: false,
         address: false,
         mobileNo: false,
-        email: false
-    })    
+        email: false,
+        usernameAlreadyExists: false,
+        passwordsDoNotMatch: false,
+        firstNameCantStartWithNumber: false,
+        lastNameCantStartWithNumber: false
+    })       
 
     // For Generating User Account Number
     const handleGenerateAccountNo = () => {
@@ -96,20 +100,24 @@ const useHooks = () => {
             lastName: false,
             address: false,
             mobileNo: false,
-            email: false
+            email: false,
+            usernameAlreadyExists: false,
+            passwordsDoNotMatch: false,
+            firstNameCantStartWithNumber: false,
+            lastNameCantStartWithNumber: false                        
         })
     }
 
     // Add user validations
     const validation = (newUser) => {
-        if(users.find((user) => {return user.username === userName})) {
-            alert('Username already exists.')
+        if(users.find((user) => {return user.username === userName})) {            
+            setErrorState({usernameAlreadyExists: true})
        }
-       else if (password !== retypePassword) {
-            alert('Password do not match.')
+       else if (password !== retypePassword) {            
+            setErrorState({passwordsDoNotMatch: true})
        } 
        else if (!userName) {
-            setErrorState({username: true})
+            setErrorState({username: true})            
        }
        else if (!password) {
         setErrorState({password: true})
@@ -172,13 +180,13 @@ const useHooks = () => {
                                             }
                                         }
                                     }
-                                    else {
-                                        alert(`Last name cannot start with a number`)
+                                    else {                                        
+                                        setErrorState({lastNameCantStartWithNumber: true})
                                     }
                                 }
                             }
-                            else {
-                                alert(`First name cannot start with a number`)
+                            else {                                
+                                setErrorState({firstNameCantStartWithNumber: true})
                             }
                         }
                     }
@@ -598,7 +606,7 @@ const useHooks = () => {
         users.sort((a, b)=>{
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
-        setUsers([...users])         
+        setUsers([...users])                  
     } 
 
     
