@@ -3,6 +3,7 @@ import {convertToMoney} from '../../lib/helpers'
 import useHooks from './hooks';
 import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
 import { ToastContainer } from 'react-toastify';
+import Fade  from 'react-reveal/Fade'
 
 const Index = ({loginAccount, isUser}) => {
 
@@ -26,7 +27,9 @@ const Index = ({loginAccount, isUser}) => {
       limit={8}      
       />
         <div className="transaction-header">
+            <Fade down>
             <h1>Transfers History</h1>            
+            </Fade>   
             </div>
         <div className="dashboard-container">
             
@@ -58,6 +61,7 @@ const Index = ({loginAccount, isUser}) => {
                     {!isUser ?
                     transfersHistories.map((user, index) => {
                         return (
+                            <Fade up duration={index>10 ? 1000: `${index}00`}>
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
                                 <td>{user.account_no}</td>
@@ -67,11 +71,13 @@ const Index = ({loginAccount, isUser}) => {
                                 <td>{convertToMoney(user.latestTransferAmount)}</td>
                                 <td>{convertToMoney(user.balance)}</td>
                             </tr>
+                            </Fade>
                         )
                     })
                     :
                     filteredHistory.map((user, index) => {
                         return (
+                            <Fade up duration={index>10 ? 1000: `${index}00`}>
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
                                 <td>{user.account_no}</td>
@@ -81,6 +87,7 @@ const Index = ({loginAccount, isUser}) => {
                                 <td>{convertToMoney(user.latestTransferAmount)}</td>
                                 <td>{convertToMoney(user.balance)}</td>
                             </tr>
+                            </Fade>
                         )
                     })
                 }

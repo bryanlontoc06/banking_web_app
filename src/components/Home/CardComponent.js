@@ -1,11 +1,11 @@
 import React from 'react'
-import Fade  from 'react-reveal/Fade';
+import Zoom  from 'react-reveal/Zoom';
 
 
 const CardComponent = ({svg, setSelected, isAdmin, Link, cardTitle, cardText, item}) => {
     return ( 
         <>
-        <Fade  left>
+        <Zoom  up>
         <div className={`box-item ${item}`}>
         <div className="card">
         <object className="svg" data={svg} width="auto" height="auto"> </object>
@@ -21,7 +21,7 @@ const CardComponent = ({svg, setSelected, isAdmin, Link, cardTitle, cardText, it
         </div>
         </div>     
         </div>
-        </Fade>
+        </Zoom>
        </>        
     )
 }

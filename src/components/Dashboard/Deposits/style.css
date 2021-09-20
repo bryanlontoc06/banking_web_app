@@ -34,4 +34,5 @@ h3 {
     position: sticky;
     top: 0;
     background-color: #f7f7ff !important;
+    z-index: 99;
 }

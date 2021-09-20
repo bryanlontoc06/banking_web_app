@@ -2,7 +2,7 @@ import React from "react";
 import {FillDelete, Search, ContactInfo, PersonPlus, ArrowSortedDownIcon, ArrowSortedUpIcon} from "./component";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Fade  from 'react-reveal/Fade'
 import ButtonComponent from "./ButtonComponent";
 import "./style.css";
 
@@ -109,6 +109,7 @@ const TableComponent = ({
             {users.length > 0 ? (
               users.map((data, index) => {
                 return (
+                  <Fade up duration={index>10 ? 1000: `${index}00`}>
                   <tr key={index}>
                     <th scope="row">{data.account_no}</th>
                     <td>{data.first_name + " " + data.last_name}</td>                    
@@ -132,6 +133,7 @@ const TableComponent = ({
                       /> */}
                     </td>
                   </tr>
+                  </Fade>
                 );
               })
             ) : (

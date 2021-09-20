@@ -3,6 +3,7 @@ import {convertToMoney} from '../../lib/helpers'
 import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
 import useHooks from './hooks';
 import { ToastContainer } from 'react-toastify';
+import Fade  from 'react-reveal/Fade'
 
 const Index = ({loginAccount, isUser}) => {       
 
@@ -24,7 +25,9 @@ const Index = ({loginAccount, isUser}) => {
             limit={8}      
             />
         <div className="transaction-header">
-            <h1>Deposits History</h1>            
+            <Fade down>
+            <h1>Deposits History</h1>  
+            </Fade>           
             </div>
         <div className="dashboard-container">            
             <table className="table">
@@ -52,6 +55,7 @@ const Index = ({loginAccount, isUser}) => {
                     {!isUser ? 
                     depositHistories.map((user, index) => {
                         return (
+                            <Fade up duration={index>10 ? 1000: `${index}00`}>
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
                                 <td>{user.account_no}</td>
@@ -60,11 +64,13 @@ const Index = ({loginAccount, isUser}) => {
                                 <td>{convertToMoney(user.latestDepositAmount)}</td>
                                 <td>{convertToMoney(user.balance)}</td>
                             </tr>
+                            </Fade>
                         )
                     })
                     :
                     filteredHistory.map((user, index) => {
                         return (
+                            <Fade up duration={index>10 ? 1000: `${index}00`}>
                             <tr key={index}>
                                 <th scope="row">{index+1}</th>
                                 <td>{user.account_no}</td>
@@ -73,6 +79,7 @@ const Index = ({loginAccount, isUser}) => {
                                 <td>{convertToMoney(user.latestDepositAmount)}</td>
                                 <td>{convertToMoney(user.balance)}</td>
                             </tr>
+                            </Fade>
                         )
                     })
                 }

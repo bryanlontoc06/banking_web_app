@@ -290,7 +290,8 @@ table.table {
 .table-header {
     position: sticky;
     top: 0;
-    background: #f7f7ff
+    background: #f7f7ff;
+    z-index: 99;
 }
 
 
