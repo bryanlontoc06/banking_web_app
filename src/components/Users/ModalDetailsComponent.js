@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ButtonComponent from './ButtonComponent'
 import InputComponent from './InputComponent'
+import {Modal, Button} from 'react-bootstrap'
 
 const ModalForDetailsComponent = (  
   {currentSelectedData,  
@@ -14,29 +15,23 @@ const ModalForDetailsComponent = (
   setTransferTo,
   setAmountToTransfer,
   transferTo,
-  amountToTransfer,
-  transferMessage,
+  amountToTransfer,  
   handleTransfer,
   modalDetailsAlert,
-  resetTransaction,
-  withdrawMessage,
-  depositMessage
+  resetTransaction,  
+  show,
+  setShow
   }
-) => {
-    return (
-        <div>        
-            <div className="modal fade" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">User Information</h5>
-                        <ButtonComponent
-                         btnClass={"btn-close"}
-                         dbsDismiss={"modal"}
-                         ariaLabel={"Close"}
-                         resetTransaction={resetTransaction}
-                         />
-                    </div>
+) => {       
+    return ( 
+        <div className="modal-details-component">              
+        <Modal show={show}>
+          <Modal.Header>          
+          <Modal.Title><h5 className="modal-title" id="exampleModalLabel">User Information</h5></Modal.Title>
+          <button type="button" className="btn-close modal-close-btn" data-bs-dismiss="modal" aria-label="Close" onClick={() => {setShow(false); resetTransaction()}}></button>
+        </Modal.Header>
+         <Modal.Body>        
+                    <div className="modal-content">                   
                     <div className="modal-body admin-modal-details">
                         <div className="user-row">
                             <div className="form-floating mb-3">
@@ -136,7 +131,7 @@ const ModalForDetailsComponent = (
                         </div>
                     </div>
                     <div>
-                        {/* <div className="title"> */} <div className='modal-header'>
+                         <div className='modal-header'>
                             <h5 className="modal-title" >Transactions</h5>
                         </div>
                         <div className="transaction-body-container">
@@ -158,14 +153,13 @@ const ModalForDetailsComponent = (
                                 
                                 <ButtonComponent
                                     btnClass={"btn btn-primary"}                                   
-                                    handleFunction={() => handleWithdraw()}
+                                    handleFunction={() => handleWithdraw()}                                    
                                     btnDescription={"Withdraw"}
                                 />
                             </div>
 
                             <div style={{marginBottom: '1rem'}}>
-                                {modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}
-                                {modalDetailsAlert.successful && <p className="success-message">Withdrawn {convertToMoney(withdrawMessage)} Successfully!</p>}
+                                {modalDetailsAlert.insufficientBalance && <p className="error-message">You have an Insufficient Balance. Please Try Again!</p>}                                
                                 {modalDetailsAlert.enterAnAmountToWithdraw && <p className="enter-an-amount-message">Please enter an Amount to Withdraw.</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeWithdraw && <p className="error-message">Amount withdrawn cannot be negative.</p>}                                
                             </div>
@@ -190,8 +184,7 @@ const ModalForDetailsComponent = (
                                 />
                             </div>
 
-                            <div style={{marginBottom: '1rem'}}>
-                                {modalDetailsAlert.successfulDeposit && <p className="success-message">Deposited {convertToMoney(depositMessage)} Successfully!</p>}
+                            <div style={{marginBottom: '1rem'}}>                               
                                 {modalDetailsAlert.enterAnAmountToDeposit && <p className="enter-an-amount-message">Please enter an Amount to Deposit.</p>}
                                 {modalDetailsAlert.amountEnteredIsNegativeDeposit && <p className="error-message">Amount deposited cannot be negative.</p>}
                             </div>
@@ -233,27 +226,23 @@ const ModalForDetailsComponent = (
                             </div>
                             <div style={{marginBottom: '1rem'}}>
                                 {modalDetailsAlert.amountEnteredIsNegative && <p className="error-message">Amount entered cannot be negative.</p>}
-                                {modalDetailsAlert.insufficientBalanceTransfer && <p className="error-message">You have an Insufficient Balance. Please Try Again.</p>}
-                                {modalDetailsAlert.successfulTransfer && <p className="success-message">You have successfully transferred {convertToMoney(transferMessage.transferAmount)} to {transferMessage.firstName} {transferMessage.lastName} with the Account# {transferMessage.accountNo}.</p>}
+                                {modalDetailsAlert.insufficientBalanceTransfer && <p className="error-message">You have an Insufficient Balance. Please Try Again.</p>}                                
                                 {modalDetailsAlert.enterAnAmountToTransfer && <p className="enter-an-amount-message">Please enter an amount to transfer.</p>}
                                 {modalDetailsAlert.sameAccountNumber &&  <p className="enter-an-amount-message">Invalid Action. You cannot send amount to the same Account #. Please Try Again.</p>}
                                 {modalDetailsAlert.accountNumberNotValidTransfer && <p className="error-message">Account# is not valid. Please Try Again.</p>}                      
                                 {modalDetailsAlert.accountNumberCannotBeBlank && <p className="error-message">Account# to transfer to cannot be blank. Please Try Again. </p>}
                             </div>
                         </div>
-                    </div>
-                    <div className="modal-footer">
-                        <ButtonComponent
-                            btnClass={"btn btn-secondary"}
-                            dbsDismiss={"modal"}
-                            btnDescription={"Close"}
-                            resetTransaction={resetTransaction}
-                        />
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div>                 
+                    </div>        
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={()=>{setShow(false); resetTransaction()}}>
+            Close
+          </Button>        
+        </Modal.Footer>
+    </Modal>
+    </div> 
     )
 }
 

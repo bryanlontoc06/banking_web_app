@@ -1,10 +1,12 @@
 import React from "react";
 import {FillDelete, Search, ContactInfo, PersonPlus, ArrowSortedDownIcon, ArrowSortedUpIcon} from "./component";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ButtonComponent from "./ButtonComponent";
 import "./style.css";
 
-function TableComponent({
+const TableComponent = ({
   setCurrentSelectedData,
   handleDeleteUser,
   users,
@@ -21,11 +23,18 @@ function TableComponent({
   sortByEmail,
   sortByCurrentBalance,
   convertToMoney,
-  isOrdered
-}) {
+  isOrdered,  
+  setShow  
+}) => {
+ 
+
   return (
-    <>
-      <div className="btns-n-search">
+    <>        
+      <ToastContainer
+      pauseOnFocusLoss={false}   
+      limit={8}      
+      />
+      <div className="btns-n-search">  
         <div className="add-client-btns">
           <ButtonComponent
             handleFunction={handleGenerateAccountNo}
@@ -109,7 +118,7 @@ function TableComponent({
                     <td>{convertToMoney(data.balance)}</td>
                     <td className="action-btns">
                       <ButtonComponent
-                        handleFunction={() => setCurrentSelectedData(data)}
+                        handleFunction={() => {setCurrentSelectedData(data); setShow(true)}}
                         iconName={<ContactInfo className="white" />}
                         btnClass={"btn btn-info"}
                         dbsToggle={"modal"}

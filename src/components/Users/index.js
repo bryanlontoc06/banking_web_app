@@ -51,9 +51,7 @@ const Index = () => {
         modalShow,
         closeModalComponent,
         resetUserInput,
-        insertUserData,
-        withdrawMessage,
-        depositMessage,
+        insertUserData,        
         loadDummyData,
         searchTerm,
         searchResults,
@@ -65,7 +63,9 @@ const Index = () => {
         sortByMobileNo,
         sortByEmail,
         sortByCurrentBalance,
-        isOrdered,              
+        isOrdered,
+        show,
+        setShow                     
     } = useHooks();
 
     
@@ -89,8 +89,9 @@ const Index = () => {
                 sortByEmail={sortByEmail}
                 sortByCurrentBalance={sortByCurrentBalance}
                 convertToMoney={convertToMoney}
-                isOrdered={isOrdered}
-
+                isOrdered={isOrdered}   
+                show={show}
+                setShow={setShow}                          
             />       
             {/* <!-- Modal --> */}
             <ModalComponent
@@ -132,14 +133,13 @@ const Index = () => {
                 transferTo={transferTo}
                 setTransferTo={setTransferTo}
                 amountToTransfer={amountToTransfer}
-                setAmountToTransfer={setAmountToTransfer}
-                transferMessage={transferMessage}
+                setAmountToTransfer={setAmountToTransfer}                
                 handleDeposit={handleDeposit}
                 handleTransfer={handleTransfer}
                 modalDetailsAlert={modalDetailsAlert}
-                resetTransaction={resetTransaction}
-                withdrawMessage={withdrawMessage}
-                depositMessage={depositMessage}                
+                resetTransaction={resetTransaction}                
+                show={show}
+                setShow={setShow}                
             />
         </div>
     )

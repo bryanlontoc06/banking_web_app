@@ -48,8 +48,10 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setUserName}                                
                                         inputValue={userName}                                
                                         label={`Username`}
-                                        errorMessage={(errorState.username && <p className="error-message">Username is required</p>) || (errorState.usernameAlreadyExists && <p className="error-message">Username already exists</p>)}  
-                                        isError={errorState.username || errorState.usernameAlreadyExists}                                                           
+                                        errorMessage={(errorState.username && <p className="error-message">Username is required</p>)
+                                        || (errorState.usernameAlreadyExists && <p className="error-message">Username already exists</p>)
+                                        || (errorState.usernameCantContainSpace && <p className="error-message">Username can't contain spaces</p>)}  
+                                        isError={errorState.username || errorState.usernameAlreadyExists || errorState.usernameCantContainSpace}                                                           
                                     />
                                 </div>
                                 <div className="form-floating mb-3">
@@ -62,7 +64,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         inputValue={password}                                
                                         label={`Password`} 
                                         isPattern={true}     
-                                        errorMessage={(errorState.password && <p className="error-message">Password is required</p>) || (errorState.passwordsDoNotMatch && <p className="error-message">Passwords do not match</p>)}  
+                                        errorMessage={(errorState.password && <p className="error-message">Password is required</p>)
+                                        || (errorState.passwordsDoNotMatch && <p className="error-message">Passwords do not match</p>)}  
                                         isError={errorState.password || errorState.passwordsDoNotMatch}                                                       
                                     />
                                 </div>                                
@@ -88,7 +91,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setFirstName}                                
                                         inputValue={firstName}                                
                                         label={`First Name`}   
-                                        errorMessage={(errorState.firstName && <p className="error-message">Firstname is required</p>) || (errorState.firstNameCantStartWithNumber && <p className="error-message">First name can't start with a number</p>)}  
+                                        errorMessage={(errorState.firstName && <p className="error-message">Firstname is required</p>)
+                                        || (errorState.firstNameCantStartWithNumber && <p className="error-message">First name can't start with a number</p>)}  
                                         isError={errorState.firstName || errorState.firstNameCantStartWithNumber}                                                            
                                     />
                                 </div>
@@ -101,7 +105,8 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setLastName}                                
                                         inputValue={lastName}                                
                                         label={`Last Name`}  
-                                        errorMessage={(errorState.lastName && <p className="error-message">Lastname is required</p>) || (errorState.lastNameCantStartWithNumber && <p className="error-message">Last name can't start with a number</p>)}  
+                                        errorMessage={(errorState.lastName && <p className="error-message">Lastname is required</p>)
+                                        || (errorState.lastNameCantStartWithNumber && <p className="error-message">Last name can't start with a number</p>)}  
                                         isError={errorState.lastName || errorState.lastNameCantStartWithNumber}                                                           
                                     />
                                 </div>
@@ -141,8 +146,9 @@ const ModalComponent = ({accountNo, setUserName, userName, setPassword, password
                                         handleOnChange={setEmail}                                
                                         inputValue={email}                                
                                         label={`Email Address`}  
-                                        errorMessage={errorState.email && <p className="error-message">Email is required</p>}  
-                                        isError={errorState.email}                                                            
+                                        errorMessage={(errorState.email && <p className="error-message">Email is required</p>) ||
+                                        (errorState.invalidEmailFormat && <p className="error-message">Invalid email format</p>)}  
+                                        isError={errorState.email || errorState.invalidEmailFormat}                                                            
                                     />
                                 </div>
                                 <div className="form-floating mb-3">

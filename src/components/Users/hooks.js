@@ -2,8 +2,7 @@ import { useState, useContext } from 'react'
 import {AppContext} from '../Global/AppContext'
 import useLocalStorage from './useLocalStorage'
 import {convertToMoney} from '../lib/helpers'
-
-
+import { toast } from 'react-toastify';
 
 const useHooks = () => {    
     const {withdrawalHistories,
@@ -28,14 +27,13 @@ const useHooks = () => {
     const [balance, setBalance] = useState('');
     const [amountToWithdraw, setAmountToWithdraw] = useState('')
     const [amountToDeposit, setAmountToDeposit] = useState('')
-    const [transferTo, setTransferTo] = useState('')
-    const [transferMessage, setTransferMessage] = useState({})
-    const [withdrawMessage, setwithdrawMessage] = useState('')
-    const [depositMessage, setDepositMessage] = useState('')
+    const [transferTo, setTransferTo] = useState('')    
     const [amountToTransfer, setAmountToTransfer] = useState('')
+    const [show, setShow] = useState(false);
     const [modalShow, setModalShow] = useState(false);  
     const [searchTerm, setSearchTerm] = useState('');  
     const [searchResults, setSearchResults] = useState([]);    
+    
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -74,7 +72,9 @@ const useHooks = () => {
         usernameAlreadyExists: false,
         passwordsDoNotMatch: false,
         firstNameCantStartWithNumber: false,
-        lastNameCantStartWithNumber: false
+        lastNameCantStartWithNumber: false,
+        usernameCantContainSpace: false,
+        invalidEmailFormat: false
     })       
 
     // For Generating User Account Number
@@ -104,7 +104,9 @@ const useHooks = () => {
             usernameAlreadyExists: false,
             passwordsDoNotMatch: false,
             firstNameCantStartWithNumber: false,
-            lastNameCantStartWithNumber: false                        
+            lastNameCantStartWithNumber: false,
+            usernameCantContainSpace: false,
+            invalidEmailFormat: false                        
         })
     }
 
@@ -142,7 +144,8 @@ const useHooks = () => {
        }
         else if (userName) {
             setErrorState({username: false})
-                if (password) {
+              if(!userName.includes(" ")){                    
+                 if (password) {
                     setErrorState({password: false})
                     if (retypePassword) {
                         setErrorState({retypePassword: false})
@@ -158,7 +161,7 @@ const useHooks = () => {
                                                 setErrorState({mobileNo: false})
                                                 if (email) {
                                                     setErrorState({email: false})
-
+                                                        if(email.includes("@" && ".com")){
                                                     setUsers([...users, newUser])
                                                     setAccountNo('')
                                                     setUserName('')
@@ -175,7 +178,19 @@ const useHooks = () => {
                                                     setAmountToDeposit(0)
                                                     setTransferTo('')
                                                     setModalShow(false)
-                                                    alert('Account created')
+                                                    toast.success(`Account Created for ${firstName}!`, {
+                                                        position: "top-center",
+                                                        autoClose: 5000,
+                                                        hideProgressBar: false,
+                                                        closeOnClick: true,
+                                                        pauseOnHover: true,
+                                                        draggable: true,
+                                                        progress: undefined,
+                                                        theme: "colored"
+                                                        });  
+                                                    } else {
+                                                        setErrorState({invalidEmailFormat: true})
+                                                    }                                                   
                                                 }
                                             }
                                         }
@@ -190,10 +205,13 @@ const useHooks = () => {
                             }
                         }
                     }
-                }
+               }
+        }
+        else {            
+            setErrorState({usernameCantContainSpace: true})
         } 
     }
-
+}
     // Modal Component Reset state
     const resetUserInput = () => {
         setAccountNo("");
@@ -250,16 +268,28 @@ const useHooks = () => {
         const userAccounts = users.map(user=>user.account_no)
         const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
         if(!dummyAccounts.some(val=>userAccounts.includes(val))){
-            setLoadDummyData(false)            
+            setLoadDummyData(false)                     
         }        
    }   
    
     //  Deleting dummy accounts (Delete Data Button)
-   const deleteDummyAccounts = ()=> {           
+   const deleteDummyAccounts = ()=> {                 
+        if(loadDummyData){
+            toast.warning(`Deleted Test Data`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined, 
+                theme: "colored"                       
+                }); 
         const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
-        const newUsers = users.filter(user=>user =! dummyAccounts.includes(user.account_no))
-        setLoadDummyData(false)   
-        setUsers([...newUsers])    
+        const newUsers = users.filter(user=>user =! dummyAccounts.includes(user.account_no))         
+        setUsers([...newUsers])   
+        } 
+        setLoadDummyData(false)    
    }
 
     // Functions for Histories
@@ -298,11 +328,19 @@ const useHooks = () => {
                 if(amountToWithdraw <= currentSelectedData.balance) {
                      let currentBalance = currentSelectedData.balance - amountToWithdraw;
                      setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
-                     handleHistories('withdraw');
-                     setModalDetailsAlert({insufficientBalance: false})
-                     setModalDetailsAlert({successful: true})
-                     setwithdrawMessage(amountToWithdraw)
-                     setAmountToWithdraw('')
+                     handleHistories('withdraw');                                                               
+                     toast.success(`Successfully Withdrawn ${convertToMoney(amountToWithdraw)} from ${currentSelectedData.account_no}`, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored"            
+                        });
+                        setShow(false)
+                        resetTransaction() 
                 } else {
                  setModalDetailsAlert({insufficientBalance: true})
                 } 
@@ -321,9 +359,18 @@ const useHooks = () => {
             let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
             setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
             handleHistories('deposit');
-            setDepositMessage(amountToDeposit)
-            setAmountToDeposit('')
-            setModalDetailsAlert({successfulDeposit: true})
+            toast.success(`Successfully Deposited ${convertToMoney(amountToDeposit)} to ${currentSelectedData.account_no}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored"            
+                });
+                resetTransaction()
+                setShow(false)            
         } else {
             setModalDetailsAlert({enterAnAmountToDeposit: true})
         }
@@ -349,10 +396,18 @@ const useHooks = () => {
                                     currentSelectedData.latestTransferTo = transferTo,
                                     toUser.balance = toUserCurrentBalance)
                                 handleHistories('transfer');
-                                setTransferMessage({transferAmount: amountToTransfer, accountNo: transferTo, firstName: toUser.first_name, lastName: toUser.last_name})                            
-                                setTransferTo('')
-                                setAmountToTransfer('')
-                                setModalDetailsAlert({successfulTransfer: true})
+                                toast.success(`Successfully Transferred ${convertToMoney(amountToTransfer)} from ${currentSelectedData.account_no} to ${transferTo}`, {
+                                    position: "top-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "colored"            
+                                    });                                    
+                                    setShow(false) 
+                                    resetTransaction()
                             } else {
                                 setModalDetailsAlert({insufficientBalanceTransfer: true})
                             }
@@ -376,8 +431,7 @@ const useHooks = () => {
         setAmountToWithdraw('')
         setAmountToDeposit('')
         setAmountToTransfer('')
-        setTransferTo('')
-        setTransferMessage({})
+        setTransferTo('')        
         setModalDetailsAlert({
             insufficientBalance: false,
             successful: false,
@@ -396,9 +450,18 @@ const useHooks = () => {
     }
 
     // Adding 10 users on one click
-    const insertUserData = (e) => {          
-
+    const insertUserData = (e) => {             
             if(!loadDummyData){
+                toast.success(`Loadeded Test Data`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"            
+                    }); 
             setUsers([...users, {
                 account_no: "22902201921",
                 username: "Bryan", 
@@ -606,7 +669,16 @@ const useHooks = () => {
         users.sort((a, b)=>{
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
-        setUsers([...users])                  
+        setUsers([...users])      
+        toast.success(`Sorted Account Number`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,            
+            });             
     } 
 
     
@@ -630,7 +702,16 @@ const useHooks = () => {
               }
               return 0        
           });            
-            setUsers([...users])        
+            setUsers([...users])    
+            toast.success(`Sorted By Full Name`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,            
+                });     
     }    
 
     const sortByAddress = () => {
@@ -654,6 +735,15 @@ const useHooks = () => {
           return 0          
       });            
         setUsers([...users])
+        toast.success(`Sorted By Address`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,            
+            }); 
     }
 
     const sortByMobileNo = () => {
@@ -668,7 +758,16 @@ const useHooks = () => {
         users.sort((a, b)=>{
         return (isOrdered.mobileNo ? a.mobile_no - b.mobile_no : b.mobile_no - a.mobile_no)
         })
-        setUsers([...users])         
+        setUsers([...users])     
+        toast.success(`Sorted By Mobile Number`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,            
+            });             
     } 
 
     const sortByEmail = () => {
@@ -692,6 +791,15 @@ const useHooks = () => {
           return 0          
       });            
         setUsers([...users])
+        toast.success(`Sorted By Email`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,            
+            }); 
     }
 
     const sortByCurrentBalance = () => {
@@ -702,7 +810,16 @@ const useHooks = () => {
         return (isOrdered.balance ? a.balance - b.balance : b.balance - a.balance)
         })
         setUsers([...users])         
-    } 
+        toast.success(`Sorted By Current Balance`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,            
+            }); 
+    }        
     
     return {
         currentSelectedData,
@@ -734,8 +851,7 @@ const useHooks = () => {
         amountToDeposit, 
         setAmountToDeposit, 
         transferTo, 
-        setTransferTo,
-        transferMessage,
+        setTransferTo,        
         amountToTransfer, 
         setAmountToTransfer,
         handleGenerateAccountNo,
@@ -753,9 +869,7 @@ const useHooks = () => {
         modalShow,
         closeModalComponent,
         resetUserInput,
-        insertUserData,
-        withdrawMessage,
-        depositMessage,
+        insertUserData,        
         loadDummyData,
         searchTerm,
         setSearchTerm,
@@ -769,7 +883,9 @@ const useHooks = () => {
         sortByMobileNo,
         sortByEmail,
         sortByCurrentBalance,
-        isOrdered
+        isOrdered, 
+        show,
+        setShow  
     }
 }
 
