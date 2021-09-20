@@ -33,7 +33,6 @@ const useHooks = () => {
     const [modalShow, setModalShow] = useState(false);  
     const [searchTerm, setSearchTerm] = useState('');  
     const [searchResults, setSearchResults] = useState([]);    
-    
     const [modalDetailsAlert, setModalDetailsAlert] = useState({
         insufficientBalance: false,
         successful: false,
@@ -177,17 +176,8 @@ const useHooks = () => {
                                                     setAmountToTransfer(0)
                                                     setAmountToDeposit(0)
                                                     setTransferTo('')
-                                                    setModalShow(false)
-                                                    toast.success(`Account Created for ${firstName}!`, {
-                                                        position: "top-center",
-                                                        autoClose: 5000,
-                                                        hideProgressBar: false,
-                                                        closeOnClick: true,
-                                                        pauseOnHover: true,
-                                                        draggable: true,
-                                                        progress: undefined,
-                                                        theme: "colored"
-                                                        });  
+                                                    setModalShow(false)                                                
+                                                    toastNotify("success", `Account Created for ${firstName}!`, "top-center", "colored")    
                                                     } else {
                                                         setErrorState({invalidEmailFormat: true})
                                                     }                                                   
@@ -274,17 +264,8 @@ const useHooks = () => {
    
     //  Deleting dummy accounts (Delete Data Button)
    const deleteDummyAccounts = ()=> {                 
-        if(loadDummyData){
-            toast.warning(`Deleted Test Data`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined, 
-                theme: "colored"                       
-                }); 
+        if(loadDummyData){           
+        toastNotify("warn", `Deleted Test Data`, "top-right", "colored")
         const dummyAccounts = ["22902201921", "22902201922", "22902201923", "22902201924", "22902201925", "22902201926", "22902201927", "22902201928", "22902201929", "22902201930"]
         const newUsers = users.filter(user=>user =! dummyAccounts.includes(user.account_no))         
         setUsers([...newUsers])   
@@ -328,17 +309,8 @@ const useHooks = () => {
                 if(amountToWithdraw <= currentSelectedData.balance) {
                      let currentBalance = currentSelectedData.balance - amountToWithdraw;
                      setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestWithdrawnAmount = amountToWithdraw)
-                     handleHistories('withdraw');                                                               
-                     toast.success(`Successfully Withdrawn ${convertToMoney(amountToWithdraw)} from ${currentSelectedData.account_no}`, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored"            
-                        });
+                     handleHistories('withdraw');                                                                                    
+                        toastNotify("success", `Successfully Withdrawn ${convertToMoney(amountToWithdraw)} from ${currentSelectedData.account_no}`, "top-right", "colored")                                      
                         setShow(false)
                         resetTransaction() 
                 } else {
@@ -358,17 +330,8 @@ const useHooks = () => {
         else if(amountToDeposit > 0) {
             let currentBalance = (+currentSelectedData.balance) + (+amountToDeposit);
             setUsers([...users], currentSelectedData.balance = currentBalance, currentSelectedData.latestDepositAmount = amountToDeposit)
-            handleHistories('deposit');
-            toast.success(`Successfully Deposited ${convertToMoney(amountToDeposit)} to ${currentSelectedData.account_no}`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored"            
-                });
+            handleHistories('deposit');            
+                toastNotify("success", `Successfully Deposited ${convertToMoney(amountToDeposit)} to ${currentSelectedData.account_no}`, "top-right", "colored")                                      
                 resetTransaction()
                 setShow(false)            
         } else {
@@ -395,17 +358,8 @@ const useHooks = () => {
                                     currentSelectedData.latestTransferAmount = amountToTransfer, 
                                     currentSelectedData.latestTransferTo = transferTo,
                                     toUser.balance = toUserCurrentBalance)
-                                handleHistories('transfer');
-                                toast.success(`Successfully Transferred ${convertToMoney(amountToTransfer)} from ${currentSelectedData.account_no} to ${transferTo}`, {
-                                    position: "top-right",
-                                    autoClose: 5000,
-                                    hideProgressBar: false,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                    progress: undefined,
-                                    theme: "colored"            
-                                    });                                    
+                                handleHistories('transfer');                                
+                                    toastNotify("success",`Successfully Transferred ${convertToMoney(amountToTransfer)} from ${currentSelectedData.account_no} to ${transferTo}`, "top-right", "colored")                                      
                                     setShow(false) 
                                     resetTransaction()
                             } else {
@@ -451,17 +405,8 @@ const useHooks = () => {
 
     // Adding 10 users on one click
     const insertUserData = (e) => {             
-            if(!loadDummyData){
-                toast.success(`Loadeded Test Data`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored"            
-                    }); 
+            if(!loadDummyData){           
+            toastNotify("success", "Successfully Loaded Test Data", "top-right", "colored")    
             setUsers([...users, {
                 account_no: "22902201921",
                 username: "Bryan", 
@@ -670,15 +615,7 @@ const useHooks = () => {
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
         setUsers([...users])      
-        toast.success(`Sorted Account Number`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,            
-            });             
+        toastNotify("success", "Sorted By Account Number", "top-right")            
     } 
 
     
@@ -703,15 +640,7 @@ const useHooks = () => {
               return 0        
           });            
             setUsers([...users])    
-            toast.success(`Sorted By Full Name`, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,            
-                });     
+            toastNotify("success", "Sorted By Full Name", "top-right")  
     }    
 
     const sortByAddress = () => {
@@ -735,15 +664,7 @@ const useHooks = () => {
           return 0          
       });            
         setUsers([...users])
-        toast.success(`Sorted By Address`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,            
-            }); 
+        toastNotify("success", "Sorted By Address", "top-right")
     }
 
     const sortByMobileNo = () => {
@@ -759,15 +680,7 @@ const useHooks = () => {
         return (isOrdered.mobileNo ? a.mobile_no - b.mobile_no : b.mobile_no - a.mobile_no)
         })
         setUsers([...users])     
-        toast.success(`Sorted By Mobile Number`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,            
-            });             
+        toastNotify("success", "Sorted By Phone Number", "top-right")           
     } 
 
     const sortByEmail = () => {
@@ -791,15 +704,7 @@ const useHooks = () => {
           return 0          
       });            
         setUsers([...users])
-        toast.success(`Sorted By Email`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,            
-            }); 
+        toastNotify("success", "Sorted By Email", "top-right")
     }
 
     const sortByCurrentBalance = () => {
@@ -809,17 +714,35 @@ const useHooks = () => {
         users.sort((a, b)=>{
         return (isOrdered.balance ? a.balance - b.balance : b.balance - a.balance)
         })
-        setUsers([...users])         
-        toast.success(`Sorted By Current Balance`, {
-            position: "top-right",
+        setUsers([...users])      
+        toastNotify("success", "Sorted By Current Balance", "top-right")
+    }   
+    
+    const toastNotify = (type, str, position, colored=null) => {
+            if(type==="success"){
+            toast.success(str, {
+            position: position,
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
-            progress: undefined,            
+            progress: undefined,
+            theme: colored            
             }); 
-    }        
+        } else if (type==="warn"){
+            toast.warning(str, {
+                position: position,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined, 
+                theme: colored
+                }); 
+        } 
+    }
     
     return {
         currentSelectedData,

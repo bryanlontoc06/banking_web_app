@@ -2,6 +2,7 @@ import './style.css';
 import {convertToMoney} from '../../lib/helpers'
 import useHooks from './hooks';
 import { ArrowSortedDownIcon, ArrowSortedUpIcon } from '../../Users/component';
+import { ToastContainer } from 'react-toastify';
 
 const Index = ({loginAccount, isUser}) => {
 
@@ -20,6 +21,10 @@ const Index = ({loginAccount, isUser}) => {
 
     return (
         <>
+          <ToastContainer
+      pauseOnFocusLoss={false}   
+      limit={8}      
+      />
         <div className="transaction-header">
             <h1>Transfers History</h1>            
             </div>

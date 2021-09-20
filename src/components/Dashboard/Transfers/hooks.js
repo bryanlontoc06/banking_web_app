@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useLocalStorage from '../../Users/useLocalStorage'
+import { toast } from 'react-toastify';
 
 const useHooks = () => {    
     const [transfersHistories, setTransfersHistories] = useLocalStorage('transfersHistories', [])
@@ -21,6 +22,7 @@ const useHooks = () => {
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
         setTransfersHistories([...transfersHistories])         
+        toastNotify("success", "Sorted By Account Number", "top-right")                  
     } 
     
     const sortByFullName = () => {  
@@ -39,6 +41,7 @@ const useHooks = () => {
               return 0        
           });            
             setTransfersHistories([...transfersHistories])        
+            toastNotify("success", "Sorted By Full Name", "top-right")    
     }
 
     const sortByDate = () => {
@@ -52,6 +55,7 @@ const useHooks = () => {
         return (isOrdered.date ? date1 - date2 : date2 - date1)
         })
         setTransfersHistories([...transfersHistories]) 
+        toastNotify("success", "Sorted By Date", "top-right")
     }
   
 
@@ -63,6 +67,7 @@ const useHooks = () => {
         return (isOrdered.latestTransferTo ? a.latestTransferTo - b.latestTransferTo : b.latestTransferTo - a.latestTransferTo)
         })
         setTransfersHistories([...transfersHistories])         
+        toastNotify("success", "Sorted By Account Number Transferred to", "top-right")        
     } 
 
     const sortByTransferredAmount = () => {
@@ -72,7 +77,8 @@ const useHooks = () => {
         transfersHistories.sort((a, b)=>{
         return (isOrdered.latestTransferAmount ? a.latestTransferAmount - b.latestTransferAmount : b.latestTransferAmount - a.latestTransferAmount)
         })
-        setTransfersHistories([...transfersHistories])         
+        setTransfersHistories([...transfersHistories]) 
+        toastNotify("success", "Sorted By Transferred Amount", "top-right")                
     } 
 
     const sortByCurrentBalance = () => {
@@ -83,7 +89,34 @@ const useHooks = () => {
         return (isOrdered.currentBalance ? a.balance - b.balance : b.balance - a.balance)
         })
         setTransfersHistories([...transfersHistories])         
+        toastNotify("success", "Sorted By Current Balance", "top-right")        
     } 
+
+    const toastNotify = (type, str, position, colored=null) => {
+        if(type==="success"){
+        toast.success(str, {
+        position: position,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: colored            
+        }); 
+    } else if (type==="warn"){
+        toast.warning(str, {
+            position: position,
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined, 
+            theme: colored
+            }); 
+    } 
+}
 
     return {      
         transfersHistories,

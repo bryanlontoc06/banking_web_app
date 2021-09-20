@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useLocalStorage from '../../Users/useLocalStorage'
+import { toast } from 'react-toastify';
 
 const useHooks = () => {    
     const [withdrawalHistories, setWithdrawalHistories] = useLocalStorage('withdrawalHistories', [])
@@ -20,7 +21,8 @@ const useHooks = () => {
         withdrawalHistories.sort((a, b)=>{
         return (isOrdered.accountNumber ? a.account_no - b.account_no : b.account_no - a.account_no)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setWithdrawalHistories([...withdrawalHistories])
+        toastNotify("success", "Sorted By Account Number", "top-right")                  
     } 
 
     
@@ -39,7 +41,8 @@ const useHooks = () => {
               }
               return 0        
           });            
-            setWithdrawalHistories([...withdrawalHistories])        
+            setWithdrawalHistories([...withdrawalHistories])      
+            toastNotify("success", "Sorted By Full Name", "top-right")    
     }
 
     const sortByDate = () => {
@@ -53,6 +56,7 @@ const useHooks = () => {
         return (isOrdered.date ? date1 - date2 : date2 - date1)
         })
         setWithdrawalHistories([...withdrawalHistories]) 
+        toastNotify("success", "Sorted By Date", "top-right")
     }
   
 
@@ -63,7 +67,8 @@ const useHooks = () => {
         withdrawalHistories.sort((a, b)=>{
         return (isOrdered.withdrawnAmount ? a.latestWithdrawnAmount - b.latestWithdrawnAmount : b.latestWithdrawnAmount - a.latestWithdrawnAmount)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setWithdrawalHistories([...withdrawalHistories]) 
+        toastNotify("success", "Sorted By Withdrawn Amount", "top-right")        
     } 
 
     const sortByCurrentBalance = () => {
@@ -73,8 +78,35 @@ const useHooks = () => {
         withdrawalHistories.sort((a, b)=>{
         return (isOrdered.currentBalance ? a.balance - b.balance : b.balance - a.balance)
         })
-        setWithdrawalHistories([...withdrawalHistories])         
+        setWithdrawalHistories([...withdrawalHistories]) 
+        toastNotify("success", "Sorted By Current Balance", "top-right")        
     } 
+
+    const toastNotify = (type, str, position, colored=null) => {
+        if(type==="success"){
+        toast.success(str, {
+        position: position,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: colored            
+        }); 
+    } else if (type==="warn"){
+        toast.warning(str, {
+            position: position,
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined, 
+            theme: colored
+            }); 
+    } 
+}
 
     return {      
         withdrawalHistories,
