@@ -6,13 +6,14 @@ import security from "../../assets/security.svg"
 import feedback from "../../assets/feedback.svg"
 import { Link } from "react-router-dom";
 import CardComponent from "./CardComponent"
+import Zoom from 'react-reveal/Zoom';
 
 const Index = ({setSelected, isAdmin}) => {
     
     return (
       <>    
     <div className="card-container">
-
+    
         <CardComponent
         svg={cc}
         setSelected={setSelected}
@@ -21,7 +22,7 @@ const Index = ({setSelected, isAdmin}) => {
         cardTitle={"Open and manage accounts with ease."} 
         cardText={"No need to drop by a branch."}
         item={"item1"}  
-       />       
+       />      
 
         <CardComponent
         svg={phone}                        

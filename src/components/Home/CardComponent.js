@@ -1,8 +1,11 @@
 import React from 'react'
+import Fade  from 'react-reveal/Fade';
+
 
 const CardComponent = ({svg, setSelected, isAdmin, Link, cardTitle, cardText, item}) => {
     return ( 
         <>
+        <Fade  left>
         <div className={`box-item ${item}`}>
         <div className="card">
         <object className="svg" data={svg} width="auto" height="auto"> </object>
@@ -18,6 +21,7 @@ const CardComponent = ({svg, setSelected, isAdmin, Link, cardTitle, cardText, it
         </div>
         </div>     
         </div>
+        </Fade>
        </>        
     )
 }
