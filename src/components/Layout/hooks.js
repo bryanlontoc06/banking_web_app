@@ -17,10 +17,6 @@ const useHooks = () => {
     const [admin, setAdmin] = useLocalStorage('adminsData', [])
     const [users, setUsers] = useLocalStorage('usersData', [])
     const historiesSelected = selected === 1 || selected === 2 || selected === 3;
-
-    const addValidation = () => {
-        return "I added my validation"
-    }
    
     // Automatically create an admin account in localstorage if adminsdata is null
     if(localStorage.getItem('adminsData') == null) {
