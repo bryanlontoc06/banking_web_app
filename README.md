@@ -7,6 +7,8 @@ password: 1234
 
 A Reactjs Banking Web App that has two types of users. For the admin user, it can add, edit and delete a client's account, and in addition to that, it can monitor the transaction of the client and can add a client’s account. For Client users, they can monitor their transactions and can send, deposit and withdraw money between accounts.
 
+link: https://bryanlontoc06.github.io/banking_web_app/
+
 ## Features
 - Developed a feature for users that can manually manage the bank’s account.
 - Developed a login feature for users to protect their accounts.
